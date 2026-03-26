@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const translations = {
   en: {
     title: "Web App Launcher",
     myApps: "MY APPS",
+    favorites: "FAVORITES",
     resetApps: "Restore Default Apps",
     resetConfirm: "Reset to default apps?",
     settings: "Settings",
@@ -20,11 +21,27 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v1.5",
+    version: "v1.6",
+    search: "Search apps...",
+    importExport: "Import / Export",
+    exportBtn: "Export JSON",
+    importBtn: "Import JSON",
+    pinProtect: "PIN Protection",
+    pinFor: "PIN for app",
+    pinSet: "Set PIN",
+    pinRemove: "Remove PIN",
+    pinEnter: "Enter PIN",
+    pinWrong: "Wrong PIN",
+    pinPlaceholder: "4-digit PIN",
+    addToHome: "Add to Home Screen",
+    addToHomeDesc: "Install this app on your home screen for quick access.",
+    addToHomeBtn: "Add to Home Screen",
+    addToHomeDismiss: "Not now",
   },
   de: {
     title: "Web App Launcher",
     myApps: "MEINE APPS",
+    favorites: "FAVORITEN",
     resetApps: "Standard-Apps wiederherstellen",
     resetConfirm: "Wirklich auf Standard-Apps zur\u00fccksetzen?",
     settings: "Einstellungen",
@@ -41,7 +58,22 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v1.5",
+    version: "v1.6",
+    search: "Apps suchen...",
+    importExport: "Import / Export",
+    exportBtn: "JSON exportieren",
+    importBtn: "JSON importieren",
+    pinProtect: "PIN-Schutz",
+    pinFor: "PIN f\u00fcr App",
+    pinSet: "PIN setzen",
+    pinRemove: "PIN entfernen",
+    pinEnter: "PIN eingeben",
+    pinWrong: "Falsche PIN",
+    pinPlaceholder: "4-stellige PIN",
+    addToHome: "Zum Startbildschirm",
+    addToHomeDesc: "Installiere diese App auf deinem Startbildschirm f\u00fcr schnellen Zugriff.",
+    addToHomeBtn: "Zum Startbildschirm hinzuf\u00fcgen",
+    addToHomeDismiss: "Nicht jetzt",
   },
 };
 
@@ -57,7 +89,7 @@ const THEMES = {
 const STORAGE_APPS  = "wal_apps";
 const STORAGE_THEME = "wal_theme";
 const STORAGE_LANG  = "wal_lang";
-const PROTECTED = { "https://rpdashboard.vercel.app": "2026" };
+const STORAGE_PINS  = "wal_pins";
 
 const BlobBg = ({ isDark }) => (
   <div style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
@@ -74,36 +106,46 @@ const BlobBg = ({ isDark }) => (
 
 export default function App() {
   const DEFAULT_APPS = [
-    { id: 1, name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪" },
-    { id: 2, name: "Showrunner Test", url: "https://magicshowrunnertest.vercel.app", emoji: "🧪" },
-    { id: 3, name: "Synaptic Tester", url: "https://synaptictester.vercel.app", emoji: "🧠" },
-    { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️" },
-    { id: 5, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "📊" },
+    { id: 1, name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪", fav: false },
+    { id: 2, name: "Showrunner Test", url: "https://magicshowrunnertest.vercel.app", emoji: "🧪", fav: false },
+    { id: 3, name: "Synaptic Tester", url: "https://synaptictester.vercel.app", emoji: "🧠", fav: false },
+    { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️", fav: false },
+    { id: 5, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "📊", fav: false },
   ];
 
   const [apps, setApps] = useState(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_APPS);
-      if (stored) return JSON.parse(stored);
-      return DEFAULT_APPS;
-    } catch { return DEFAULT_APPS; }
+    try { const s = localStorage.getItem(STORAGE_APPS); return s ? JSON.parse(s) : DEFAULT_APPS; } catch { return DEFAULT_APPS; }
+  });
+  const [pins, setPins] = useState(() => {
+    try { const s = localStorage.getItem(STORAGE_PINS); return s ? JSON.parse(s) : { "https://rpdashboard.vercel.app": "2026" }; } catch { return { "https://rpdashboard.vercel.app": "2026" }; }
   });
   const [themeName, setThemeName] = useState("dark");
   const [lang, setLang] = useState("de");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [form, setForm] = useState({ name: "", url: "", emoji: "" });
   const [error, setError] = useState("");
-  const [pwModal, setPwModal] = useState({ open: false, url: "" });
-  const [pwInput, setPwInput] = useState("");
-  const [pwError, setPwError] = useState(false);
+  const [search, setSearch] = useState("");
+  const [pwModal, setPwModal] = useState({ open: false, url: "", pin: "" });
+  const [pinError, setPinError] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showBanner, setShowBanner] = useState(false);
+  const [dragId, setDragId] = useState(null);
+  const [pinEdit, setPinEdit] = useState({ appId: null, value: "" });
+  const importRef = useRef();
 
   const t = translations[lang] || translations.en;
   const theme = THEMES[themeName] || THEMES.dark;
   const isDark = ["dark", "blueDark", "greenDark"].includes(themeName);
 
-  useEffect(() => { localStorage.setItem(STORAGE_APPS,  JSON.stringify(apps)); }, [apps]);
+  useEffect(() => { localStorage.setItem(STORAGE_APPS, JSON.stringify(apps)); }, [apps]);
+  useEffect(() => { localStorage.setItem(STORAGE_PINS, JSON.stringify(pins)); }, [pins]);
   useEffect(() => { localStorage.setItem(STORAGE_THEME, themeName); }, [themeName]);
-  useEffect(() => { localStorage.setItem(STORAGE_LANG,  lang); }, [lang]);
+  useEffect(() => { localStorage.setItem(STORAGE_LANG, lang); }, [lang]);
+  useEffect(() => {
+    const handler = e => { e.preventDefault(); setDeferredPrompt(e); setShowBanner(true); };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
 
   function toggleDark() {
     const pairs = { light: "dark", dark: "light", blue: "blueDark", blueDark: "blue", green: "greenDark", greenDark: "green" };
@@ -115,32 +157,88 @@ export default function App() {
     let url = form.url.trim();
     if (!/^https?:\/\//i.test(url)) url = "https://" + url;
     try { new URL(url); } catch { setError("Invalid URL."); return; }
-    setApps(prev => [...prev, { id: Date.now(), name: form.name.trim(), url, emoji: form.emoji.trim() || "🌐" }]);
+    setApps(prev => [...prev, { id: Date.now(), name: form.name.trim(), url, emoji: form.emoji.trim() || "🌐", fav: false }]);
     setForm({ name: "", url: "", emoji: "" });
     setError("");
   }
 
   function resetApps() { setApps(DEFAULT_APPS); }
   function deleteApp(id) { setApps(prev => prev.filter(a => a.id !== id)); }
+  function toggleFav(id) { setApps(prev => prev.map(a => a.id === id ? { ...a, fav: !a.fav } : a)); }
 
   function handleAppClick(e, app) {
-    if (PROTECTED[app.url]) {
+    if (pins[app.url]) {
       e.preventDefault();
-      setPwModal({ open: true, url: app.url });
-      setPwInput("");
-      setPwError(false);
+      setPwModal({ open: true, url: app.url, pin: "" });
+      setPinError(false);
     }
   }
 
-  function submitPassword() {
-    if (pwInput === PROTECTED[pwModal.url]) {
-      setPwModal({ open: false, url: "" });
-      window.open(pwModal.url, "_blank");
+  function submitPin(digit) {
+    const next = pwModal.pin + digit;
+    if (next.length < 4) { setPwModal(m => ({ ...m, pin: next })); return; }
+    if (next === pins[pwModal.url]) {
+      const url = pwModal.url;
+      setPwModal({ open: false, url: "", pin: "" });
+      window.open(url, "_blank");
     } else {
-      setPwError(true);
-      setPwInput("");
+      setPinError(true);
+      setTimeout(() => { setPwModal(m => ({ ...m, pin: "" })); setPinError(false); }, 700);
     }
   }
+
+  function deletePin(digit) { setPwModal(m => ({ ...m, pin: m.pin.slice(0, -1) })); }
+
+  function exportApps() {
+    const data = JSON.stringify(apps, null, 2);
+    const blob = new Blob([data], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "web-app-launcher.json";
+    a.click();
+  }
+
+  function importApps(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        if (Array.isArray(data)) setApps(data);
+      } catch {}
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  }
+
+  // Drag & Drop
+  function onDragStart(e, id) { setDragId(id); e.dataTransfer.effectAllowed = "move"; }
+  function onDragOver(e, id) {
+    e.preventDefault();
+    if (id === dragId) return;
+    setApps(prev => {
+      const from = prev.findIndex(a => a.id === dragId);
+      const to = prev.findIndex(a => a.id === id);
+      if (from < 0 || to < 0) return prev;
+      const next = [...prev];
+      next.splice(to, 0, next.splice(from, 1)[0]);
+      return next;
+    });
+  }
+  function onDragEnd() { setDragId(null); }
+
+  async function installApp() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    setDeferredPrompt(null);
+    setShowBanner(false);
+  }
+
+  const filtered = apps.filter(a => a.name.toLowerCase().includes(search.toLowerCase()) || a.url.toLowerCase().includes(search.toLowerCase()));
+  const favApps = filtered.filter(a => a.fav);
+  const allApps = filtered.filter(a => !a.fav);
 
   const s = {
     body:       { position: "relative", background: theme.bg, minHeight: "100vh", fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif", color: theme.text, transition: "background .4s,color .3s" },
@@ -164,29 +262,75 @@ export default function App() {
     delBtn:     { background: "#fee2e2", border: "none", color: "#dc2626", width: 30, height: 30, borderRadius: 8, cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
   };
 
+  const AppCard = ({ app }) => (
+    <a
+      key={app.id}
+      href={app.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ ...s.card, opacity: dragId === app.id ? 0.4 : 1 }}
+      onClick={e => handleAppClick(e, app)}
+      draggable
+      onDragStart={e => onDragStart(e, app.id)}
+      onDragOver={e => onDragOver(e, app.id)}
+      onDragEnd={onDragEnd}
+      onMouseEnter={e => { e.currentTarget.style.background = theme.cardHover; e.currentTarget.style.borderColor = theme.primary; e.currentTarget.style.transform = "translateY(-4px) scale(1.03)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5)"; }}
+      onMouseLeave={e => { e.currentTarget.style.background = theme.surface; e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.35)"; }}
+    >
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "45%", background: "linear-gradient(180deg,rgba(255,255,255,0.18) 0%,transparent 100%)", borderRadius: "22px 22px 0 0", pointerEvents: "none" }} />
+      {pins[app.url] && <div style={{ position: "absolute", top: 8, right: 8, fontSize: 11 }}>🔒</div>}
+      <button
+        onClick={e => { e.preventDefault(); e.stopPropagation(); toggleFav(app.id); }}
+        style={{ position: "absolute", top: 7, left: 8, background: "none", border: "none", cursor: "pointer", fontSize: 14, opacity: app.fav ? 1 : 0.3, transition: "opacity .2s" }}
+      >⭐</button>
+      <span style={{ fontSize: 38, display: "block", marginBottom: 10, marginTop: 8 }}>{app.emoji}</span>
+      <span style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.3 }}>{app.name}</span>
+    </a>
+  );
+
   return (
     <div style={s.body}>
       <BlobBg isDark={isDark} />
 
+      {/* Add to Home Banner */}
+      {showBanner && (
+        <div style={{ position: "fixed", bottom: 24, left: 16, right: 16, zIndex: 400, background: theme.surface, backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", border: "1px solid " + theme.border, borderRadius: 20, padding: "16px 20px", boxShadow: "0 8px 32px rgba(0,0,0,0.2)", display: "flex", alignItems: "center", gap: 14 }}>
+          <span style={{ fontSize: 32 }}>📱</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: theme.text }}>{t.addToHome}</div>
+            <div style={{ fontSize: 12, color: theme.subtext }}>{t.addToHomeDesc}</div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <button onClick={installApp} style={{ background: theme.primary, color: "#fff", border: "none", borderRadius: 10, padding: "6px 12px", fontSize: 12, fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap" }}>{t.addToHomeBtn}</button>
+            <button onClick={() => setShowBanner(false)} style={{ background: "none", border: "none", color: theme.subtext, fontSize: 12, cursor: "pointer" }}>{t.addToHomeDismiss}</button>
+          </div>
+        </div>
+      )}
+
+      {/* PIN Modal */}
       {pwModal.open && (
         <div style={{ position: "fixed", inset: 0, zIndex: 500, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
-          <div onClick={() => setPwModal({ open: false, url: "" })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
-          <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid " + theme.border, borderRadius: 28, padding: "32px 28px", width: "100%", maxWidth: 340, boxShadow: "0 8px 48px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.3)", textAlign: "center" }}>
+          <div onClick={() => setPwModal({ open: false, url: "", pin: "" })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
+          <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid " + theme.border, borderRadius: 28, padding: "32px 28px", width: "100%", maxWidth: 320, boxShadow: "0 8px 48px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.3)", textAlign: "center" }}>
             <div style={{ fontSize: 44, marginBottom: 12 }}>🔒</div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: theme.text, marginBottom: 6 }}>Gesch\u00fctzter Bereich</div>
-            <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 20 }}>Bitte Passwort eingeben um fortzufahren</div>
-            <input
-              autoFocus
-              type="password"
-              placeholder="Passwort"
-              value={pwInput}
-              onChange={e => { setPwInput(e.target.value); setPwError(false); }}
-              onKeyDown={e => e.key === "Enter" && submitPassword()}
-              style={{ ...s.input, textAlign: "center", fontSize: 18, letterSpacing: 4, marginBottom: 8, border: "1.5px solid " + (pwError ? "#dc2626" : theme.border) }}
-            />
-            {pwError && <div style={{ color: "#dc2626", fontSize: 12, marginBottom: 8 }}>❌ Falsches Passwort</div>}
-            <button onClick={submitPassword} style={{ ...s.addBtn, marginTop: 8 }}>\u00d6ffnen \u2192</button>
-            <button onClick={() => setPwModal({ open: false, url: "" })} style={{ marginTop: 10, background: "none", border: "none", color: theme.subtext, fontSize: 13, cursor: "pointer", width: "100%" }}>Abbrechen</button>
+            <div style={{ fontSize: 18, fontWeight: 700, color: theme.text, marginBottom: 20 }}>{t.pinEnter}</div>
+            {/* PIN dots */}
+            <div style={{ display: "flex", justifyContent: "center", gap: 14, marginBottom: 28 }}>
+              {[0,1,2,3].map(i => (
+                <div key={i} style={{ width: 16, height: 16, borderRadius: "50%", background: i < pwModal.pin.length ? (pinError ? "#dc2626" : theme.primary) : theme.border, transition: "background .15s", boxShadow: i < pwModal.pin.length ? "0 0 8px " + theme.primary : "none" }} />
+              ))}
+            </div>
+            {/* Numpad */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, marginBottom: 8 }}>
+              {[1,2,3,4,5,6,7,8,9].map(n => (
+                <button key={n} onClick={() => submitPin(String(n))} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "16px 0", fontSize: 20, fontWeight: 600, color: theme.text, cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }}>{n}</button>
+              ))}
+              <div />
+              <button onClick={() => submitPin("0")} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "16px 0", fontSize: 20, fontWeight: 600, color: theme.text, cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }}>0</button>
+              <button onClick={deletePin} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "16px 0", fontSize: 18, color: theme.text, cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>⌫</button>
+            </div>
+            {pinError && <div style={{ color: "#dc2626", fontSize: 13, marginTop: 4 }}>{t.pinWrong}</div>}
+            <button onClick={() => setPwModal({ open: false, url: "", pin: "" })} style={{ marginTop: 16, background: "none", border: "none", color: theme.subtext, fontSize: 13, cursor: "pointer" }}>Abbrechen</button>
           </div>
         </div>
       )}
@@ -206,30 +350,37 @@ export default function App() {
       </header>
 
       <main style={s.main}>
+        {/* Search */}
+        <div style={{ marginBottom: 20 }}>
+          <input
+            style={{ ...s.input, paddingLeft: 40 }}
+            placeholder={t.search}
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+          <span style={{ position: "relative", top: -36, left: 14, fontSize: 16, pointerEvents: "none" }}>🔍</span>
+        </div>
+
+        {/* Favorites */}
+        {favApps.length > 0 && (
+          <div style={{ marginBottom: 28 }}>
+            <div style={s.secLabel}>⭐ {t.favorites}</div>
+            <div style={s.grid}>
+              {favApps.map(app => <AppCard key={app.id} app={app} />)}
+            </div>
+          </div>
+        )}
+
+        {/* All Apps */}
         <div style={s.secLabel}>{t.myApps}</div>
         <div style={s.grid}>
-          {apps.length === 0 ? (
+          {allApps.length === 0 && favApps.length === 0 ? (
             <div style={{ gridColumn: "1/-1", textAlign: "center", padding: "50px 20px", color: theme.subtext }}>
               <div style={{ fontSize: 48, marginBottom: 12 }}>📦</div>
               <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 6 }}>{t.emptyTitle}</div>
               <div style={{ fontSize: 13 }}>{t.emptyDesc}</div>
             </div>
-          ) : apps.map(app => (
-            <a
-              key={app.id}
-              href={app.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={s.card}
-              onClick={e => handleAppClick(e, app)}
-              onMouseEnter={e => { e.currentTarget.style.background = theme.cardHover; e.currentTarget.style.borderColor = theme.primary; e.currentTarget.style.transform = "translateY(-4px) scale(1.03)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5)"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = theme.surface; e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.35)"; }}
-            >
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "45%", background: "linear-gradient(180deg,rgba(255,255,255,0.18) 0%,transparent 100%)", borderRadius: "22px 22px 0 0", pointerEvents: "none" }} />
-              <span style={{ fontSize: 38, display: "block", marginBottom: 10 }}>{app.emoji}</span>
-              <span style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.3 }}>{app.name}</span>
-            </a>
-          ))}
+          ) : allApps.map(app => <AppCard key={app.id} app={app} />)}
         </div>
       </main>
 
@@ -243,6 +394,7 @@ export default function App() {
         </div>
         <div style={s.drawerBody}>
 
+          {/* Add App */}
           <div style={{ marginBottom: 24 }}>
             <div style={s.secTitle}>{t.addNewApp}</div>
             {error && <div style={{ color: "#dc2626", fontSize: 12, marginBottom: 8 }}>{error}</div>}
@@ -255,6 +407,7 @@ export default function App() {
             <button style={s.addBtn} onClick={addApp}>{t.addBtn}</button>
           </div>
 
+          {/* Theme */}
           <div style={{ marginBottom: 24 }}>
             <div style={s.secTitle}>{t.theme}</div>
             <div style={s.themeGrid}>
@@ -267,6 +420,7 @@ export default function App() {
             </div>
           </div>
 
+          {/* Language */}
           <div style={{ marginBottom: 24 }}>
             <div style={s.secTitle}>{t.language}</div>
             <div style={s.langRow}>
@@ -278,32 +432,71 @@ export default function App() {
             </div>
           </div>
 
+          {/* Manage Apps + PIN */}
           <div style={{ marginBottom: 24 }}>
             <div style={s.secTitle}>{t.manageApps}</div>
             {apps.length === 0 && <div style={{ color: theme.subtext, fontSize: 13 }}>{t.emptyTitle}</div>}
             {apps.map(app => (
-              <div key={app.id} style={s.listItem}>
-                <span style={{ fontSize: 22 }}>{app.emoji}</span>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.name}</div>
-                  <div style={{ fontSize: 11, color: theme.subtext, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.url}</div>
+              <div key={app.id}>
+                <div style={s.listItem}>
+                  <span style={{ fontSize: 22 }}>{app.emoji}</span>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.name}</div>
+                    <div style={{ fontSize: 11, color: theme.subtext, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.url}</div>
+                  </div>
+                  <button
+                    onClick={() => setPinEdit(pinEdit.appId === app.id ? { appId: null, value: "" } : { appId: app.id, value: pins[app.url] || "" })}
+                    style={{ background: pins[app.url] ? theme.primarySoft : theme.inputBg, border: "1px solid " + theme.border, color: pins[app.url] ? theme.primary : theme.subtext, width: 30, height: 30, borderRadius: 8, cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginRight: 4 }}
+                  >🔒</button>
+                  <button style={s.delBtn} onClick={() => deleteApp(app.id)}>🗑️</button>
                 </div>
-                <button style={s.delBtn} onClick={() => deleteApp(app.id)}>🗑️</button>
+                {pinEdit.appId === app.id && (
+                  <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 12, padding: 12, marginBottom: 8, marginTop: -4 }}>
+                    <div style={{ fontSize: 12, color: theme.subtext, marginBottom: 6 }}>{t.pinFor}: {app.name}</div>
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <input
+                        style={{ ...s.input, flex: 1, letterSpacing: 4, fontSize: 16 }}
+                        type="password"
+                        maxLength={4}
+                        placeholder={t.pinPlaceholder}
+                        value={pinEdit.value}
+                        onChange={e => setPinEdit(p => ({ ...p, value: e.target.value.replace(/\D/g, "").slice(0, 4) }))}
+                      />
+                      <button
+                        onClick={() => { if (pinEdit.value.length === 4) { setPins(p => ({ ...p, [app.url]: pinEdit.value })); setPinEdit({ appId: null, value: "" }); } }}
+                        style={{ background: theme.primary, color: "#fff", border: "none", borderRadius: 10, padding: "0 14px", cursor: "pointer", fontWeight: 700, fontSize: 13 }}
+                      >{t.pinSet}</button>
+                      {pins[app.url] && <button
+                        onClick={() => { setPins(p => { const n = { ...p }; delete n[app.url]; return n; }); setPinEdit({ appId: null, value: "" }); }}
+                        style={{ background: "#fee2e2", color: "#dc2626", border: "none", borderRadius: 10, padding: "0 10px", cursor: "pointer", fontSize: 12, fontWeight: 700 }}
+                      >{t.pinRemove}</button>}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
 
+          {/* Import / Export */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.importExport}</div>
+            <div style={{ display: "flex", gap: 8 }}>
+              <button onClick={exportApps} style={{ flex: 1, background: theme.primarySoft, color: theme.primary, border: "1px solid " + theme.border, borderRadius: 12, padding: 10, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>📤 {t.exportBtn}</button>
+              <button onClick={() => importRef.current.click()} style={{ flex: 1, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border, borderRadius: 12, padding: 10, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>📥 {t.importBtn}</button>
+              <input ref={importRef} type="file" accept=".json" style={{ display: "none" }} onChange={importApps} />
+            </div>
+          </div>
+
+          {/* Reset */}
           <div style={{ marginBottom: 24 }}>
             <div style={s.secTitle}>Reset</div>
             <button
               onClick={() => { if (window.confirm(t.resetConfirm)) resetApps(); }}
               style={{ width: "100%", background: "transparent", border: "2px solid #dc2626", color: "#dc2626", borderRadius: 12, padding: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}
-            >
-              {t.resetApps}
-            </button>
+            >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher \u00b7 v1.4</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v1.6</div>
         </div>
       </div>
     </div>
