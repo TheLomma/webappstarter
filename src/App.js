@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import QRCode from "qrcode";
 
 const translations = {
   en: {
@@ -24,7 +25,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v1.8",
+    version: "v1.9",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -40,7 +41,24 @@ const translations = {
     addToHomeDesc: "Install this app on your home screen for quick access.",
     addToHomeBtn: "Add to Home Screen",
     addToHomeDismiss: "Not now",
+    recentlyUsed: "RECENTLY USED",
+    cardSize: "Card Size",
+    small: "Small",
+    medium: "Medium",
+    large: "Large",
+    customBg: "Custom Background",
+    customBgColor1: "Color 1",
+    customBgColor2: "Color 2",
+    offlineTitle: "You are offline",
+    offlineDesc: "Please check your internet connection.",
+    qrExport: "QR Code Export",
+    qrBtn: "Show QR Code",
+    qrClose: "Close",
+    vibration: "Vibration",
+    vibrationOn: "On",
+    vibrationOff: "Off",
   },
+
   de: {
     title: "Web App Launcher",
     myApps: "MEINE APPS",
@@ -64,7 +82,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v1.8",
+    version: "v1.9",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -80,6 +98,22 @@ const translations = {
     addToHomeDesc: "Installiere diese App auf deinem Startbildschirm f\u00fcr schnellen Zugriff.",
     addToHomeBtn: "Zum Startbildschirm hinzuf\u00fcgen",
     addToHomeDismiss: "Nicht jetzt",
+    recentlyUsed: "ZULETZT GEÖFFNET",
+    cardSize: "Kartengröße",
+    small: "Klein",
+    medium: "Mittel",
+    large: "Groß",
+    customBg: "Eigener Hintergrund",
+    customBgColor1: "Farbe 1",
+    customBgColor2: "Farbe 2",
+    offlineTitle: "Du bist offline",
+    offlineDesc: "Bitte überprüfe deine Internetverbindung.",
+    qrExport: "QR-Code Export",
+    qrBtn: "QR-Code anzeigen",
+    qrClose: "Schließen",
+    vibration: "Vibration",
+    vibrationOn: "An",
+    vibrationOff: "Aus",
   },
 };
 
@@ -95,7 +129,8 @@ const THEMES = {
 const STORAGE_APPS  = "wal_apps";
 const STORAGE_THEME = "wal_theme";
 const STORAGE_LANG  = "wal_lang";
-const STORAGE_PINS  = "wal_pins";
+const STORAGE_PINS   = "wal_pins";
+
 
 const BlobBg = ({ isDark }) => (
   <div style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
@@ -140,6 +175,7 @@ export default function App() {
   const [showBanner, setShowBanner] = useState(false);
   const [dragId, setDragId] = useState(null);
   const [pinEdit, setPinEdit] = useState({ appId: null, value: "" });
+
   const importRef = useRef();
 
   const t = translations[lang] || translations.en;
@@ -150,6 +186,7 @@ export default function App() {
   useEffect(() => { localStorage.setItem(STORAGE_PINS, JSON.stringify(pins)); }, [pins]);
   useEffect(() => { localStorage.setItem(STORAGE_THEME, themeName); }, [themeName]);
   useEffect(() => { localStorage.setItem(STORAGE_LANG, lang); }, [lang]);
+
   useEffect(() => {
     const handler = e => { e.preventDefault(); setDeferredPrompt(e); setShowBanner(true); };
     window.addEventListener("beforeinstallprompt", handler);
@@ -535,7 +572,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v1.8</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v1.9</div>
         </div>
       </div>
     </div>
