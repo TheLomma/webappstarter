@@ -25,7 +25,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v2.1",
+    version: "v2.3",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -82,7 +82,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v2.1",
+    version: "v2.3",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -131,6 +131,8 @@ const STORAGE_THEME = "wal_theme";
 const STORAGE_LANG  = "wal_lang";
 const STORAGE_PINS   = "wal_pins";
 const STORAGE_SIZE   = "wal_size";
+const STORAGE_VIBRO  = "wal_vibro";
+const STORAGE_CUSTBG = "wal_custbg";
 
 
 const BlobBg = ({ isDark }) => (
@@ -178,6 +180,10 @@ export default function App() {
   const [pinEdit, setPinEdit] = useState({ appId: null, value: "" });
   const [cardSize, setCardSize] = useState(() => localStorage.getItem(STORAGE_SIZE) || "medium");
 
+  const [vibro, setVibro] = useState(() => localStorage.getItem(STORAGE_VIBRO) !== "off");
+  const [customBg, setCustomBg] = useState(() => {
+    try { const s = localStorage.getItem(STORAGE_CUSTBG); return s ? JSON.parse(s) : { enabled: false, color1: "#1a1a2e", color2: "#16213e" }; } catch { return { enabled: false, color1: "#1a1a2e", color2: "#16213e" }; }
+  });
   const importRef = useRef();
   const [splash, setSplash] = useState(true);
   const [splashFade, setSplashFade] = useState(false);
@@ -197,6 +203,8 @@ export default function App() {
   useEffect(() => { localStorage.setItem(STORAGE_THEME, themeName); }, [themeName]);
   useEffect(() => { localStorage.setItem(STORAGE_LANG, lang); }, [lang]);
   useEffect(() => { localStorage.setItem(STORAGE_SIZE, cardSize); }, [cardSize]);
+  useEffect(() => { localStorage.setItem(STORAGE_VIBRO, vibro ? "on" : "off"); }, [vibro]);
+  useEffect(() => { localStorage.setItem(STORAGE_CUSTBG, JSON.stringify(customBg)); }, [customBg]);
 
   useEffect(() => {
     const handler = e => { e.preventDefault(); setDeferredPrompt(e); setShowBanner(true); };
@@ -223,7 +231,12 @@ export default function App() {
   function deleteApp(id) { setApps(prev => prev.filter(a => a.id !== id)); }
   function toggleFav(id) { setApps(prev => prev.map(a => a.id === id ? { ...a, fav: !a.fav } : a)); }
 
+  function vibrate() {
+    if (vibro && navigator.vibrate) navigator.vibrate(30);
+  }
+
   function handleAppClick(e, app) {
+    vibrate();
     if (pins[app.url]) {
       e.preventDefault();
       setPwModal({ open: true, url: app.url, pin: "" });
@@ -298,7 +311,7 @@ export default function App() {
   const allApps = filtered.filter(a => !a.fav);
 
   const s = {
-    body:       { position: "relative", background: theme.bg, minHeight: "100vh", fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif", color: theme.text, transition: "background .4s,color .3s" },
+    body:       { position: "relative", background: customBg.enabled ? `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)` : theme.bg, minHeight: "100vh", fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif", color: theme.text, transition: "background .4s,color .3s" },
     header:     { background: theme.headerBg, backdropFilter: "blur(24px) saturate(180%)", WebkitBackdropFilter: "blur(24px) saturate(180%)", color: theme.headerText, padding: "0 20px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 1px 0 " + theme.border + ", 0 4px 24px rgba(0,0,0,.08)", borderBottom: "1px solid " + theme.border },
     iconBtn:    { background: "rgba(255,255,255,0.18)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.3)", color: theme.headerText, width: 38, height: 38, borderRadius: "50%", cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" },
     main:       { position: "relative", zIndex: 1, padding: "16px 14px", maxWidth: 900, margin: "0 auto" },
@@ -354,7 +367,7 @@ export default function App() {
           <div style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
             <div style={{ fontSize: 72, marginBottom: 20, animation: "splashPop 0.6s cubic-bezier(.34,1.56,.64,1) forwards" }}>🚀</div>
             <div style={{ fontSize: 24, fontWeight: 800, color: theme.text, letterSpacing: 1, marginBottom: 8 }}>Web App Launcher</div>
-            <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 32 }}>v2.1</div>
+            <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 32 }}>v2.3</div>
             <div style={{ width: 48, height: 4, borderRadius: 2, background: theme.border, margin: "0 auto", overflow: "hidden" }}>
               <div style={{ height: "100%", background: theme.primary, borderRadius: 2, animation: "splashBar 1.2s ease forwards" }} />
             </div>
@@ -493,6 +506,61 @@ export default function App() {
             <button style={s.addBtn} onClick={addApp}>{t.addBtn}</button>
           </div>
 
+          {/* Custom Background */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.customBg}</div>
+            <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: 14 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: customBg.enabled ? 14 : 0 }}>
+                <div style={{ fontSize: 14, fontWeight: 600, color: theme.text }}>🎨 {t.customBg}</div>
+                <button
+                  onClick={() => setCustomBg(b => ({ ...b, enabled: !b.enabled }))}
+                  style={{ width: 52, height: 28, borderRadius: 14, border: "none", cursor: "pointer", background: customBg.enabled ? theme.primary : theme.border, position: "relative", transition: "background .25s" }}
+                >
+                  <div style={{ position: "absolute", top: 3, left: customBg.enabled ? 26 : 3, width: 22, height: 22, borderRadius: "50%", background: "#fff", transition: "left .25s", boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }} />
+                </button>
+              </div>
+              {customBg.enabled && (
+                <div>
+                  <div style={{ display: "flex", gap: 12, marginBottom: 12 }}>
+                    <div style={{ flex: 1 }}>
+                      <label style={{ fontSize: 11, fontWeight: 600, color: theme.subtext, display: "block", marginBottom: 6 }}>{t.customBgColor1}</label>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <input type="color" value={customBg.color1} onChange={e => setCustomBg(b => ({ ...b, color1: e.target.value }))} style={{ width: 40, height: 36, border: "none", borderRadius: 8, cursor: "pointer", padding: 2, background: "none" }} />
+                        <span style={{ fontSize: 12, color: theme.subtext }}>{customBg.color1}</span>
+                      </div>
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <label style={{ fontSize: 11, fontWeight: 600, color: theme.subtext, display: "block", marginBottom: 6 }}>{t.customBgColor2}</label>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <input type="color" value={customBg.color2} onChange={e => setCustomBg(b => ({ ...b, color2: e.target.value }))} style={{ width: 40, height: 36, border: "none", borderRadius: 8, cursor: "pointer", padding: 2, background: "none" }} />
+                        <span style={{ fontSize: 12, color: theme.subtext }}>{customBg.color2}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ height: 40, borderRadius: 10, background: `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)`, marginBottom: 10, border: "1px solid " + theme.border }} />
+                  <button onClick={() => setCustomBg({ enabled: false, color1: "#1a1a2e", color2: "#16213e" })} style={{ width: "100%", background: "transparent", border: "1px solid " + theme.border, color: theme.subtext, borderRadius: 10, padding: 8, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>↩️ Reset</button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Vibration */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.vibration}</div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "12px 16px" }}>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 600, color: theme.text }}>📳 {t.vibration}</div>
+                <div style={{ fontSize: 11, color: theme.subtext }}>Android / Mobile</div>
+              </div>
+              <button
+                onClick={() => setVibro(v => !v)}
+                style={{ width: 52, height: 28, borderRadius: 14, border: "none", cursor: "pointer", background: vibro ? theme.primary : theme.border, position: "relative", transition: "background .25s" }}
+              >
+                <div style={{ position: "absolute", top: 3, left: vibro ? 26 : 3, width: 22, height: 22, borderRadius: "50%", background: "#fff", transition: "left .25s", boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }} />
+              </button>
+            </div>
+          </div>
+
           {/* Card Size */}
           <div style={{ marginBottom: 24 }}>
             <div style={s.secTitle}>{t.cardSize}</div>
@@ -614,7 +682,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v2.1</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v2.3</div>
         </div>
       </div>
     </div>
