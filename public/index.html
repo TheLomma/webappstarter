@@ -1,61 +1,32 @@
 <!DOCTYPE html>
 <html lang="de">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web App Launcher</title>
 
-    <!-- Theme & Status Bar -->
-    <meta name="theme-color" content="#1c1c2e" />
-    <meta name="msapplication-TileColor" content="#1c1c2e" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
-    <!-- iOS PWA -->
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#1a1a2e" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="App Launcher" />
+    <meta name="apple-mobile-web-app-title" content="WAL" />
 
-    <!-- Icons -->
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="%PUBLIC_URL%/apple-touch-icon-152x152.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon-180x180.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-
-    <!-- SEO & Description -->
-    <meta name="description" content="Web App Launcher – deine persönliche App-Startseite" />
-    <meta name="robots" content="noindex" />
-
-    <!-- Open Graph (optional, für Share-Links) -->
-    <meta property="og:title" content="Web App Launcher" />
-    <meta property="og:description" content="Deine persönliche App-Startseite" />
-    <meta property="og:type" content="website" />
-
-    <!-- Prevent iOS text size adjust -->
-    <style>
-      html {
-        -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
-      }
-      body {
-        margin: 0;
-        padding: 0;
-        overscroll-behavior: none;
-        -webkit-overflow-scrolling: touch;
-      }
-      /* Safe area für iPhone Notch / Dynamic Island */
-      #root {
-        padding-top: env(safe-area-inset-top);
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-    </style>
-
-    <title>Web App Launcher</title>
+    <!-- SEO / Open Graph -->
+    <meta name="description" content="Web App Launcher – schneller Zugriff auf alle deine Web-Apps." />
   </head>
   <body>
-    <noscript>Du benötigst JavaScript um diese App zu nutzen.</noscript>
     <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
