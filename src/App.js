@@ -19,7 +19,7 @@ const translations = {
     emptyDesc: "Tap the settings button to add your first app!",
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
-    emojiPlaceholder: "\U0001f310",
+    emojiPlaceholder: "🌐",
     version: "v1.1",
   },
   de: {
@@ -40,7 +40,7 @@ const translations = {
     emptyDesc: "Tippe auf Einstellungen um deine erste App hinzuzufügen!",
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
-    emojiPlaceholder: "\U0001f310",
+    emojiPlaceholder: "🌐",
     version: "v1.1",
   },
 };
@@ -60,11 +60,11 @@ const STORAGE_LANG  = "wal_lang";
 
 export default function App() {
   const DEFAULT_APPS = [
-    { id: 1, name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "\U0001f3aa" },
-    { id: 2, name: "Showrunner Test", url: "https://magicshowrunnertest.vercel.app", emoji: "\U0001f9ea" },
-    { id: 3, name: "Synaptic Tester", url: "https://synaptictester.vercel.app", emoji: "\U0001f9e0" },
-    { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "\u2708\ufe0f" },
-    { id: 5, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "\U0001f4ca" },
+    { id: 1, name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪" },
+    { id: 2, name: "Showrunner Test", url: "https://magicshowrunnertest.vercel.app", emoji: "🧪" },
+    { id: 3, name: "Synaptic Tester", url: "https://synaptictester.vercel.app", emoji: "🧠" },
+    { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️" },
+    { id: 5, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "📊" },
   ];
 
   const [apps, setApps] = useState(() => {
@@ -98,12 +98,13 @@ export default function App() {
     let url = form.url.trim();
     if (!/^https?:\/\//i.test(url)) url = "https://" + url;
     try { new URL(url); } catch { setError("Invalid URL."); return; }
-    setApps(prev => [...prev, { id: Date.now(), name: form.name.trim(), url, emoji: form.emoji.trim() || "\U0001f310" }]);
+    setApps(prev => [...prev, { id: Date.now(), name: form.name.trim(), url, emoji: form.emoji.trim() || "🌐" }]);
     setForm({ name: "", url: "", emoji: "" });
     setError("");
   }
 
   function resetApps() { setApps(DEFAULT_APPS); }
+
   function deleteApp(id) { setApps(prev => prev.filter(a => a.id !== id)); }
 
   const s = {
@@ -132,15 +133,15 @@ export default function App() {
     <div style={s.body}>
       <header style={s.header}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ fontSize: 24 }}>\U0001f680</span>
+          <span style={{ fontSize: 24 }}>🚀</span>
           <div>
             <div style={{ fontSize: 17, fontWeight: 700 }}>{t.title}</div>
             <div style={{ fontSize: 10, opacity: 0.6 }}>{t.version}</div>
           </div>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
-          <button style={s.iconBtn} onClick={toggleDark}>{isDark ? "\u2600\ufe0f" : "\U0001f319"}</button>
-          <button style={s.iconBtn} onClick={() => setDrawerOpen(true)}>\u2699\ufe0f</button>
+          <button style={s.iconBtn} onClick={toggleDark}>{isDark ? "☀️" : "🌙"}</button>
+          <button style={s.iconBtn} onClick={() => setDrawerOpen(true)}>⚙️</button>
         </div>
       </header>
 
@@ -149,14 +150,20 @@ export default function App() {
         <div style={s.grid}>
           {apps.length === 0 ? (
             <div style={{ gridColumn: "1/-1", textAlign: "center", padding: "50px 20px", color: theme.subtext }}>
-              <div style={{ fontSize: 48, marginBottom: 12 }}>\U0001f4e6</div>
+              <div style={{ fontSize: 48, marginBottom: 12 }}>📦</div>
               <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 6 }}>{t.emptyTitle}</div>
               <div style={{ fontSize: 13 }}>{t.emptyDesc}</div>
             </div>
           ) : apps.map(app => (
-            <a key={app.id} href={app.url} target="_blank" rel="noopener noreferrer" style={s.card}
+            <a
+              key={app.id}
+              href={app.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={s.card}
               onMouseEnter={e => { e.currentTarget.style.background = theme.cardHover; e.currentTarget.style.borderColor = theme.primary; e.currentTarget.style.transform = "translateY(-3px)"; }}
-              onMouseLeave={e => { e.currentTarget.style.background = theme.surface; e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.transform = "none"; }}>
+              onMouseLeave={e => { e.currentTarget.style.background = theme.surface; e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.transform = "none"; }}
+            >
               <span style={{ fontSize: 38, display: "block", marginBottom: 10 }}>{app.emoji}</span>
               <span style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.3 }}>{app.name}</span>
             </a>
@@ -169,8 +176,8 @@ export default function App() {
       <div style={s.drawer}>
         <div style={{ width: 40, height: 4, background: theme.border, borderRadius: 2, margin: "12px auto 0" }} />
         <div style={s.drawerHead}>
-          <span>\u2699\ufe0f {t.settings}</span>
-          <button style={s.closeBtn} onClick={() => setDrawerOpen(false)}>\u2715</button>
+          <span>⚙️ {t.settings}</span>
+          <button style={s.closeBtn} onClick={() => setDrawerOpen(false)}>✕</button>
         </div>
         <div style={s.drawerBody}>
 
@@ -203,13 +210,13 @@ export default function App() {
             <div style={s.langRow}>
               {["en", "de"].map(l => (
                 <button key={l} onClick={() => setLang(l)} style={{ flex: 1, border: "2px solid " + (lang === l ? theme.primary : theme.border), borderRadius: 10, padding: 8, cursor: "pointer", fontSize: 13, fontWeight: 700, background: lang === l ? theme.primarySoft : theme.surface, color: lang === l ? theme.primary : theme.text, transition: "all .2s" }}>
-                  {l === "en" ? "\U0001f1ec\U0001f1e7 English" : "\U0001f1e9\U0001f1ea Deutsch"}
+                  {l === "en" ? "🇬🇧 English" : "🇩🇪 Deutsch"}
                 </button>
               ))}
             </div>
           </div>
 
-          <div style={{ marginBottom: 24 }}>
+          <div>
             <div style={s.secTitle}>{t.manageApps}</div>
             {apps.length === 0 && <div style={{ color: theme.subtext, fontSize: 13 }}>{t.emptyTitle}</div>}
             {apps.map(app => (
@@ -219,20 +226,22 @@ export default function App() {
                   <div style={{ fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.name}</div>
                   <div style={{ fontSize: 11, color: theme.subtext, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.url}</div>
                 </div>
-                <button style={s.delBtn} onClick={() => deleteApp(app.id)}>\U0001f5d1\ufe0f</button>
+                <button style={s.delBtn} onClick={() => deleteApp(app.id)}>🗑️</button>
               </div>
             ))}
           </div>
 
           <div style={{ marginBottom: 24 }}>
             <div style={s.secTitle}>Reset</div>
-            <button onClick={() => { if (window.confirm(t.resetConfirm)) resetApps(); }}
-              style={{ width: "100%", background: "transparent", border: "2px solid #dc2626", color: "#dc2626", borderRadius: 12, padding: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>
+            <button
+              onClick={() => { if (window.confirm(t.resetConfirm)) resetApps(); }}
+              style={{ width: "100%", background: "transparent", border: "2px solid #dc2626", color: "#dc2626", borderRadius: 12, padding: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}
+            >
               {t.resetApps}
             </button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher \u00b7 v1.1</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v1.1</div>
         </div>
       </div>
     </div>
