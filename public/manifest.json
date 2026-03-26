@@ -1,0 +1,9 @@
+{
+  "short_name": "App Launcher",
+  "name": "Web App Launcher",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1c1c2e",
+  "background_color": "#0f0f17"
+}
