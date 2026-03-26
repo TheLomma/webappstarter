@@ -5,6 +5,9 @@ const translations = {
     title: "Web App Launcher",
     myApps: "MY APPS",
     favorites: "FAVORITES",
+    clearCache: "Clear Cache",
+    clearCacheConfirm: "Clear all cache & local storage?",
+    clearCacheDone: "Cache cleared!",
     resetApps: "Restore Default Apps",
     resetConfirm: "Reset to default apps?",
     settings: "Settings",
@@ -21,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v1.7",
+    version: "v1.8",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -42,6 +45,9 @@ const translations = {
     title: "Web App Launcher",
     myApps: "MEINE APPS",
     favorites: "FAVORITEN",
+    clearCache: "Cache leeren",
+    clearCacheConfirm: "Gesamten Cache & lokalen Speicher leeren?",
+    clearCacheDone: "Cache geleert!",
     resetApps: "Standard-Apps wiederherstellen",
     resetConfirm: "Wirklich auf Standard-Apps zur\u00fccksetzen?",
     settings: "Einstellungen",
@@ -58,7 +64,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v1.7",
+    version: "v1.8",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -110,10 +116,10 @@ export default function App() {
     { id: 2, name: "Showrunner Test", url: "https://magicshowrunnertest.vercel.app", emoji: "🧪", fav: false },
     { id: 3, name: "Synaptic Tester", url: "https://synaptictester.vercel.app", emoji: "🧠", fav: false },
     { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️", fav: false },
-    { id: 8, name: "5 Star Lomma", url: "https://magic.pm/5star/lomma/", emoji: "🌟", fav: false },
-    { id: 7, name: "The Wheel", url: "https://thewheel.fun/login.php", emoji: "🎡", fav: false },
-    { id: 6, name: "Prestige App", url: "https://prestige-app-zeta.vercel.app/dashboard", emoji: "📋", fav: false },
-    { id: 5, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "📊", fav: false },
+    { id: 5, name: "5 Star Lomma", url: "https://magic.pm/5star/lomma/", emoji: "🌟", fav: false },
+    { id: 6, name: "The Wheel", url: "https://thewheel.fun/login.php", emoji: "🎡", fav: false },
+    { id: 7, name: "Prestige App", url: "https://prestige-app-zeta.vercel.app/dashboard", emoji: "📋", fav: false },
+    { id: 8, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "📊", fav: false },
   ];
 
   const [apps, setApps] = useState(() => {
@@ -501,6 +507,25 @@ export default function App() {
             </div>
           </div>
 
+          {/* Clear Cache */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>Cache</div>
+            <button
+              onClick={() => {
+                if (window.confirm(t.clearCacheConfirm)) {
+                  localStorage.clear();
+                  sessionStorage.clear();
+                  setApps(DEFAULT_APPS);
+                  setThemeName("dark");
+                  setLang("de");
+                  setPins({ "https://rpdashboard.vercel.app": "2026" });
+                  alert(t.clearCacheDone);
+                }
+              }}
+              style={{ width: "100%", background: "transparent", border: "2px solid #f59e0b", color: "#f59e0b", borderRadius: 12, padding: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}
+            >🗑️ {t.clearCache}</button>
+          </div>
+
           {/* Reset */}
           <div style={{ marginBottom: 24 }}>
             <div style={s.secTitle}>Reset</div>
@@ -510,7 +535,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v1.7</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v1.8</div>
         </div>
       </div>
     </div>
