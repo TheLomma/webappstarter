@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import QRCode from "qrcode";
 
 const translations = {
   en: {
