@@ -21,7 +21,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v1.6",
+    version: "v1.7",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -58,7 +58,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v1.6",
+    version: "v1.7",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -110,6 +110,9 @@ export default function App() {
     { id: 2, name: "Showrunner Test", url: "https://magicshowrunnertest.vercel.app", emoji: "🧪", fav: false },
     { id: 3, name: "Synaptic Tester", url: "https://synaptictester.vercel.app", emoji: "🧠", fav: false },
     { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️", fav: false },
+    { id: 8, name: "5 Star Lomma", url: "https://magic.pm/5star/lomma/", emoji: "🌟", fav: false },
+    { id: 7, name: "The Wheel", url: "https://thewheel.fun/login.php", emoji: "🎡", fav: false },
+    { id: 6, name: "Prestige App", url: "https://prestige-app-zeta.vercel.app/dashboard", emoji: "📋", fav: false },
     { id: 5, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "📊", fav: false },
   ];
 
@@ -244,19 +247,19 @@ export default function App() {
     body:       { position: "relative", background: theme.bg, minHeight: "100vh", fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif", color: theme.text, transition: "background .4s,color .3s" },
     header:     { background: theme.headerBg, backdropFilter: "blur(24px) saturate(180%)", WebkitBackdropFilter: "blur(24px) saturate(180%)", color: theme.headerText, padding: "0 20px", height: 60, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 1px 0 " + theme.border + ", 0 4px 24px rgba(0,0,0,.08)", borderBottom: "1px solid " + theme.border },
     iconBtn:    { background: "rgba(255,255,255,0.18)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.3)", color: theme.headerText, width: 38, height: 38, borderRadius: "50%", cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" },
-    main:       { position: "relative", zIndex: 1, padding: "24px 20px", maxWidth: 900, margin: "0 auto" },
+    main:       { position: "relative", zIndex: 1, padding: "16px 14px", maxWidth: 900, margin: "0 auto" },
     secLabel:   { fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "1.5px", color: theme.subtext, marginBottom: 14 },
-    grid:       { display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(130px,1fr))", gap: 14 },
-    card:       { position: "relative", overflow: "hidden", background: theme.surface, backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)", border: "1px solid " + theme.border, borderRadius: 22, padding: "22px 14px", textAlign: "center", cursor: "pointer", textDecoration: "none", color: theme.text, display: "block", boxShadow: "0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.35)", transition: "all .25s cubic-bezier(.34,1.56,.64,1)" },
+    grid:       { display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(110px,1fr))", gap: 12 },
+    card:       { position: "relative", overflow: "hidden", background: theme.surface, backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)", border: "1px solid " + theme.border, borderRadius: 20, padding: "18px 10px", textAlign: "center", cursor: "pointer", textDecoration: "none", color: theme.text, display: "block", boxShadow: "0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.35)", transition: "all .25s cubic-bezier(.34,1.56,.64,1)" },
     overlay:    { position: "fixed", inset: 0, background: "rgba(0,0,0,.5)", zIndex: 200, opacity: drawerOpen ? 1 : 0, pointerEvents: drawerOpen ? "all" : "none", transition: "opacity .3s" },
     drawer:     { position: "fixed", bottom: 0, left: 0, right: 0, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", borderRadius: "28px 28px 0 0", zIndex: 201, transform: drawerOpen ? "translateY(0)" : "translateY(100%)", transition: "transform .4s cubic-bezier(.34,1.56,.64,1)", maxHeight: "85vh", overflowY: "auto", boxShadow: "0 -4px 40px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.3)", border: "1px solid " + theme.border },
     drawerHead: { padding: "16px 20px 12px", fontSize: 17, fontWeight: 700, color: theme.text, borderBottom: "1px solid " + theme.border, display: "flex", alignItems: "center", justifyContent: "space-between" },
     closeBtn:   { background: theme.primarySoft, border: "none", color: theme.primary, width: 28, height: 28, borderRadius: "50%", cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center" },
-    drawerBody: { padding: "16px 20px 32px" },
+    drawerBody: { padding: "14px 16px 40px" },
     secTitle:   { fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: theme.subtext, marginBottom: 12 },
     input:      { width: "100%", background: theme.inputBg, backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", border: "1.5px solid " + theme.border, borderRadius: 14, padding: "11px 14px", fontSize: 14, color: theme.text, outline: "none", boxSizing: "border-box", boxShadow: "inset 0 1px 3px rgba(0,0,0,0.06)" },
     addBtn:     { width: "100%", background: theme.primary, color: "#fff", border: "none", borderRadius: 16, padding: 13, fontSize: 15, fontWeight: 700, cursor: "pointer", marginTop: 6, boxShadow: "0 4px 16px rgba(0,0,0,0.18)", letterSpacing: 0.3 },
-    themeGrid:  { display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 },
+    themeGrid:  { display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 6 },
     langRow:    { display: "flex", gap: 8 },
     listItem:   { display: "flex", alignItems: "center", gap: 10, padding: "11px 14px", background: theme.inputBg, backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderRadius: 14, marginBottom: 8, border: "1px solid " + theme.border, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" },
     delBtn:     { background: "#fee2e2", border: "none", color: "#dc2626", width: 30, height: 30, borderRadius: 8, cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
@@ -290,11 +293,22 @@ export default function App() {
 
   return (
     <div style={s.body}>
+      <style>{`
+        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+        body { margin: 0; overscroll-behavior: none; }
+        input, button { -webkit-appearance: none; }
+        @media (max-width: 400px) {
+          .wal-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; }
+          .wal-card { padding: 14px 8px !important; border-radius: 16px !important; }
+          .wal-card span:first-of-type { font-size: 30px !important; }
+          .wal-card span:last-of-type { font-size: 11px !important; }
+        }
+      `}</style>
       <BlobBg isDark={isDark} />
 
       {/* Add to Home Banner */}
       {showBanner && (
-        <div style={{ position: "fixed", bottom: 24, left: 16, right: 16, zIndex: 400, background: theme.surface, backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", border: "1px solid " + theme.border, borderRadius: 20, padding: "16px 20px", boxShadow: "0 8px 32px rgba(0,0,0,0.2)", display: "flex", alignItems: "center", gap: 14 }}>
+        <div style={{ position: "fixed", bottom: 24, left: 16, right: 16, zIndex: 400, background: theme.surface, backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", border: "1px solid " + theme.border, borderRadius: 20, padding: "14px 16px", boxShadow: "0 8px 32px rgba(0,0,0,0.2)", display: "flex", alignItems: "center", gap: 14 }}>
           <span style={{ fontSize: 32 }}>📱</span>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 14, fontWeight: 700, color: theme.text }}>{t.addToHome}</div>
@@ -311,7 +325,7 @@ export default function App() {
       {pwModal.open && (
         <div style={{ position: "fixed", inset: 0, zIndex: 500, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
           <div onClick={() => setPwModal({ open: false, url: "", pin: "" })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
-          <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid " + theme.border, borderRadius: 28, padding: "32px 28px", width: "100%", maxWidth: 320, boxShadow: "0 8px 48px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.3)", textAlign: "center" }}>
+          <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid " + theme.border, borderRadius: 28, padding: "28px 20px", width: "100%", maxWidth: 340, width: "calc(100% - 32px)", boxShadow: "0 8px 48px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.3)", textAlign: "center" }}>
             <div style={{ fontSize: 44, marginBottom: 12 }}>🔒</div>
             <div style={{ fontSize: 18, fontWeight: 700, color: theme.text, marginBottom: 20 }}>{t.pinEnter}</div>
             {/* PIN dots */}
@@ -323,10 +337,10 @@ export default function App() {
             {/* Numpad */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, marginBottom: 8 }}>
               {[1,2,3,4,5,6,7,8,9].map(n => (
-                <button key={n} onClick={() => submitPin(String(n))} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "16px 0", fontSize: 20, fontWeight: 600, color: theme.text, cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }}>{n}</button>
+                <button key={n} onClick={() => submitPin(String(n))} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 22, fontWeight: 600, color: theme.text, cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }}>{n}</button>
               ))}
               <div />
-              <button onClick={() => submitPin("0")} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "16px 0", fontSize: 20, fontWeight: 600, color: theme.text, cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }}>0</button>
+              <button onClick={() => submitPin("0")} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 22, fontWeight: 600, color: theme.text, cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }}>0</button>
               <button onClick={deletePin} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "16px 0", fontSize: 18, color: theme.text, cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>⌫</button>
             </div>
             {pinError && <div style={{ color: "#dc2626", fontSize: 13, marginTop: 4 }}>{t.pinWrong}</div>}
@@ -373,7 +387,7 @@ export default function App() {
 
         {/* All Apps */}
         <div style={s.secLabel}>{t.myApps}</div>
-        <div style={s.grid}>
+        <div style={s.grid} className="wal-grid">
           {allApps.length === 0 && favApps.length === 0 ? (
             <div style={{ gridColumn: "1/-1", textAlign: "center", padding: "50px 20px", color: theme.subtext }}>
               <div style={{ fontSize: 48, marginBottom: 12 }}>📦</div>
@@ -496,7 +510,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v1.6</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v1.7</div>
         </div>
       </div>
     </div>
