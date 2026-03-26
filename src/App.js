@@ -25,7 +25,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v1.9",
+    version: "v2.1",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -82,7 +82,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v1.9",
+    version: "v2.1",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -130,6 +130,7 @@ const STORAGE_APPS  = "wal_apps";
 const STORAGE_THEME = "wal_theme";
 const STORAGE_LANG  = "wal_lang";
 const STORAGE_PINS   = "wal_pins";
+const STORAGE_SIZE   = "wal_size";
 
 
 const BlobBg = ({ isDark }) => (
@@ -175,8 +176,17 @@ export default function App() {
   const [showBanner, setShowBanner] = useState(false);
   const [dragId, setDragId] = useState(null);
   const [pinEdit, setPinEdit] = useState({ appId: null, value: "" });
+  const [cardSize, setCardSize] = useState(() => localStorage.getItem(STORAGE_SIZE) || "medium");
 
   const importRef = useRef();
+  const [splash, setSplash] = useState(true);
+  const [splashFade, setSplashFade] = useState(false);
+
+  useEffect(() => {
+    const fadeTimer = setTimeout(() => setSplashFade(true), 1200);
+    const hideTimer = setTimeout(() => setSplash(false), 1700);
+    return () => { clearTimeout(fadeTimer); clearTimeout(hideTimer); };
+  }, []);
 
   const t = translations[lang] || translations.en;
   const theme = THEMES[themeName] || THEMES.dark;
@@ -186,6 +196,7 @@ export default function App() {
   useEffect(() => { localStorage.setItem(STORAGE_PINS, JSON.stringify(pins)); }, [pins]);
   useEffect(() => { localStorage.setItem(STORAGE_THEME, themeName); }, [themeName]);
   useEffect(() => { localStorage.setItem(STORAGE_LANG, lang); }, [lang]);
+  useEffect(() => { localStorage.setItem(STORAGE_SIZE, cardSize); }, [cardSize]);
 
   useEffect(() => {
     const handler = e => { e.preventDefault(); setDeferredPrompt(e); setShowBanner(true); };
@@ -292,7 +303,7 @@ export default function App() {
     iconBtn:    { background: "rgba(255,255,255,0.18)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.3)", color: theme.headerText, width: 38, height: 38, borderRadius: "50%", cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" },
     main:       { position: "relative", zIndex: 1, padding: "16px 14px", maxWidth: 900, margin: "0 auto" },
     secLabel:   { fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "1.5px", color: theme.subtext, marginBottom: 14 },
-    grid:       { display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(110px,1fr))", gap: 12 },
+    grid:       { display: "grid", gridTemplateColumns: cardSize === "small" ? "repeat(auto-fill,minmax(80px,1fr))" : cardSize === "large" ? "repeat(auto-fill,minmax(150px,1fr))" : "repeat(auto-fill,minmax(110px,1fr))", gap: cardSize === "small" ? 8 : cardSize === "large" ? 16 : 12 },
     card:       { position: "relative", overflow: "hidden", background: theme.surface, backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)", border: "1px solid " + theme.border, borderRadius: 20, padding: "18px 10px", textAlign: "center", cursor: "pointer", textDecoration: "none", color: theme.text, display: "block", boxShadow: "0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.35)", transition: "all .25s cubic-bezier(.34,1.56,.64,1)" },
     overlay:    { position: "fixed", inset: 0, background: "rgba(0,0,0,.5)", zIndex: 200, opacity: drawerOpen ? 1 : 0, pointerEvents: drawerOpen ? "all" : "none", transition: "opacity .3s" },
     drawer:     { position: "fixed", bottom: 0, left: 0, right: 0, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", borderRadius: "28px 28px 0 0", zIndex: 201, transform: drawerOpen ? "translateY(0)" : "translateY(100%)", transition: "transform .4s cubic-bezier(.34,1.56,.64,1)", maxHeight: "85vh", overflowY: "auto", boxShadow: "0 -4px 40px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.3)", border: "1px solid " + theme.border },
@@ -329,13 +340,31 @@ export default function App() {
         onClick={e => { e.preventDefault(); e.stopPropagation(); toggleFav(app.id); }}
         style={{ position: "absolute", top: 7, left: 8, background: "none", border: "none", cursor: "pointer", fontSize: 14, opacity: app.fav ? 1 : 0.3, transition: "opacity .2s" }}
       >⭐</button>
-      <span style={{ fontSize: 38, display: "block", marginBottom: 10, marginTop: 8 }}>{app.emoji}</span>
-      <span style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.3 }}>{app.name}</span>
+      <span style={{ fontSize: cardSize === "small" ? 26 : cardSize === "large" ? 52 : 38, display: "block", marginBottom: cardSize === "small" ? 6 : 10, marginTop: cardSize === "small" ? 4 : 8 }}>{app.emoji}</span>
+      <span style={{ fontSize: cardSize === "small" ? 10 : cardSize === "large" ? 15 : 13, fontWeight: 600, lineHeight: 1.3 }}>{app.name}</span>
     </a>
   );
 
   return (
     <div style={s.body}>
+      {/* Splash Screen */}
+      {splash && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: theme.bg, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", opacity: splashFade ? 0 : 1, transition: "opacity 0.5s ease", pointerEvents: splashFade ? "none" : "all" }}>
+          <BlobBg isDark={isDark} />
+          <div style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
+            <div style={{ fontSize: 72, marginBottom: 20, animation: "splashPop 0.6s cubic-bezier(.34,1.56,.64,1) forwards" }}>🚀</div>
+            <div style={{ fontSize: 24, fontWeight: 800, color: theme.text, letterSpacing: 1, marginBottom: 8 }}>Web App Launcher</div>
+            <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 32 }}>v2.1</div>
+            <div style={{ width: 48, height: 4, borderRadius: 2, background: theme.border, margin: "0 auto", overflow: "hidden" }}>
+              <div style={{ height: "100%", background: theme.primary, borderRadius: 2, animation: "splashBar 1.2s ease forwards" }} />
+            </div>
+          </div>
+          <style>{`
+            @keyframes splashPop { 0%{transform:scale(0.5);opacity:0} 100%{transform:scale(1);opacity:1} }
+            @keyframes splashBar { 0%{width:0%} 100%{width:100%} }
+          `}</style>
+        </div>
+      )}
       <style>{`
         * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
         body { margin: 0; overscroll-behavior: none; }
@@ -464,6 +493,19 @@ export default function App() {
             <button style={s.addBtn} onClick={addApp}>{t.addBtn}</button>
           </div>
 
+          {/* Card Size */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.cardSize}</div>
+            <div style={{ display: "flex", gap: 8 }}>
+              {[["small", t.small, "🔹"], ["medium", t.medium, "🔷"], ["large", t.large, "🔶"]].map(([size, label, icon]) => (
+                <button key={size} onClick={() => setCardSize(size)} style={{ flex: 1, border: "2px solid " + (cardSize === size ? theme.primary : theme.border), borderRadius: 12, padding: "10px 6px", cursor: "pointer", fontSize: 12, fontWeight: 700, background: cardSize === size ? theme.primarySoft : theme.surface, color: cardSize === size ? theme.primary : theme.text, transition: "all .2s", textAlign: "center" }}>
+                  <div style={{ fontSize: size === "small" ? 16 : size === "large" ? 28 : 22, marginBottom: 4 }}>{icon}</div>
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* Theme */}
           <div style={{ marginBottom: 24 }}>
             <div style={s.secTitle}>{t.theme}</div>
@@ -572,7 +614,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v1.9</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v2.1</div>
         </div>
       </div>
     </div>
