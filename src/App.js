@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v3.1",
+    version: "v3.2",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -56,6 +56,28 @@ const translations = {
     vibration: "Vibration",
     vibrationOn: "On",
     vibrationOff: "Off",
+    helpTitle: "How to use",
+    helpClose: "Close",
+    helpItems: [
+      { icon: "➕", title: "Add App", desc: "Open Settings (⚙️) → fill in name, URL & emoji → tap '+ Add App'." },
+      { icon: "✏️", title: "Edit App", desc: "Settings → Manage Apps → tap ✏️ next to an app → change fields → Save." },
+      { icon: "🗑️", title: "Delete App", desc: "Settings → Manage Apps → tap 🗑️ next to the app." },
+      { icon: "⭐", title: "Favorites", desc: "Tap ⭐ on a card to mark it as favorite. Favorites appear at the top." },
+      { icon: "🔍", title: "Search", desc: "Type in the search bar to filter apps by name or URL in real time." },
+      { icon: "↕️", title: "Reorder", desc: "Hold & drag a card to change its position. Order is saved automatically." },
+      { icon: "🔒", title: "PIN Protection", desc: "Settings → Manage Apps → tap 🔒 → set a 4-digit PIN. Protected apps ask for PIN before opening." },
+      { icon: "🔲", title: "View Mode", desc: "Tap the 🔲/📊 button in the header to switch between grid and compact list view." },
+      { icon: "📐", title: "Card Size", desc: "Settings → Card Size → choose Small, Medium or Large." },
+      { icon: "🎨", title: "Themes", desc: "Settings → Theme → pick one of 6 color themes. Use ☀️/🌙 to toggle light/dark." },
+      { icon: "🌈", title: "Custom Background", desc: "Settings → Custom Background → enable & pick two gradient colors." },
+      { icon: "🌐", title: "Language", desc: "Settings → Language → choose 🇩🇪 Deutsch or 🇬🇧 English." },
+      { icon: "📤", title: "Export", desc: "Settings → Import/Export → Export JSON to save your apps as a file." },
+      { icon: "📥", title: "Import", desc: "Settings → Import/Export → Import JSON to restore a saved app list." },
+      { icon: "📷", title: "QR Code", desc: "Settings → QR Code Export → Show QR Code → scan with another device to share apps." },
+      { icon: "📳", title: "Vibration", desc: "Settings → Vibration → toggle on/off. Vibrates briefly when opening an app (Android only)." },
+      { icon: "📲", title: "Install PWA", desc: "Tap 'Add to Home Screen' in the banner or via your browser menu to install as an app." },
+      { icon: "🗄️", title: "Clear Cache", desc: "Settings → Clear Cache → resets all data. Export a backup first!" },
+    ],
   },
 
   de: {
@@ -81,7 +103,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v3.1",
+    version: "v3.2",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -113,6 +135,28 @@ const translations = {
     vibration: "Vibration",
     vibrationOn: "An",
     vibrationOff: "Aus",
+    helpTitle: "So funktioniert's",
+    helpClose: "Schließen",
+    helpItems: [
+      { icon: "➕", title: "App hinzufügen", desc: "Einstellungen (⚙️) öffnen → Name, URL & Emoji eingeben → '+ App hinzufügen' tippen." },
+      { icon: "✏️", title: "App bearbeiten", desc: "Einstellungen → Apps verwalten → ✏️ tippen → Felder ändern → Speichern." },
+      { icon: "🗑️", title: "App löschen", desc: "Einstellungen → Apps verwalten → 🗑️ neben der App tippen." },
+      { icon: "⭐", title: "Favoriten", desc: "⭐ auf einer Karte tippen, um sie als Favorit zu markieren. Favoriten erscheinen oben." },
+      { icon: "🔍", title: "Suche", desc: "Im Suchfeld tippen, um Apps nach Name oder URL zu filtern." },
+      { icon: "↕️", title: "Reihenfolge", desc: "Karte gedrückt halten & ziehen, um die Reihenfolge zu ändern. Wird automatisch gespeichert." },
+      { icon: "🔒", title: "PIN-Schutz", desc: "Einstellungen → Apps verwalten → 🔒 tippen → 4-stellige PIN setzen. Geschützte Apps fragen beim Öffnen nach der PIN." },
+      { icon: "🔲", title: "Ansicht", desc: "🔲/📊-Button im Header tippen, um zwischen Gitter- und Kompaktansicht zu wechseln." },
+      { icon: "📐", title: "Kartengröße", desc: "Einstellungen → Kartengröße → Klein, Mittel oder Groß wählen." },
+      { icon: "🎨", title: "Design", desc: "Einstellungen → Design → eines von 6 Farbthemes wählen. ☀️/🌙 schaltet hell/dunkel um." },
+      { icon: "🌈", title: "Eigener Hintergrund", desc: "Einstellungen → Eigener Hintergrund → aktivieren & zwei Verlaufsfarben wählen." },
+      { icon: "🌐", title: "Sprache", desc: "Einstellungen → Sprache → 🇩🇪 Deutsch oder 🇬🇧 English wählen." },
+      { icon: "📤", title: "Exportieren", desc: "Einstellungen → Import/Export → JSON exportieren, um Apps als Datei zu sichern." },
+      { icon: "📥", title: "Importieren", desc: "Einstellungen → Import/Export → JSON importieren, um eine gespeicherte App-Liste zu laden." },
+      { icon: "📷", title: "QR-Code", desc: "Einstellungen → QR-Code Export → QR-Code anzeigen → mit anderem Gerät scannen." },
+      { icon: "📳", title: "Vibration", desc: "Einstellungen → Vibration → ein/aus schalten. Kurze Vibration beim Öffnen einer App (nur Android)." },
+      { icon: "📲", title: "Als App installieren", desc: "Banner 'Zum Startbildschirm' tippen oder über das Browser-Menü als PWA installieren." },
+      { icon: "🗄️", title: "Cache leeren", desc: "Einstellungen → Cache leeren → setzt alle Daten zurück. Vorher JSON-Export erstellen!" },
+    ],
   },
 };
 
@@ -189,6 +233,7 @@ export default function App() {
   const [qrModal, setQrModal] = useState({ open: false, url: "" });
   const [editApp, setEditApp] = useState({ appId: null, name: "", url: "", emoji: "" });
   const [viewMode, setViewMode] = useState(() => localStorage.getItem(STORAGE_VIEW) || "grid");
+    const [helpOpen, setHelpOpen] = useState(false);
   const importRef = useRef();
 
   useEffect(() => {
@@ -198,6 +243,28 @@ export default function App() {
     window.addEventListener("online", goOnline);
     return () => { window.removeEventListener("offline", goOffline); window.removeEventListener("online", goOnline); };
   }, []);
+
+  const HelpModal = () => !helpOpen ? null : (
+    <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }} onClick={() => setHelpOpen(false)}>
+      <div style={{ background: theme.bg, border: "1px solid " + theme.border, borderRadius: 20, padding: 24, maxWidth: 480, width: "100%", maxHeight: "80vh", overflowY: "auto", backdropFilter: "blur(20px)" }} onClick={e => e.stopPropagation()}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: theme.text }}>❓ {t.helpTitle}</h2>
+          <button onClick={() => setHelpOpen(false)} style={{ background: theme.surface, border: "1px solid " + theme.border, borderRadius: 10, padding: "6px 14px", cursor: "pointer", color: theme.text, fontWeight: 700 }}>{t.helpClose}</button>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {t.helpItems.map((item, i) => (
+            <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", background: theme.surface, border: "1px solid " + theme.border, borderRadius: 14, padding: "12px 14px" }}>
+              <span style={{ fontSize: 22, flexShrink: 0, marginTop: 1 }}>{item.icon}</span>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 14, color: theme.text, marginBottom: 3 }}>{item.title}</div>
+                <div style={{ fontSize: 13, color: theme.subtext, lineHeight: 1.5 }}>{item.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 
 
 
@@ -420,6 +487,7 @@ export default function App() {
         }
       `}</style>
       <BlobBg isDark={isDark} />
+      <HelpModal />
 
       {/* QR Modal */}
       {qrModal.open && (
@@ -533,6 +601,7 @@ export default function App() {
           </div>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
+          <button style={s.iconBtn} onClick={() => setHelpOpen(true)}>❓</button>
           <button style={s.iconBtn} onClick={() => setViewMode(v => v === "compact" ? "grid" : "compact")}>{viewMode === "compact" ? "🔲" : "📊"}</button>
           <button style={s.iconBtn} onClick={toggleDark}>{isDark ? "☀️" : "🌙"}</button>
           <button style={s.iconBtn} onClick={() => setDrawerOpen(true)}>⚙️</button>
