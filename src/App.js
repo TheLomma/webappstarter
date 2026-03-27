@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v3.3",
+    version: "v3.4",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -56,6 +56,14 @@ const translations = {
     vibration: "Vibration",
     vibrationOn: "On",
     vibrationOff: "Off",
+    backupReminder: "Backup Reminder",
+    backupReminderDesc: "Get reminded to export your apps",
+    backupReminderOff: "Off",
+    backupReminderOptions: ["Off", "7 days", "14 days", "30 days"],
+    backupBannerTitle: "Backup reminder",
+    backupBannerDesc: "It's time to export your apps as a backup!",
+    backupBannerBtn: "Export now",
+    backupBannerDismiss: "Later",
     globalPin: "Global PIN",
     pinTimeout: "Auto-Lock",
     pinTimeoutDesc: "Lock app automatically after inactivity",
@@ -77,6 +85,11 @@ const translations = {
     helpClose: "Close",
     helpItems: [
       { icon: "➕", title: "Add App", desc: "Open Settings (⚙️) → fill in name, URL & emoji → tap '+ Add App'." },
+      { icon: "🌐", title: "Language", desc: "Tap the EN/DE button in the header to switch language instantly." },
+      { icon: "🔐", title: "Global PIN", desc: "Settings → Global PIN → Set Global PIN → enter & confirm a 4-digit PIN. App will be locked on next start." },
+      { icon: "⏱️", title: "Auto-Lock", desc: "Settings → Global PIN → Auto-Lock → choose after how many minutes the app locks automatically." },
+      { icon: "💾", title: "Backup Reminder", desc: "Settings → Backup Reminder → choose an interval. A banner will remind you to export your apps." },
+      { icon: "✨", title: "Animations", desc: "Settings → Animations → toggle off to disable background blob animations for better performance." },
       { icon: "✏️", title: "Edit App", desc: "Settings → Manage Apps → tap ✏️ next to an app → change fields → Save." },
       { icon: "🗑️", title: "Delete App", desc: "Settings → Manage Apps → tap 🗑️ next to the app." },
       { icon: "⭐", title: "Favorites", desc: "Tap ⭐ on a card to mark it as favorite. Favorites appear at the top." },
@@ -120,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v3.3",
+    version: "v3.4",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -152,6 +165,14 @@ const translations = {
     vibration: "Vibration",
     vibrationOn: "An",
     vibrationOff: "Aus",
+    backupReminder: "Backup-Erinnerung",
+    backupReminderDesc: "Erinnerung zum Exportieren der Apps",
+    backupReminderOff: "Aus",
+    backupReminderOptions: ["Aus", "7 Tage", "14 Tage", "30 Tage"],
+    backupBannerTitle: "Backup fällig",
+    backupBannerDesc: "Es ist Zeit, deine Apps als Backup zu exportieren!",
+    backupBannerBtn: "Jetzt exportieren",
+    backupBannerDismiss: "Später",
     globalPin: "Globaler PIN",
     pinTimeout: "Auto-Sperre",
     pinTimeoutDesc: "App nach Inaktivität automatisch sperren",
@@ -173,6 +194,11 @@ const translations = {
     helpClose: "Schließen",
     helpItems: [
       { icon: "➕", title: "App hinzufügen", desc: "Einstellungen (⚙️) öffnen → Name, URL & Emoji eingeben → '+ App hinzufügen' tippen." },
+      { icon: "🌐", title: "Sprache", desc: "EN/DE-Button im Header tippen, um die Sprache sofort zu wechseln." },
+      { icon: "🔐", title: "Globaler PIN", desc: "Einstellungen → Globaler PIN → Globalen PIN setzen → 4-stelligen PIN eingeben & bestätigen. App wird beim nächsten Start gesperrt." },
+      { icon: "⏱️", title: "Auto-Sperre", desc: "Einstellungen → Globaler PIN → Auto-Sperre → Zeitraum wählen, nach dem die App automatisch gesperrt wird." },
+      { icon: "💾", title: "Backup-Erinnerung", desc: "Einstellungen → Backup-Erinnerung → Intervall wählen. Ein Banner erinnert dich rechtzeitig ans Exportieren." },
+      { icon: "✨", title: "Animationen", desc: "Einstellungen → Animationen → deaktivieren, um Blob-Hintergrundanimationen für bessere Performance auszuschalten." },
       { icon: "✏️", title: "App bearbeiten", desc: "Einstellungen → Apps verwalten → ✏️ tippen → Felder ändern → Speichern." },
       { icon: "🗑️", title: "App löschen", desc: "Einstellungen → Apps verwalten → 🗑️ neben der App tippen." },
       { icon: "⭐", title: "Favoriten", desc: "⭐ auf einer Karte tippen, um sie als Favorit zu markieren. Favoriten erscheinen oben." },
@@ -213,6 +239,8 @@ const STORAGE_CUSTBG = "wal_custbg";
 const STORAGE_VIEW      = "wal_view";
 const STORAGE_GLOBAL_PIN = "wal_global_pin";
 const STORAGE_PIN_TIMEOUT = "wal_pin_timeout";
+const STORAGE_BACKUP_DAYS = "wal_backup_days";
+const STORAGE_LAST_EXPORT = "wal_last_export";
 const STORAGE_GLOBAL_UNLOCKED = "wal_global_unlocked";
   const STORAGE_ANIM   = "wal_anim";
 
@@ -279,6 +307,8 @@ export default function App() {
   const [globalPinSetup, setGlobalPinSetup] = useState({ step: 0, first: "", input: "" });
   const [pinTimeout, setPinTimeout] = useState(() => parseInt(localStorage.getItem(STORAGE_PIN_TIMEOUT) || "0"));
   const lastUnlockedRef = useRef(null);
+  const [backupDays, setBackupDays] = useState(() => parseInt(localStorage.getItem(STORAGE_BACKUP_DAYS) || "0"));
+  const [showBackupBanner, setShowBackupBanner] = useState(false);
   const importRef = useRef();
 
   useEffect(() => {
@@ -398,6 +428,16 @@ export default function App() {
   useEffect(() => { localStorage.setItem(STORAGE_VIEW, viewMode); }, [viewMode]);
   useEffect(() => { localStorage.setItem(STORAGE_GLOBAL_PIN, globalPin); }, [globalPin]);
   useEffect(() => { localStorage.setItem(STORAGE_PIN_TIMEOUT, String(pinTimeout)); }, [pinTimeout]);
+  useEffect(() => { localStorage.setItem(STORAGE_BACKUP_DAYS, String(backupDays)); }, [backupDays]);
+
+  // Backup reminder checker
+  useEffect(() => {
+    if (backupDays === 0) { setShowBackupBanner(false); return; }
+    const last = parseInt(localStorage.getItem(STORAGE_LAST_EXPORT) || "0");
+    if (!last) { setShowBackupBanner(true); return; }
+    const daysSince = (Date.now() - last) / 1000 / 60 / 60 / 24;
+    if (daysSince >= backupDays) setShowBackupBanner(true);
+  }, [backupDays]);
 
   // PIN Timeout checker
   useEffect(() => {
@@ -507,6 +547,8 @@ export default function App() {
   }
 
   function exportApps() {
+    localStorage.setItem(STORAGE_LAST_EXPORT, String(Date.now()));
+    setShowBackupBanner(false);
     const data = JSON.stringify(apps, null, 2);
     const blob = new Blob([data], { type: "application/json" });
     const a = document.createElement("a");
@@ -689,6 +731,21 @@ export default function App() {
         </div>
       )}
 
+      {/* Backup Banner */}
+      {showBackupBanner && (
+        <div style={{ position: "fixed", bottom: showBanner ? 120 : 24, left: 16, right: 16, zIndex: 401, background: theme.surface, backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", border: "1px solid " + theme.primary, borderRadius: 20, padding: "14px 16px", boxShadow: "0 8px 32px rgba(0,0,0,0.2)", display: "flex", alignItems: "center", gap: 14 }}>
+          <span style={{ fontSize: 32 }}>💾</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: theme.text }}>{t.backupBannerTitle}</div>
+            <div style={{ fontSize: 12, color: theme.subtext }}>{t.backupBannerDesc}</div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <button onClick={() => { exportApps(); }} style={{ background: theme.primary, color: "#fff", border: "none", borderRadius: 10, padding: "6px 12px", fontSize: 12, fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap" }}>{t.backupBannerBtn}</button>
+            <button onClick={() => setShowBackupBanner(false)} style={{ background: "none", border: "none", color: theme.subtext, fontSize: 12, cursor: "pointer" }}>{t.backupBannerDismiss}</button>
+          </div>
+        </div>
+      )}
+
       {/* Add to Home Banner */}
       {showBanner && (
         <div style={{ position: "fixed", bottom: 24, left: 16, right: 16, zIndex: 400, background: theme.surface, backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", border: "1px solid " + theme.border, borderRadius: 20, padding: "14px 16px", boxShadow: "0 8px 32px rgba(0,0,0,0.2)", display: "flex", alignItems: "center", gap: 14 }}>
@@ -741,6 +798,7 @@ export default function App() {
           </div>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
+          <button style={s.iconBtn} onClick={() => setLang(l => l === "de" ? "en" : "de")} title={lang === "de" ? "Switch to English" : "Zu Deutsch wechseln"}>{lang === "de" ? "EN" : "DE"}</button>
           <button style={s.iconBtn} onClick={() => setHelpOpen(true)}>❓</button>
           <button style={s.iconBtn} onClick={() => setViewMode(v => v === "compact" ? "grid" : "compact")}>{viewMode === "compact" ? "🔲" : "📊"}</button>
           <button style={s.iconBtn} onClick={toggleDark}>{isDark ? "☀️" : "🌙"}</button>
@@ -855,6 +913,22 @@ export default function App() {
                   <button onClick={() => setCustomBg({ enabled: false, color1: "#1a1a2e", color2: "#16213e" })} style={{ width: "100%", background: "transparent", border: "1px solid " + theme.border, color: theme.subtext, borderRadius: 10, padding: 8, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>↩️ Reset</button>
                 </div>
               )}
+            </div>
+          </div>
+
+          {/* Backup Reminder */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>💾 {t.backupReminder}</div>
+            <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px" }}>
+              <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 12 }}>{t.backupReminderDesc}</div>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                {[0, 7, 14, 30].map((days, i) => (
+                  <button key={days} onClick={() => setBackupDays(days)}
+                    style={{ padding: "6px 12px", borderRadius: 10, border: "1px solid " + (backupDays === days ? theme.primary : theme.border), background: backupDays === days ? theme.primary : theme.inputBg, color: backupDays === days ? "#fff" : theme.text, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                    {t.backupReminderOptions[i]}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
