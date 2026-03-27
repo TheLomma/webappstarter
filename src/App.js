@@ -241,8 +241,8 @@ const STORAGE_GLOBAL_PIN = "wal_global_pin";
 const STORAGE_PIN_TIMEOUT = "wal_pin_timeout";
 const STORAGE_BACKUP_DAYS = "wal_backup_days";
 const STORAGE_LAST_EXPORT = "wal_last_export";
-const STORAGE_GLOBAL_UNLOCKED = "wal_global_unlocked";
-  const STORAGE_ANIM   = "wal_anim";
+
+
 
 
 const BlobBg = ({ isDark }) => (
