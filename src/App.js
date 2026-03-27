@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v3.2",
+    version: "v3.3",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -56,6 +56,23 @@ const translations = {
     vibration: "Vibration",
     vibrationOn: "On",
     vibrationOff: "Off",
+    globalPin: "Global PIN",
+    pinTimeout: "Auto-Lock",
+    pinTimeoutDesc: "Lock app automatically after inactivity",
+    pinTimeoutOff: "Off",
+    pinTimeoutOptions: ["Off", "1 min", "5 min", "15 min", "30 min"],
+    globalPinDesc: "Lock the entire app with a PIN",
+    globalPinSet: "Set Global PIN",
+    globalPinRemove: "Remove Global PIN",
+    globalPinEnter: "Enter App PIN",
+    globalPinNew: "Set new PIN",
+    globalPinConfirm: "Confirm PIN",
+    globalPinMismatch: "PINs do not match",
+    globalPinWrong: "Wrong PIN",
+    globalPinActive: "Global PIN active",
+    animations: "Animations",
+    animationsOn: "On",
+    animationsOff: "Off",
     helpTitle: "How to use",
     helpClose: "Close",
     helpItems: [
@@ -103,7 +120,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v3.2",
+    version: "v3.3",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -135,6 +152,23 @@ const translations = {
     vibration: "Vibration",
     vibrationOn: "An",
     vibrationOff: "Aus",
+    globalPin: "Globaler PIN",
+    pinTimeout: "Auto-Sperre",
+    pinTimeoutDesc: "App nach Inaktivität automatisch sperren",
+    pinTimeoutOff: "Aus",
+    pinTimeoutOptions: ["Aus", "1 Min", "5 Min", "15 Min", "30 Min"],
+    globalPinDesc: "Die gesamte App mit einem PIN schützen",
+    globalPinSet: "Globalen PIN setzen",
+    globalPinRemove: "Globalen PIN entfernen",
+    globalPinEnter: "App-PIN eingeben",
+    globalPinNew: "Neuen PIN setzen",
+    globalPinConfirm: "PIN bestätigen",
+    globalPinMismatch: "PINs stimmen nicht überein",
+    globalPinWrong: "Falscher PIN",
+    globalPinActive: "Globaler PIN aktiv",
+    animations: "Animationen",
+    animationsOn: "An",
+    animationsOff: "Aus",
     helpTitle: "So funktioniert's",
     helpClose: "Schließen",
     helpItems: [
@@ -176,7 +210,11 @@ const STORAGE_PINS   = "wal_pins";
 const STORAGE_SIZE   = "wal_size";
 const STORAGE_VIBRO  = "wal_vibro";
 const STORAGE_CUSTBG = "wal_custbg";
-const STORAGE_VIEW   = "wal_view";
+const STORAGE_VIEW      = "wal_view";
+const STORAGE_GLOBAL_PIN = "wal_global_pin";
+const STORAGE_PIN_TIMEOUT = "wal_pin_timeout";
+const STORAGE_GLOBAL_UNLOCKED = "wal_global_unlocked";
+  const STORAGE_ANIM   = "wal_anim";
 
 
 const BlobBg = ({ isDark }) => (
@@ -233,7 +271,14 @@ export default function App() {
   const [qrModal, setQrModal] = useState({ open: false, url: "" });
   const [editApp, setEditApp] = useState({ appId: null, name: "", url: "", emoji: "" });
   const [viewMode, setViewMode] = useState(() => localStorage.getItem(STORAGE_VIEW) || "grid");
+  const [animEnabled, setAnimEnabled] = useState(() => localStorage.getItem("wal_anim") !== "off");
     const [helpOpen, setHelpOpen] = useState(false);
+  const [globalPin, setGlobalPin] = useState(() => localStorage.getItem(STORAGE_GLOBAL_PIN) || "");
+  const [globalUnlocked, setGlobalUnlocked] = useState(false);
+  const [globalPinModal, setGlobalPinModal] = useState({ open: false, input: "", error: false, mode: "unlock" });
+  const [globalPinSetup, setGlobalPinSetup] = useState({ step: 0, first: "", input: "" });
+  const [pinTimeout, setPinTimeout] = useState(() => parseInt(localStorage.getItem(STORAGE_PIN_TIMEOUT) || "0"));
+  const lastUnlockedRef = useRef(null);
   const importRef = useRef();
 
   useEffect(() => {
@@ -243,6 +288,75 @@ export default function App() {
     window.addEventListener("online", goOnline);
     return () => { window.removeEventListener("offline", goOffline); window.removeEventListener("online", goOnline); };
   }, []);
+
+  const GlobalPinModal = () => !globalPinModal.open ? null : (
+    <div style={{ position: "fixed", inset: 0, zIndex: 8000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
+      <div style={{ background: theme.surface, border: "1px solid " + theme.border, borderRadius: 28, padding: "32px 24px", maxWidth: 340, width: "100%", textAlign: "center", boxShadow: "0 8px 48px rgba(0,0,0,0.4)" }}>
+        <div style={{ fontSize: 52, marginBottom: 12 }}>{globalPinModal.mode === "setup" ? "🔐" : "🔒"}</div>
+        <div style={{ fontSize: 20, fontWeight: 800, color: theme.text, marginBottom: 6 }}>
+          {globalPinModal.mode === "setup"
+            ? (globalPinSetup.step === 0 ? t.globalPinNew : t.globalPinConfirm)
+            : t.globalPinEnter}
+        </div>
+        <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 24 }}>Web App Launcher</div>
+        <div style={{ display: "flex", justifyContent: "center", gap: 14, marginBottom: 28 }}>
+          {[0,1,2,3].map(i => {
+            const pinLen = globalPinModal.mode === "setup" ? globalPinSetup.input.length : globalPinModal.input.length;
+            return <div key={i} style={{ width: 16, height: 16, borderRadius: "50%", background: i < pinLen ? (globalPinModal.error ? "#dc2626" : theme.primary) : theme.border, transition: "background .15s" }} />;
+          })}
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, marginBottom: 8 }}>
+          {[1,2,3,4,5,6,7,8,9].map(n => (
+            <button key={n} onClick={() => globalPinModal.mode === "setup" ? handleGlobalPinSetup(String(n)) : submitGlobalPin(String(n))}
+              style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 22, fontWeight: 600, color: theme.text, cursor: "pointer" }}>{n}</button>
+          ))}
+          <div />
+          <button onClick={() => globalPinModal.mode === "setup" ? handleGlobalPinSetup("0") : submitGlobalPin("0")}
+            style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 22, fontWeight: 600, color: theme.text, cursor: "pointer" }}>0</button>
+          <button onClick={() => globalPinModal.mode === "setup"
+            ? setGlobalPinSetup(s => ({ ...s, input: s.input.slice(0,-1) }))
+            : setGlobalPinModal(m => ({ ...m, input: m.input.slice(0,-1) }))}
+            style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 18, color: theme.text, cursor: "pointer" }}>⌫</button>
+        </div>
+        {globalPinModal.error && <div style={{ color: "#dc2626", fontSize: 13, marginTop: 8 }}>{globalPinModal.mode === "setup" ? t.globalPinMismatch : t.globalPinWrong}</div>}
+      </div>
+    </div>
+  );
+
+  function submitGlobalPin(digit) {
+    const next = globalPinModal.input + digit;
+    if (next.length < 4) { setGlobalPinModal(m => ({ ...m, input: next })); return; }
+    if (next === globalPin) {
+      setGlobalUnlocked(true);
+      lastUnlockedRef.current = Date.now();
+      setGlobalPinModal({ open: false, input: "", error: false, mode: "unlock" });
+    } else {
+      setGlobalPinModal(m => ({ ...m, error: true, input: "" }));
+      setTimeout(() => setGlobalPinModal(m => ({ ...m, error: false })), 700);
+    }
+  }
+
+  function handleGlobalPinSetup(digit) {
+    if (globalPinSetup.step === 0) {
+      const next = globalPinSetup.input + digit;
+      if (next.length < 4) { setGlobalPinSetup(s => ({ ...s, input: next })); return; }
+      setGlobalPinSetup({ step: 1, first: next, input: "" });
+    } else {
+      const next = globalPinSetup.input + digit;
+      if (next.length < 4) { setGlobalPinSetup(s => ({ ...s, input: next })); return; }
+      if (next === globalPinSetup.first) {
+        setGlobalPin(next);
+        setGlobalUnlocked(true);
+        lastUnlockedRef.current = Date.now();
+        setGlobalPinSetup({ step: 0, first: "", input: "" });
+        setGlobalPinModal({ open: false, input: "", error: false, mode: "unlock" });
+      } else {
+        setGlobalPinSetup({ step: 0, first: "", input: "" });
+        setGlobalPinModal(m => ({ ...m, error: true }));
+        setTimeout(() => setGlobalPinModal(m => ({ ...m, error: false })), 700);
+      }
+    }
+  }
 
   const HelpModal = () => !helpOpen ? null : (
     <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }} onClick={() => setHelpOpen(false)}>
@@ -282,6 +396,31 @@ export default function App() {
   useEffect(() => { localStorage.setItem(STORAGE_VIBRO, vibro ? "on" : "off"); }, [vibro]);
   useEffect(() => { localStorage.setItem(STORAGE_CUSTBG, JSON.stringify(customBg)); }, [customBg]);
   useEffect(() => { localStorage.setItem(STORAGE_VIEW, viewMode); }, [viewMode]);
+  useEffect(() => { localStorage.setItem(STORAGE_GLOBAL_PIN, globalPin); }, [globalPin]);
+  useEffect(() => { localStorage.setItem(STORAGE_PIN_TIMEOUT, String(pinTimeout)); }, [pinTimeout]);
+
+  // PIN Timeout checker
+  useEffect(() => {
+    if (!globalPin || pinTimeout === 0) return;
+    const interval = setInterval(() => {
+      if (lastUnlockedRef.current && globalUnlocked) {
+        const elapsed = (Date.now() - lastUnlockedRef.current) / 1000 / 60;
+        if (elapsed >= pinTimeout) {
+          setGlobalUnlocked(false);
+          setGlobalPinModal({ open: true, input: "", error: false, mode: "unlock" });
+          lastUnlockedRef.current = null;
+        }
+      }
+    }, 15000);
+    return () => clearInterval(interval);
+  }, [globalPin, pinTimeout, globalUnlocked]);
+
+  // Show global PIN lock on load
+  useEffect(() => {
+    if (globalPin && !globalUnlocked) {
+      setGlobalPinModal({ open: true, input: "", error: false, mode: "unlock" });
+    }
+  }, []);
 
   useEffect(() => {
     try {
@@ -486,7 +625,8 @@ export default function App() {
           .wal-card span:last-of-type { font-size: 11px !important; }
         }
       `}</style>
-      <BlobBg isDark={isDark} />
+      {animEnabled && <BlobBg isDark={isDark} />}
+      <GlobalPinModal />
       <HelpModal />
 
       {/* QR Modal */}
@@ -714,6 +854,35 @@ export default function App() {
                   <div style={{ height: 40, borderRadius: 10, background: `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)`, marginBottom: 10, border: "1px solid " + theme.border }} />
                   <button onClick={() => setCustomBg({ enabled: false, color1: "#1a1a2e", color2: "#16213e" })} style={{ width: "100%", background: "transparent", border: "1px solid " + theme.border, color: theme.subtext, borderRadius: 10, padding: 8, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>↩️ Reset</button>
                 </div>
+              )}
+            </div>
+          </div>
+
+          {/* Global PIN */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>🔐 {t.globalPin}</div>
+            <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px" }}>
+              <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 12 }}>{t.globalPinDesc}</div>
+              {globalPin ? (
+                <div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                    <span style={{ fontSize: 13, color: theme.primary, fontWeight: 700 }}>✅ {t.globalPinActive}</span>
+                  </div>
+                  <div style={{ marginBottom: 10 }}>
+                    <div style={{ fontSize: 12, color: theme.subtext, marginBottom: 6 }}>{t.pinTimeout}</div>
+                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                      {[0, 1, 5, 15, 30].map((mins, i) => (
+                        <button key={mins} onClick={() => setPinTimeout(mins)}
+                          style={{ padding: "5px 10px", borderRadius: 10, border: "1px solid " + (pinTimeout === mins ? theme.primary : theme.border), background: pinTimeout === mins ? theme.primary : theme.inputBg, color: pinTimeout === mins ? "#fff" : theme.text, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                          {t.pinTimeoutOptions[i]}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <button onClick={() => { setGlobalPin(""); setGlobalUnlocked(false); setPinTimeout(0); }} style={{ width: "100%", background: "#fee2e2", border: "1px solid #fca5a5", color: "#dc2626", borderRadius: 12, padding: "10px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>🗑️ {t.globalPinRemove}</button>
+                </div>
+              ) : (
+                <button onClick={() => setGlobalPinModal({ open: true, input: "", error: false, mode: "setup" })} style={{ width: "100%", background: theme.primary, color: "#fff", border: "none", borderRadius: 12, padding: "10px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>🔐 {t.globalPinSet}</button>
               )}
             </div>
           </div>
