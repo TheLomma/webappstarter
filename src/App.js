@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v2.3",
+    version: "v2.6",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -81,7 +81,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v2.3",
+    version: "v2.6",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -165,8 +165,8 @@ export default function App() {
   const [pins, setPins] = useState(() => {
     try { const s = localStorage.getItem(STORAGE_PINS); return s ? JSON.parse(s) : { "https://rpdashboard.vercel.app": "2026" }; } catch { return { "https://rpdashboard.vercel.app": "2026" }; }
   });
-  const [themeName, setThemeName] = useState("dark");
-  const [lang, setLang] = useState("de");
+  const [themeName, setThemeName] = useState(() => localStorage.getItem(STORAGE_THEME) || "dark");
+  const [lang, setLang] = useState(() => localStorage.getItem(STORAGE_LANG) || "de");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [form, setForm] = useState({ name: "", url: "", emoji: "" });
   const [error, setError] = useState("");
@@ -183,15 +183,21 @@ export default function App() {
   const [customBg, setCustomBg] = useState(() => {
     try { const s = localStorage.getItem(STORAGE_CUSTBG); return s ? JSON.parse(s) : { enabled: false, color1: "#1a1a2e", color2: "#16213e" }; } catch { return { enabled: false, color1: "#1a1a2e", color2: "#16213e" }; }
   });
+  const [isOffline, setIsOffline] = useState(() => !navigator.onLine);
+  const [urlImportModal, setUrlImportModal] = useState({ open: false, apps: [] });
   const importRef = useRef();
-  const [splash, setSplash] = useState(true);
-  const [splashFade, setSplashFade] = useState(false);
 
   useEffect(() => {
-    const fadeTimer = setTimeout(() => setSplashFade(true), 1200);
-    const hideTimer = setTimeout(() => setSplash(false), 1700);
-    return () => { clearTimeout(fadeTimer); clearTimeout(hideTimer); };
+    const goOffline = () => setIsOffline(true);
+    const goOnline = () => setIsOffline(false);
+    window.addEventListener("offline", goOffline);
+    window.addEventListener("online", goOnline);
+    return () => { window.removeEventListener("offline", goOffline); window.removeEventListener("online", goOnline); };
   }, []);
+
+
+
+
 
   const t = translations[lang] || translations.en;
   const theme = THEMES[themeName] || THEMES.dark;
@@ -204,6 +210,20 @@ export default function App() {
   useEffect(() => { localStorage.setItem(STORAGE_SIZE, cardSize); }, [cardSize]);
   useEffect(() => { localStorage.setItem(STORAGE_VIBRO, vibro ? "on" : "off"); }, [vibro]);
   useEffect(() => { localStorage.setItem(STORAGE_CUSTBG, JSON.stringify(customBg)); }, [customBg]);
+
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const raw = params.get("import");
+      if (raw) {
+        const decoded = JSON.parse(atob(raw));
+        if (Array.isArray(decoded) && decoded.length > 0) {
+          setUrlImportModal({ open: true, apps: decoded });
+          window.history.replaceState({}, "", window.location.pathname);
+        }
+      }
+    } catch {}
+  }, []);
 
   useEffect(() => {
     const handler = e => { e.preventDefault(); setDeferredPrompt(e); setShowBanner(true); };
@@ -359,9 +379,8 @@ export default function App() {
 
   return (
     <div style={s.body}>
-      {/* Splash Screen */}
-      {splash && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: theme.bg, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", opacity: splashFade ? 0 : 1, transition: "opacity 0.5s ease", pointerEvents: splashFade ? "none" : "all" }}>
+      {false && (
+        <div>
           <BlobBg isDark={isDark} />
           <div style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
             <div style={{ fontSize: 72, marginBottom: 20, animation: "splashPop 0.6s cubic-bezier(.34,1.56,.64,1) forwards" }}>🚀</div>
@@ -381,6 +400,12 @@ export default function App() {
         * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
         body { margin: 0; overscroll-behavior: none; }
         input, button { -webkit-appearance: none; }
+        @media (orientation: landscape) and (max-height: 500px) {
+          .wal-header { height: 46px !important; padding: 0 14px !important; }
+          .wal-main { padding: 10px 12px !important; }
+          .wal-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important; gap: 8px !important; }
+          .wal-drawer { max-height: 100vh !important; width: 60vw !important; left: auto !important; top: 0 !important; bottom: 0 !important; border-radius: 0 !important; }
+        }
         @media (max-width: 400px) {
           .wal-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; }
           .wal-card { padding: 14px 8px !important; border-radius: 16px !important; }
@@ -389,6 +414,49 @@ export default function App() {
         }
       `}</style>
       <BlobBg isDark={isDark} />
+
+      {/* URL Import Modal */}
+      {urlImportModal.open && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 600, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+          <div onClick={() => setUrlImportModal({ open: false, apps: [] })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
+          <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid " + theme.border, borderRadius: 28, padding: "24px 20px", maxWidth: 360, width: "calc(100% - 32px)", boxShadow: "0 8px 48px rgba(0,0,0,0.25)" }}>
+            <div style={{ fontSize: 36, textAlign: "center", marginBottom: 12 }}>🔗</div>
+            <div style={{ fontSize: 17, fontWeight: 700, color: theme.text, textAlign: "center", marginBottom: 6 }}>URL Import</div>
+            <div style={{ fontSize: 13, color: theme.subtext, textAlign: "center", marginBottom: 16 }}>{urlImportModal.apps.length} App{urlImportModal.apps.length !== 1 ? "s" : ""} gefunden. Importieren?</div>
+            <div style={{ maxHeight: 200, overflowY: "auto", marginBottom: 16 }}>
+              {urlImportModal.apps.map((app, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", background: theme.inputBg, borderRadius: 10, marginBottom: 6, border: "1px solid " + theme.border }}>
+                  <span style={{ fontSize: 20 }}>{app.emoji || "🌐"}</span>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: theme.text }}>{app.name}</div>
+                    <div style={{ fontSize: 11, color: theme.subtext }}>{app.url}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ display: "flex", gap: 8 }}>
+              <button onClick={() => setUrlImportModal({ open: false, apps: [] })} style={{ flex: 1, background: theme.inputBg, border: "1px solid " + theme.border, color: theme.text, borderRadius: 12, padding: 11, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Abbrechen</button>
+              <button onClick={() => { setApps(prev => { const newApps = urlImportModal.apps.map((a, i) => ({ ...a, id: Date.now() + i, fav: false })); return [...prev, ...newApps]; }); setUrlImportModal({ open: false, apps: [] }); }} style={{ flex: 1, background: theme.primary, color: "#fff", border: "none", borderRadius: 12, padding: 11, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>✅ Importieren</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Offline Screen */}
+      {isOffline && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 9000, background: customBg.enabled ? `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)` : theme.bg, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 32, textAlign: "center" }}>
+          <BlobBg isDark={isDark} />
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <div style={{ fontSize: 80, marginBottom: 24 }}>📡</div>
+            <div style={{ fontSize: 24, fontWeight: 800, color: theme.text, marginBottom: 12 }}>{t.offlineTitle}</div>
+            <div style={{ fontSize: 15, color: theme.subtext, marginBottom: 32, maxWidth: 280 }}>{t.offlineDesc}</div>
+            <button
+              onClick={() => window.location.reload()}
+              style={{ background: theme.primary, color: "#fff", border: "none", borderRadius: 16, padding: "14px 32px", fontSize: 15, fontWeight: 700, cursor: "pointer", boxShadow: "0 4px 16px rgba(0,0,0,0.2)" }}
+            >🔄 Erneut versuchen</button>
+          </div>
+        </div>
+      )}
 
       {/* Add to Home Banner */}
       {showBanner && (
@@ -433,7 +501,7 @@ export default function App() {
         </div>
       )}
 
-      <header style={s.header}>
+      <header style={s.header} className="wal-header">
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <span style={{ fontSize: 24 }}>🚀</span>
           <div>
@@ -447,7 +515,7 @@ export default function App() {
         </div>
       </header>
 
-      <main style={s.main}>
+      <main style={s.main} className="wal-main">
         {/* Search */}
         <div style={{ marginBottom: 20 }}>
           <input
@@ -484,7 +552,7 @@ export default function App() {
 
       <div style={s.overlay} onClick={() => setDrawerOpen(false)} />
 
-      <div style={s.drawer}>
+      <div style={s.drawer} className="wal-drawer">
         <div style={{ width: 40, height: 4, background: theme.border, borderRadius: 2, margin: "12px auto 0" }} />
         <div style={s.drawerHead}>
           <span>⚙️ {t.settings}</span>
@@ -681,7 +749,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v2.3</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v2.6</div>
         </div>
       </div>
     </div>
