@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v3.4",
+    version: "v3.5",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -133,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v3.4",
+    version: "v3.5",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -299,7 +299,7 @@ export default function App() {
   const [qrModal, setQrModal] = useState({ open: false, url: "" });
   const [editApp, setEditApp] = useState({ appId: null, name: "", url: "", emoji: "" });
   const [viewMode, setViewMode] = useState(() => localStorage.getItem(STORAGE_VIEW) || "grid");
-  const [animEnabled, setAnimEnabled] = useState(() => localStorage.getItem("wal_anim") !== "off");
+  const [animEnabled, setAnimEnabled] = useState(() => localStorage.getItem("wal_anim") !== "off"); // eslint-disable-line
     const [helpOpen, setHelpOpen] = useState(false);
   const [globalPin, setGlobalPin] = useState(() => localStorage.getItem(STORAGE_GLOBAL_PIN) || "");
   const [globalUnlocked, setGlobalUnlocked] = useState(false);
@@ -455,6 +455,7 @@ export default function App() {
     return () => clearInterval(interval);
   }, [globalPin, pinTimeout, globalUnlocked]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   // Show global PIN lock on load
   useEffect(() => {
     if (globalPin && !globalUnlocked) {
