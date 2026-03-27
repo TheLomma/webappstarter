@@ -455,8 +455,8 @@ export default function App() {
     return () => clearInterval(interval);
   }, [globalPin, pinTimeout, globalUnlocked]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   // Show global PIN lock on load
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (globalPin && !globalUnlocked) {
       setGlobalPinModal({ open: true, input: "", error: false, mode: "unlock" });
