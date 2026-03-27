@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v3.7",
+    version: "v3.8",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -133,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v3.7",
+    version: "v3.8",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -261,7 +261,6 @@ const BlobBg = ({ isDark }) => (
 export default function App() {
   const DEFAULT_APPS = [
     { id: 1, name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪", fav: false },
-    { id: 2, name: "Showrunner Test", url: "https://magicshowrunnertest.vercel.app", emoji: "🧪", fav: false },
     { id: 3, name: "SynaTest", url: "https://synaptictester.vercel.app", emoji: "🧠", fav: false },
     { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️", fav: false },
     { id: 5, name: "5 Star Lomma", url: "https://magic.pm/5star/lomma/", emoji: "🌟", fav: false },
