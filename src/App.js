@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v2.6",
+    version: "v2.8",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -81,7 +81,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v2.6",
+    version: "v2.8",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -185,6 +185,7 @@ export default function App() {
   });
   const [isOffline, setIsOffline] = useState(() => !navigator.onLine);
   const [urlImportModal, setUrlImportModal] = useState({ open: false, apps: [] });
+  const [qrModal, setQrModal] = useState({ open: false, url: "" });
   const importRef = useRef();
 
   useEffect(() => {
@@ -277,6 +278,15 @@ export default function App() {
   }
 
   function deletePin(digit) { setPwModal(m => ({ ...m, pin: m.pin.slice(0, -1) })); }
+
+  function generateQr() {
+    try {
+      const base64 = btoa(JSON.stringify(apps));
+      const importUrl = window.location.origin + window.location.pathname + "?import=" + base64;
+      const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(importUrl);
+      setQrModal({ open: true, url: qrUrl });
+    } catch {}
+  }
 
   function exportApps() {
     const data = JSON.stringify(apps, null, 2);
@@ -379,23 +389,7 @@ export default function App() {
 
   return (
     <div style={s.body}>
-      {false && (
-        <div>
-          <BlobBg isDark={isDark} />
-          <div style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
-            <div style={{ fontSize: 72, marginBottom: 20, animation: "splashPop 0.6s cubic-bezier(.34,1.56,.64,1) forwards" }}>🚀</div>
-            <div style={{ fontSize: 24, fontWeight: 800, color: theme.text, letterSpacing: 1, marginBottom: 8 }}>Web App Launcher</div>
-            <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 32 }}>v2.3</div>
-            <div style={{ width: 48, height: 4, borderRadius: 2, background: theme.border, margin: "0 auto", overflow: "hidden" }}>
-              <div style={{ height: "100%", background: theme.primary, borderRadius: 2, animation: "splashBar 1.2s ease forwards" }} />
-            </div>
-          </div>
-          <style>{`
-            @keyframes splashPop { 0%{transform:scale(0.5);opacity:0} 100%{transform:scale(1);opacity:1} }
-            @keyframes splashBar { 0%{width:0%} 100%{width:100%} }
-          `}</style>
-        </div>
-      )}
+
       <style>{`
         * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
         body { margin: 0; overscroll-behavior: none; }
@@ -414,6 +408,23 @@ export default function App() {
         }
       `}</style>
       <BlobBg isDark={isDark} />
+
+      {/* QR Modal */}
+      {qrModal.open && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 700, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+          <div onClick={() => setQrModal({ open: false, url: "" })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
+          <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid " + theme.border, borderRadius: 28, padding: "28px 24px", maxWidth: 340, width: "calc(100% - 32px)", boxShadow: "0 8px 48px rgba(0,0,0,0.3)", textAlign: "center" }}>
+            <div style={{ fontSize: 36, marginBottom: 8 }}>📷</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: theme.text, marginBottom: 4 }}>{t.qrExport}</div>
+            <div style={{ fontSize: 12, color: theme.subtext, marginBottom: 20 }}>Scanne den Code um die Apps zu importieren</div>
+            <div style={{ background: "#fff", borderRadius: 16, padding: 12, display: "inline-block", marginBottom: 20 }}>
+              <img src={qrModal.url} alt="QR Code" width={220} height={220} style={{ display: "block", borderRadius: 8 }} />
+            </div>
+            <div style={{ fontSize: 11, color: theme.subtext, marginBottom: 20 }}>{apps.length} App{apps.length !== 1 ? "s" : ""} enthalten</div>
+            <button onClick={() => setQrModal({ open: false, url: "" })} style={{ width: "100%", background: theme.primary, color: "#fff", border: "none", borderRadius: 14, padding: 12, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>{t.qrClose}</button>
+          </div>
+        </div>
+      )}
 
       {/* URL Import Modal */}
       {urlImportModal.open && (
@@ -716,6 +727,7 @@ export default function App() {
             <div style={s.secTitle}>{t.importExport}</div>
             <div style={{ display: "flex", gap: 8 }}>
               <button onClick={exportApps} style={{ flex: 1, background: theme.primarySoft, color: theme.primary, border: "1px solid " + theme.border, borderRadius: 12, padding: 10, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>📤 {t.exportBtn}</button>
+              <button onClick={generateQr} style={{ flex: 1, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border, borderRadius: 12, padding: 10, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>📷 {t.qrBtn}</button>
               <button onClick={() => importRef.current.click()} style={{ flex: 1, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border, borderRadius: 12, padding: 10, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>📥 {t.importBtn}</button>
               <input ref={importRef} type="file" accept=".json" style={{ display: "none" }} onChange={importApps} />
             </div>
@@ -749,7 +761,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v2.6</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v2.8</div>
         </div>
       </div>
     </div>
