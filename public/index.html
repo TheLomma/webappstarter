@@ -33,9 +33,6 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="%PUBLIC_URL%/icon-512x512.png" />
 
-    <!-- Splash Screens iOS -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
     <title>Web App Launcher</title>
 
     <style>
@@ -64,70 +61,6 @@
         width: 100%;
       }
 
-      /* Splash / Loading Screen */
-      #splash {
-        position: fixed;
-        inset: 0;
-        background: linear-gradient(135deg, #0f0f17 0%, #1a1a2e 50%, #16213e 100%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 99999;
-        transition: opacity 0.5s ease;
-      }
-
-      #splash.hidden {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      #splash .splash-icon {
-        font-size: 72px;
-        margin-bottom: 20px;
-        animation: splashPulse 1.5s ease-in-out infinite;
-      }
-
-      #splash .splash-title {
-        font-size: 22px;
-        font-weight: 800;
-        color: #e2e8f0;
-        letter-spacing: 0.5px;
-        margin-bottom: 8px;
-      }
-
-      #splash .splash-sub {
-        font-size: 13px;
-        color: rgba(226,232,240,0.5);
-      }
-
-      #splash .splash-loader {
-        margin-top: 40px;
-        width: 40px;
-        height: 4px;
-        background: rgba(255,255,255,0.1);
-        border-radius: 2px;
-        overflow: hidden;
-      }
-
-      #splash .splash-loader-bar {
-        height: 100%;
-        background: linear-gradient(90deg, #a78bfa, #38bdf8);
-        border-radius: 2px;
-        animation: splashLoad 1.2s ease-in-out infinite;
-      }
-
-      @keyframes splashPulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.08); }
-      }
-
-      @keyframes splashLoad {
-        0% { width: 0%; margin-left: 0%; }
-        50% { width: 70%; margin-left: 15%; }
-        100% { width: 0%; margin-left: 100%; }
-      }
-
       /* Safe Area Support */
       @supports (padding: env(safe-area-inset-bottom)) {
         body {
@@ -137,22 +70,10 @@
       }
 
       /* Scrollbar Styling */
-      ::-webkit-scrollbar {
-        width: 4px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: transparent;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.15);
-        border-radius: 2px;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: rgba(255,255,255,0.25);
-      }
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
 
       /* Selection */
       ::selection {
@@ -164,32 +85,9 @@
   <body>
     <noscript>JavaScript ist erforderlich um diese App zu nutzen.</noscript>
 
-    <!-- Splash Screen -->
-    <div id="splash">
-      <div class="splash-icon">🚀</div>
-      <div class="splash-title">Web App Launcher</div>
-      <div class="splash-sub">v3.5</div>
-      <div class="splash-loader">
-        <div class="splash-loader-bar"></div>
-      </div>
-    </div>
-
     <div id="root"></div>
 
     <script>
-      // Hide splash screen when React app is ready
-      window.addEventListener('load', function () {
-        setTimeout(function () {
-          var splash = document.getElementById('splash');
-          if (splash) {
-            splash.classList.add('hidden');
-            setTimeout(function () {
-              splash.remove();
-            }, 500);
-          }
-        }, 800);
-      });
-
       // Register Service Worker
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
