@@ -455,12 +455,11 @@ export default function App() {
     return () => clearInterval(interval);
   }, [globalPin, pinTimeout, globalUnlocked]);
 
-  // Show global PIN lock on load
-  useEffect(() => { // eslint-disable-line react-hooks/exhaustive-deps
-    if (globalPin && !globalUnlocked) {
-      setGlobalPinModal({ open: true, input: "", error: false, mode: "unlock" });
-    }
-  }, []);
+  // Show global PIN lock on load – reads directly from localStorage to avoid exhaustive-deps
+  useEffect(() => {
+    const pin = localStorage.getItem(STORAGE_GLOBAL_PIN) || "";
+    if (pin) setGlobalPinModal({ open: true, input: "", error: false, mode: "unlock" });
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     try {
