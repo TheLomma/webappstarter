@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v2.8",
+    version: "v3.1",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -81,7 +81,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v2.8",
+    version: "v3.1",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -132,6 +132,7 @@ const STORAGE_PINS   = "wal_pins";
 const STORAGE_SIZE   = "wal_size";
 const STORAGE_VIBRO  = "wal_vibro";
 const STORAGE_CUSTBG = "wal_custbg";
+const STORAGE_VIEW   = "wal_view";
 
 
 const BlobBg = ({ isDark }) => (
@@ -186,6 +187,8 @@ export default function App() {
   const [isOffline, setIsOffline] = useState(() => !navigator.onLine);
   const [urlImportModal, setUrlImportModal] = useState({ open: false, apps: [] });
   const [qrModal, setQrModal] = useState({ open: false, url: "" });
+  const [editApp, setEditApp] = useState({ appId: null, name: "", url: "", emoji: "" });
+  const [viewMode, setViewMode] = useState(() => localStorage.getItem(STORAGE_VIEW) || "grid");
   const importRef = useRef();
 
   useEffect(() => {
@@ -211,6 +214,7 @@ export default function App() {
   useEffect(() => { localStorage.setItem(STORAGE_SIZE, cardSize); }, [cardSize]);
   useEffect(() => { localStorage.setItem(STORAGE_VIBRO, vibro ? "on" : "off"); }, [vibro]);
   useEffect(() => { localStorage.setItem(STORAGE_CUSTBG, JSON.stringify(customBg)); }, [customBg]);
+  useEffect(() => { localStorage.setItem(STORAGE_VIEW, viewMode); }, [viewMode]);
 
   useEffect(() => {
     try {
@@ -248,6 +252,14 @@ export default function App() {
   }
 
   function resetApps() { setApps(DEFAULT_APPS); }
+
+  function saveEditApp() {
+    if (!editApp.name.trim() || !editApp.url.trim()) return;
+    let url = editApp.url.trim();
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+    setApps(prev => prev.map(a => a.id === editApp.appId ? { ...a, name: editApp.name.trim(), url, emoji: editApp.emoji.trim() || "🌐" } : a));
+    setEditApp({ appId: null, name: "", url: "", emoji: "" });
+  }
   function deleteApp(id) { setApps(prev => prev.filter(a => a.id !== id)); }
   function toggleFav(id) { setApps(prev => prev.map(a => a.id === id ? { ...a, fav: !a.fav } : a)); }
 
@@ -521,6 +533,7 @@ export default function App() {
           </div>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
+          <button style={s.iconBtn} onClick={() => setViewMode(v => v === "compact" ? "grid" : "compact")}>{viewMode === "compact" ? "🔲" : "📊"}</button>
           <button style={s.iconBtn} onClick={toggleDark}>{isDark ? "☀️" : "🌙"}</button>
           <button style={s.iconBtn} onClick={() => setDrawerOpen(true)}>⚙️</button>
         </div>
@@ -550,14 +563,28 @@ export default function App() {
 
         {/* All Apps */}
         <div style={s.secLabel}>{t.myApps}</div>
-        <div style={s.grid} className="wal-grid">
+        <div style={viewMode === "compact" ? { display: "flex", flexDirection: "column", gap: 8 } : s.grid} className="wal-grid">
           {allApps.length === 0 && favApps.length === 0 ? (
             <div style={{ gridColumn: "1/-1", textAlign: "center", padding: "50px 20px", color: theme.subtext }}>
               <div style={{ fontSize: 48, marginBottom: 12 }}>📦</div>
               <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 6 }}>{t.emptyTitle}</div>
               <div style={{ fontSize: 13 }}>{t.emptyDesc}</div>
             </div>
-          ) : allApps.map(app => <AppCard key={app.id} app={app} />)}
+          ) : viewMode === "compact"
+            ? allApps.map(app => (
+                <a key={app.id} href={app.url} target="_blank" rel="noopener noreferrer"
+                  onClick={e => handleAppClick(e, app)}
+                  style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 14px", background: theme.surface, border: "1px solid " + theme.border, borderRadius: 14, textDecoration: "none", color: theme.text, backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", transition: "all .2s" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = theme.cardHover; e.currentTarget.style.borderColor = theme.primary; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = theme.surface; e.currentTarget.style.borderColor = theme.border; }}
+                >
+                  <span style={{ fontSize: 22, flexShrink: 0 }}>{app.emoji}</span>
+                  <span style={{ fontSize: 14, fontWeight: 600, flex: 1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.name}</span>
+                  {pins[app.url] && <span style={{ fontSize: 12, flexShrink: 0 }}>🔒</span>}
+                  {app.fav && <span style={{ fontSize: 12, flexShrink: 0 }}>⭐</span>}
+                </a>
+              ))
+            : allApps.map(app => <AppCard key={app.id} app={app} />)}
         </div>
       </main>
 
@@ -693,8 +720,34 @@ export default function App() {
                     onClick={() => setPinEdit(pinEdit.appId === app.id ? { appId: null, value: "" } : { appId: app.id, value: pins[app.url] || "" })}
                     style={{ background: pins[app.url] ? theme.primarySoft : theme.inputBg, border: "1px solid " + theme.border, color: pins[app.url] ? theme.primary : theme.subtext, width: 30, height: 30, borderRadius: 8, cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginRight: 4 }}
                   >🔒</button>
+                  <button
+                    onClick={() => setEditApp(editApp.appId === app.id ? { appId: null, name: "", url: "", emoji: "" } : { appId: app.id, name: app.name, url: app.url, emoji: app.emoji })}
+                    style={{ background: editApp.appId === app.id ? theme.primarySoft : theme.inputBg, border: "1px solid " + theme.border, color: editApp.appId === app.id ? theme.primary : theme.subtext, width: 30, height: 30, borderRadius: 8, cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginRight: 4 }}
+                  >✏️</button>
                   <button style={s.delBtn} onClick={() => deleteApp(app.id)}>🗑️</button>
                 </div>
+                {editApp.appId === app.id && (
+                  <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 12, padding: 12, marginBottom: 8, marginTop: -4 }}>
+                    <div style={{ fontSize: 12, color: theme.subtext, marginBottom: 8, fontWeight: 700 }}>✏️ App bearbeiten</div>
+                    {[["name", "Name", "text"], ["url", "URL", "url"], ["emoji", "Emoji", "text"]].map(([key, label, type]) => (
+                      <div key={key} style={{ marginBottom: 8 }}>
+                        <label style={{ fontSize: 11, color: theme.subtext, display: "block", marginBottom: 4 }}>{label}</label>
+                        <input
+                          style={{ ...s.input, fontSize: 13 }}
+                          type={type}
+                          value={editApp[key]}
+                          maxLength={key === "emoji" ? 2 : undefined}
+                          onChange={e => setEditApp(p => ({ ...p, [key]: e.target.value }))}
+                        />
+                      </div>
+                    ))}
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <button onClick={() => setEditApp({ appId: null, name: "", url: "", emoji: "" })} style={{ flex: 1, background: theme.inputBg, border: "1px solid " + theme.border, color: theme.subtext, borderRadius: 10, padding: 8, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>Abbrechen</button>
+                      <button onClick={saveEditApp} style={{ flex: 1, background: theme.primary, color: "#fff", border: "none", borderRadius: 10, padding: 8, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>✅ Speichern</button>
+                    </div>
+                  </div>
+                )}
+
                 {pinEdit.appId === app.id && (
                   <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 12, padding: 12, marginBottom: 8, marginTop: -4 }}>
                     <div style={{ fontSize: 12, color: theme.subtext, marginBottom: 6 }}>{t.pinFor}: {app.name}</div>
@@ -761,7 +814,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v2.8</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v3.0</div>
         </div>
       </div>
     </div>
