@@ -268,6 +268,7 @@ export default function App() {
     { id: 7, name: "Prestige App", url: "https://prestige-app-zeta.vercel.app/dashboard", emoji: "📋", fav: false },
     { id: 8, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "📊", fav: false },
     { id: 9, name: "API Test", url: "https://apitest-pi-seven.vercel.app", emoji: "🔌", fav: false },
+    { id: 10, name: "Restaurant Magic", url: "https://restaurantmagic.vercel.app", emoji: "🍽️", fav: false },
   ];
 
   const [apps, setApps] = useState(() => {
