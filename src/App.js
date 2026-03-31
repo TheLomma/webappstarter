@@ -269,13 +269,14 @@ export default function App() {
     { id: 8, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "📊", fav: false },
     { id: 9, name: "API Test", url: "https://apitest-pi-seven.vercel.app", emoji: "🔌", fav: false },
     { id: 10, name: "Restaurant Magic", url: "https://restaurantmagic.vercel.app", emoji: "🍽️", fav: false },
+    { id: 11, name: "Papierinventur", url: "https://papierinventur.vercel.app", emoji: "📄", fav: false },
   ];
 
   const [apps, setApps] = useState(() => {
     try { const s = localStorage.getItem(STORAGE_APPS); return s ? JSON.parse(s) : DEFAULT_APPS; } catch { return DEFAULT_APPS; }
   });
   const [pins, setPins] = useState(() => {
-    try { const s = localStorage.getItem(STORAGE_PINS); return s ? JSON.parse(s) : { "https://rpdashboard.vercel.app": "2026" }; } catch { return { "https://rpdashboard.vercel.app": "2026" }; }
+    try { const s = localStorage.getItem(STORAGE_PINS); return s ? JSON.parse(s) : { "https://rpdashboard.vercel.app": "2026", "https://papierinventur.vercel.app": "2026" }; } catch { return { "https://rpdashboard.vercel.app": "2026", "https://papierinventur.vercel.app": "2026" }; }
   });
   const [themeName, setThemeName] = useState(() => localStorage.getItem(STORAGE_THEME) || "dark");
   const [lang, setLang] = useState(() => localStorage.getItem(STORAGE_LANG) || "de");
