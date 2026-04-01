@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v4.0",
+    version: "v4.1",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -133,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v4.0",
+    version: "v4.1",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -270,13 +270,21 @@ export default function App() {
     { id: 9, name: "API Test", url: "https://apitest-pi-seven.vercel.app", emoji: "🔌", fav: false },
     { id: 10, name: "Restaurant Magic", url: "https://restaurantmagic.vercel.app", emoji: "🍽️", fav: false },
     { id: 11, name: "Papierinventur", url: "https://papierinventur.vercel.app", emoji: "📄", fav: false },
+    { id: 12, name: "Coup d'État", url: "https://cardgame-omega-six.vercel.app", emoji: "🃏", fav: false },
   ];
 
   const [apps, setApps] = useState(() => {
     try { const s = localStorage.getItem(STORAGE_APPS); return s ? JSON.parse(s) : DEFAULT_APPS; } catch { return DEFAULT_APPS; }
   });
+  const DEFAULT_PINS = { "https://rpdashboard.vercel.app": "2026", "https://papierinventur.vercel.app": "2026" };
   const [pins, setPins] = useState(() => {
-    try { const s = localStorage.getItem(STORAGE_PINS); return s ? JSON.parse(s) : { "https://rpdashboard.vercel.app": "2026", "https://papierinventur.vercel.app": "2026" }; } catch { return { "https://rpdashboard.vercel.app": "2026", "https://papierinventur.vercel.app": "2026" }; }
+    try {
+      const s = localStorage.getItem(STORAGE_PINS);
+      const saved = s ? JSON.parse(s) : {};
+      // Merge: DEFAULT_PINS first, then saved on top — so user-set PINs win,
+      // but DEFAULT_PINS keys are always present as fallback
+      return { ...DEFAULT_PINS, ...saved };
+    } catch { return DEFAULT_PINS; }
   });
   const [themeName, setThemeName] = useState(() => localStorage.getItem(STORAGE_THEME) || "dark");
   const [lang, setLang] = useState(() => localStorage.getItem(STORAGE_LANG) || "de");
