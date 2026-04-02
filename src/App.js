@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v4.1",
+    version: "v4.2",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -133,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v4.1",
+    version: "v4.2",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -271,6 +271,7 @@ export default function App() {
     { id: 10, name: "Restaurant Magic", url: "https://restaurantmagic.vercel.app", emoji: "🍽️", fav: false },
     { id: 11, name: "Papierinventur", url: "https://papierinventur.vercel.app", emoji: "📄", fav: false },
     { id: 12, name: "Coup d'État", url: "https://cardgame-omega-six.vercel.app", emoji: "🃏", fav: false },
+    { id: 13, name: "Jump Runner", url: "https://jumprunner.vercel.app", emoji: "🕹️", fav: false },
   ];
 
   const [apps, setApps] = useState(() => {
@@ -1141,3 +1142,4 @@ export default function App() {
     </div>
   );
 }
+
