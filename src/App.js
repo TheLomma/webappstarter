@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v4.9",
+    version: "v5.0",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -133,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v4.9",
+    version: "v5.0",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -565,6 +565,16 @@ export default function App() {
 
   function deletePin(digit) { setPwModal(m => ({ ...m, pin: m.pin.slice(0, -1) })); }
 
+  function shareApp(app) {
+    const payload = btoa(JSON.stringify([app]));
+    const shareUrl = window.location.origin + window.location.pathname + "?import=" + payload;
+    if (navigator.share) {
+      navigator.share({ title: app.name, text: "Öffne " + app.name + " im Web App Launcher", url: shareUrl });
+    } else {
+      navigator.clipboard.writeText(shareUrl).then(() => alert("🔗 Link kopiert!"));
+    }
+  }
+
   function generateQr() {
     try {
       const base64 = btoa(JSON.stringify(apps));
@@ -719,6 +729,13 @@ export default function App() {
     >
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "45%", background: "linear-gradient(180deg,rgba(255,255,255,0.18) 0%,transparent 100%)", borderRadius: "22px 22px 0 0", pointerEvents: "none" }} />
       {pins[app.url] && <div style={{ position: "absolute", top: 8, right: 8, fontSize: 11 }}>🔒</div>}
+      <button
+        onClick={e => { e.preventDefault(); e.stopPropagation(); shareApp(app); }}
+        title="App teilen"
+        style={{ position: "absolute", bottom: 7, right: 7, background: "none", border: "none", cursor: "pointer", fontSize: 13, opacity: 0.35, transition: "opacity .2s" }}
+        onMouseEnter={e => e.currentTarget.style.opacity = "1"}
+        onMouseLeave={e => e.currentTarget.style.opacity = "0.35"}
+      >🔗</button>
       <button
         onClick={e => { e.preventDefault(); e.stopPropagation(); toggleFav(app.id); }}
         style={{ position: "absolute", top: 7, left: 8, background: "none", border: "none", cursor: "pointer", fontSize: 14, opacity: app.fav ? 1 : 0.3, transition: "opacity .2s" }}
