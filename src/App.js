@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v5.0",
+    version: "v5.1",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -133,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v5.0",
+    version: "v5.1",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -242,6 +242,12 @@ const STORAGE_PIN_TIMEOUT = "wal_pin_timeout";
 const STORAGE_BACKUP_DAYS = "wal_backup_days";
 const STORAGE_LAST_EXPORT = "wal_last_export";
   const STORAGE_GROUPS = "wal_groups";
+const STORAGE_PROFILE = "wal_profile";
+
+const PROFILES = {
+  dominik: { name: "Dominik", emoji: "👨‍💼" },
+  joern:   { name: "Jörn",    emoji: "🧑‍💼" },
+};
 
 
 
@@ -260,7 +266,10 @@ const BlobBg = ({ isDark }) => (
 );
 
 export default function App() {
-  const DEFAULT_APPS = [
+  const [profile, setProfile] = useState(() => localStorage.getItem(STORAGE_PROFILE) || null);
+  const [profileScreen, setProfileScreen] = useState(() => !localStorage.getItem(STORAGE_PROFILE));
+
+  const DEFAULT_APPS_DOMINIK = [
     { id: 1, name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪", fav: false },
     { id: 3, name: "SynaTest", url: "https://synaptictester.vercel.app", emoji: "🧠", fav: false },
     { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️", fav: false },
@@ -278,6 +287,25 @@ export default function App() {
     { id: 16, name: "BoardVault", url: "https://brettspielesapp.vercel.app", emoji: "🎲", fav: false },
     { id: 17, name: "Coffee Magic", url: "https://coffeemagic.vercel.app", emoji: "☕", fav: false },
   ];
+
+  const DEFAULT_APPS_JOERN = [
+    { id: 1, name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪", fav: false },
+    { id: 3, name: "SynaTest", url: "https://synaptictester.vercel.app", emoji: "🧠", fav: false },
+    { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️", fav: false },
+    { id: 5, name: "5 Star Lomma", url: "https://magic.pm/5star/lomma/", emoji: "🌟", fav: false },
+    { id: 6, name: "The Wheel", url: "https://thewheel.fun/login.php", emoji: "🎡", fav: false },
+    { id: 7, name: "Prestige", url: "https://prestige-magic.com", emoji: "📋", fav: false },
+    { id: 9, name: "API Test", url: "https://apitest-pi-seven.vercel.app", emoji: "🔌", fav: false },
+    { id: 10, name: "Restaurant Magic", url: "https://restaurantmagic.vercel.app", emoji: "🍽️", fav: false },
+    { id: 12, name: "Coup d'État", url: "https://cardgame-omega-six.vercel.app", emoji: "🃏", fav: false },
+    { id: 13, name: "Jump Runner", url: "https://jumprunner.vercel.app", emoji: "🕹️", fav: false },
+    { id: 14, name: "Hopmanns Olive", url: "https://olivespeisekarte.vercel.app", emoji: "🫒", fav: false },
+    { id: 15, name: "SMS Web App", url: "https://smswebapp.vercel.app", emoji: "💬", fav: false },
+    { id: 16, name: "BoardVault", url: "https://brettspielesapp.vercel.app", emoji: "🎲", fav: false },
+    { id: 17, name: "Coffee Magic", url: "https://coffeemagic.vercel.app", emoji: "☕", fav: false },
+  ];
+
+  const DEFAULT_APPS = profile === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK;
 
   const [apps, setApps] = useState(() => {
     try { const s = localStorage.getItem(STORAGE_APPS); return s ? JSON.parse(s) : DEFAULT_APPS; } catch { return DEFAULT_APPS; }
@@ -327,6 +355,19 @@ export default function App() {
   const [globalPinSetup, setGlobalPinSetup] = useState({ step: 0, first: "", input: "" });
   const [pinTimeout, setPinTimeout] = useState(() => parseInt(localStorage.getItem(STORAGE_PIN_TIMEOUT) || "0"));
   const lastUnlockedRef = useRef(null);
+  const logoClickRef = useRef(0);
+  const logoTimerRef = useRef(null);
+
+  function handleLogoClick() {
+    logoClickRef.current += 1;
+    if (logoTimerRef.current) clearTimeout(logoTimerRef.current);
+    if (logoClickRef.current >= 5) {
+      logoClickRef.current = 0;
+      setProfileScreen(true);
+    } else {
+      logoTimerRef.current = setTimeout(() => { logoClickRef.current = 0; }, 1500);
+    }
+  }
   const [backupDays, setBackupDays] = useState(() => parseInt(localStorage.getItem(STORAGE_BACKUP_DAYS) || "0"));
   const [showBackupBanner, setShowBackupBanner] = useState(false);
   const importRef = useRef();
@@ -458,6 +499,7 @@ export default function App() {
   useEffect(() => { localStorage.setItem(STORAGE_PIN_TIMEOUT, String(pinTimeout)); }, [pinTimeout]);
   useEffect(() => { localStorage.setItem(STORAGE_BACKUP_DAYS, String(backupDays)); }, [backupDays]);
   useEffect(() => { localStorage.setItem(STORAGE_GROUPS, JSON.stringify(groups)); }, [groups]);
+  useEffect(() => { if (profile) localStorage.setItem(STORAGE_PROFILE, profile); }, [profile]);
 
   // Backup reminder checker
   useEffect(() => {
@@ -639,6 +681,25 @@ export default function App() {
   const filtered = groupFiltered.filter(a => a.name.toLowerCase().includes(search.toLowerCase()) || a.url.toLowerCase().includes(search.toLowerCase()));
   const favApps = filtered.filter(a => a.fav);
   const allApps = filtered.filter(a => !a.fav);
+
+  if (profileScreen) return (
+    <div style={{ position: "fixed", inset: 0, background: "linear-gradient(135deg,#0f0f17 0%,#1a1a2e 50%,#16213e 100%)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", zIndex: 9999, padding: 32 }}>
+      <div style={{ fontSize: 48, marginBottom: 16 }}>🚀</div>
+      <div style={{ fontSize: 28, fontWeight: 900, color: "#e2e8f0", marginBottom: 8, letterSpacing: -0.5 }}>Web App Launcher</div>
+      <div style={{ fontSize: 15, color: "rgba(226,232,240,0.5)", marginBottom: 48 }}>Wähle dein Profil</div>
+      <div style={{ display: "flex", gap: 20, flexWrap: "wrap", justifyContent: "center" }}>
+        {Object.entries(PROFILES).map(([key, p]) => (
+          <button key={key} onClick={() => { localStorage.removeItem(STORAGE_APPS); setProfile(key); setApps(key === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK); setProfileScreen(false); }}
+            style={{ background: "rgba(255,255,255,0.07)", border: "2px solid rgba(255,255,255,0.15)", borderRadius: 28, padding: "32px 40px", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, transition: "all .2s", minWidth: 140 }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(167,139,250,0.18)"; e.currentTarget.style.borderColor = "#a78bfa"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.07)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.transform = "none"; }}>
+            <span style={{ fontSize: 52 }}>{p.emoji}</span>
+            <span style={{ fontSize: 20, fontWeight: 800, color: "#e2e8f0" }}>{p.name}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 
   const GroupModal = () => !groupModal.open ? null : (
     <div style={{ position: "fixed", inset: 0, zIndex: 500, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
@@ -892,7 +953,7 @@ export default function App() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <span style={{ fontSize: 24 }}>🚀</span>
           <div>
-            <div style={{ fontSize: 17, fontWeight: 700 }}>{t.title}</div>
+            <div style={{ fontSize: 17, fontWeight: 700 }}><span onClick={handleLogoClick} style={{ cursor: "pointer", userSelect: "none" }}>{t.title}{profile ? ` – ${PROFILES[profile]?.name}` : ""}</span></div>
             <div style={{ fontSize: 10, opacity: 0.6 }}>{t.version}</div>
           </div>
         </div>
@@ -1090,7 +1151,27 @@ export default function App() {
             </div>
           </div>
 
-          {/* Dark / Light Mode Toggle */}
+          {/* Profil */}
+            <div style={{ marginBottom: 24 }}>
+              <div style={s.secTitle}>👤 Profil</div>
+              <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 16px" }}>
+                <div style={{ fontSize: 14, fontWeight: 600, color: theme.text, marginBottom: 12 }}>Aktives Profil: {PROFILES[profile]?.emoji} {PROFILES[profile]?.name}</div>
+                <div style={{ display: "flex", gap: 8 }}>
+                  {Object.entries(PROFILES).map(([key, p]) => (
+                    <button key={key} onClick={() => { if (key !== profile) { localStorage.removeItem(STORAGE_APPS); setProfile(key); setApps(key === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK); } }}
+                      style={{ flex: 1, padding: "10px 8px", borderRadius: 12, border: "2px solid " + (profile === key ? theme.primary : theme.border), background: profile === key ? theme.primarySoft : theme.surface, color: profile === key ? theme.primary : theme.text, fontWeight: 700, fontSize: 13, cursor: "pointer" }}>
+                      {p.emoji} {p.name}
+                    </button>
+                  ))}
+                </div>
+                <button onClick={() => setProfileScreen(true)}
+                  style={{ width: "100%", marginTop: 10, background: "transparent", border: "1px solid " + theme.border, color: theme.subtext, borderRadius: 12, padding: 9, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>
+                  🔄 Profil-Auswahl anzeigen
+                </button>
+              </div>
+            </div>
+
+            {/* Dark / Light Mode Toggle */}
             <div style={{ marginBottom: 24 }}>
               <div style={s.secTitle}>☀️ Dark / Light Mode</div>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "12px 16px" }}>
