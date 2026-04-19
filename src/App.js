@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v5.1",
+    version: "v5.2",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -133,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v5.1",
+    version: "v5.2",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -286,6 +286,7 @@ export default function App() {
     { id: 15, name: "SMS Web App", url: "https://smswebapp.vercel.app", emoji: "💬", fav: false },
     { id: 16, name: "BoardVault", url: "https://brettspielesapp.vercel.app", emoji: "🎲", fav: false },
     { id: 17, name: "Coffee Magic", url: "https://coffeemagic.vercel.app", emoji: "☕", fav: false },
+    { id: 18, name: "Arc", url: "https://arc-liart-one.vercel.app", emoji: "🌀", fav: false },
   ];
 
   const DEFAULT_APPS_JOERN = [
@@ -303,6 +304,7 @@ export default function App() {
     { id: 15, name: "SMS Web App", url: "https://smswebapp.vercel.app", emoji: "💬", fav: false },
     { id: 16, name: "BoardVault", url: "https://brettspielesapp.vercel.app", emoji: "🎲", fav: false },
     { id: 17, name: "Coffee Magic", url: "https://coffeemagic.vercel.app", emoji: "☕", fav: false },
+    { id: 18, name: "Arc", url: "https://arc-liart-one.vercel.app", emoji: "🌀", fav: false },
   ];
 
   const DEFAULT_APPS = profile === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK;
