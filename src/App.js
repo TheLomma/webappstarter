@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v4.8",
+    version: "v4.9",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -133,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v4.8",
+    version: "v4.9",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -292,7 +292,11 @@ export default function App() {
       return { ...DEFAULT_PINS, ...saved };
     } catch { return DEFAULT_PINS; }
   });
-  const [themeName, setThemeName] = useState(() => localStorage.getItem(STORAGE_THEME) || "dark");
+  const [themeName, setThemeName] = useState(() => {
+    const saved = localStorage.getItem(STORAGE_THEME);
+    if (saved) return saved;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+  });
   const [lang, setLang] = useState(() => localStorage.getItem(STORAGE_LANG) || "de");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [form, setForm] = useState({ name: "", url: "", emoji: "" });
@@ -1069,7 +1073,21 @@ export default function App() {
             </div>
           </div>
 
-          {/* Theme */}
+          {/* Dark / Light Mode Toggle */}
+            <div style={{ marginBottom: 24 }}>
+              <div style={s.secTitle}>☀️ Dark / Light Mode</div>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "12px 16px" }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: theme.text }}>{isDark ? "🌙 Dark Mode" : "☀️ Light Mode"}</div>
+                  <div style={{ fontSize: 11, color: theme.subtext }}>Beim ersten Start: Systemeinstellung</div>
+                </div>
+                <button onClick={toggleDark} style={{ width: 52, height: 28, borderRadius: 14, border: "none", cursor: "pointer", background: isDark ? theme.primary : "rgba(200,200,200,0.4)", position: "relative", transition: "background .25s" }}>
+                  <div style={{ position: "absolute", top: 3, left: isDark ? 26 : 3, width: 22, height: 22, borderRadius: "50%", background: "#fff", transition: "left .25s", boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }} />
+                </button>
+              </div>
+            </div>
+
+            {/* Theme */}
           <div style={{ marginBottom: 24 }}>
             <div style={s.secTitle}>{t.theme}</div>
             <div style={s.themeGrid}>
