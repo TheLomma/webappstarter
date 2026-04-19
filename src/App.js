@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v4.6",
+    version: "v4.7",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -133,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v4.6",
+    version: "v4.7",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -265,7 +265,7 @@ export default function App() {
     { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️", fav: false },
     { id: 5, name: "5 Star Lomma", url: "https://magic.pm/5star/lomma/", emoji: "🌟", fav: false },
     { id: 6, name: "The Wheel", url: "https://thewheel.fun/login.php", emoji: "🎡", fav: false },
-    { id: 7, name: "Prestige App", url: "https://prestige-app-zeta.vercel.app/dashboard", emoji: "📋", fav: false },
+    { id: 7, name: "Prestige", url: "https://prestige-magic.com", emoji: "📋", fav: false },
     { id: 8, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "📊", fav: false },
     { id: 9, name: "API Test", url: "https://apitest-pi-seven.vercel.app", emoji: "🔌", fav: false },
     { id: 10, name: "Restaurant Magic", url: "https://restaurantmagic.vercel.app", emoji: "🍽️", fav: false },
@@ -275,6 +275,7 @@ export default function App() {
     { id: 14, name: "Hopmanns Olive", url: "https://olivespeisekarte.vercel.app", emoji: "🫒", fav: false },
     { id: 15, name: "SMS Web App", url: "https://smswebapp.vercel.app", emoji: "💬", fav: false },
     { id: 16, name: "BoardVault", url: "https://brettspielesapp.vercel.app", emoji: "🎲", fav: false },
+    { id: 17, name: "Coffee Magic", url: "https://coffeemagic.vercel.app", emoji: "☕", fav: false },
   ];
 
   const [apps, setApps] = useState(() => {
