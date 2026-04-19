@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v4.7",
+    version: "v4.8",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -133,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v4.7",
+    version: "v4.8",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -241,6 +241,7 @@ const STORAGE_GLOBAL_PIN = "wal_global_pin";
 const STORAGE_PIN_TIMEOUT = "wal_pin_timeout";
 const STORAGE_BACKUP_DAYS = "wal_backup_days";
 const STORAGE_LAST_EXPORT = "wal_last_export";
+  const STORAGE_GROUPS = "wal_groups";
 
 
 
@@ -325,6 +326,14 @@ export default function App() {
   const [backupDays, setBackupDays] = useState(() => parseInt(localStorage.getItem(STORAGE_BACKUP_DAYS) || "0"));
   const [showBackupBanner, setShowBackupBanner] = useState(false);
   const importRef = useRef();
+  const DEFAULT_GROUPS = [
+    { id: "g1", name: "Alle Apps", emoji: "🌐", appIds: [] },
+  ];
+  const [groups, setGroups] = useState(() => {
+    try { const s = localStorage.getItem("wal_groups"); return s ? JSON.parse(s) : DEFAULT_GROUPS; } catch { return DEFAULT_GROUPS; }
+  });
+  const [activeGroup, setActiveGroup] = useState("all");
+  const [groupModal, setGroupModal] = useState({ open: false, editId: null, name: "", emoji: "📁", appIds: [] });
 
   useEffect(() => {
     const goOffline = () => setIsOffline(true);
@@ -444,6 +453,7 @@ export default function App() {
   useEffect(() => { localStorage.setItem(STORAGE_GLOBAL_PIN, globalPin); }, [globalPin]);
   useEffect(() => { localStorage.setItem(STORAGE_PIN_TIMEOUT, String(pinTimeout)); }, [pinTimeout]);
   useEffect(() => { localStorage.setItem(STORAGE_BACKUP_DAYS, String(backupDays)); }, [backupDays]);
+  useEffect(() => { localStorage.setItem(STORAGE_GROUPS, JSON.stringify(groups)); }, [groups]);
 
   // Backup reminder checker
   useEffect(() => {
@@ -586,7 +596,8 @@ export default function App() {
   }
 
   // Drag & Drop
-  function onDragStart(e, id) { setDragId(id); e.dataTransfer.effectAllowed = "move"; }
+  function onDragStart(e, id) { setDragId(id); e.dataTransfer.effectAllowed = "move"; if (vibro && navigator.vibrate) navigator.vibrate(20); }
+  function onDrop(e, id) { if (vibro && navigator.vibrate) navigator.vibrate([15, 30, 15]); }
   function onDragOver(e, id) {
     e.preventDefault();
     if (id === dragId) return;
@@ -609,9 +620,60 @@ export default function App() {
     setShowBanner(false);
   }
 
-  const filtered = apps.filter(a => a.name.toLowerCase().includes(search.toLowerCase()) || a.url.toLowerCase().includes(search.toLowerCase()));
+  const activeGroupObj = groups.find(g => g.id === activeGroup);
+  const groupFiltered = activeGroup === "all" ? apps : apps.filter(a => activeGroupObj?.appIds?.includes(a.id));
+  const filtered = groupFiltered.filter(a => a.name.toLowerCase().includes(search.toLowerCase()) || a.url.toLowerCase().includes(search.toLowerCase()));
   const favApps = filtered.filter(a => a.fav);
   const allApps = filtered.filter(a => !a.fav);
+
+  const GroupModal = () => !groupModal.open ? null : (
+    <div style={{ position: "fixed", inset: 0, zIndex: 500, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
+      <div onClick={() => setGroupModal({ open: false, editId: null, name: "", emoji: "📁", appIds: [] })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
+      <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px)", WebkitBackdropFilter: "blur(40px)", border: "1px solid " + theme.border, borderRadius: "28px 28px 0 0", padding: "24px 20px 40px", width: "100%", maxWidth: 500, maxHeight: "85vh", overflowY: "auto", boxShadow: "0 -4px 40px rgba(0,0,0,0.2)" }}>
+        <div style={{ fontSize: 17, fontWeight: 800, color: theme.text, marginBottom: 16 }}>{groupModal.editId ? "✏️ Gruppe bearbeiten" : "➕ Neue Gruppe"}</div>
+        <div style={{ marginBottom: 12 }}>
+          <label style={{ fontSize: 12, color: theme.subtext, display: "block", marginBottom: 6, fontWeight: 700 }}>Emoji</label>
+          <input style={{ ...s.input, fontSize: 22, textAlign: "center", width: 60 }} maxLength={2} value={groupModal.emoji} onChange={e => setGroupModal(m => ({ ...m, emoji: e.target.value }))} />
+        </div>
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ fontSize: 12, color: theme.subtext, display: "block", marginBottom: 6, fontWeight: 700 }}>Name</label>
+          <input style={s.input} placeholder="Gruppenname" value={groupModal.name} onChange={e => setGroupModal(m => ({ ...m, name: e.target.value }))} />
+        </div>
+        <div style={{ marginBottom: 20 }}>
+          <label style={{ fontSize: 12, color: theme.subtext, display: "block", marginBottom: 10, fontWeight: 700 }}>Apps auswählen</label>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6, maxHeight: 260, overflowY: "auto" }}>
+            {apps.map(app => {
+              const checked = groupModal.appIds.includes(app.id);
+              return (
+                <div key={app.id} onClick={() => setGroupModal(m => ({ ...m, appIds: checked ? m.appIds.filter(id => id !== app.id) : [...m.appIds, app.id] }))}
+                  style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", background: checked ? theme.primarySoft : theme.inputBg, border: "1.5px solid " + (checked ? theme.primary : theme.border), borderRadius: 12, cursor: "pointer", transition: "all .15s" }}>
+                  <span style={{ fontSize: 20 }}>{app.emoji}</span>
+                  <span style={{ fontSize: 14, fontWeight: 600, color: theme.text, flex: 1 }}>{app.name}</span>
+                  <span style={{ fontSize: 18 }}>{checked ? "✅" : "⬜"}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button onClick={() => setGroupModal({ open: false, editId: null, name: "", emoji: "📁", appIds: [] })} style={{ flex: 1, background: theme.inputBg, border: "1px solid " + theme.border, color: theme.text, borderRadius: 12, padding: 12, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Abbrechen</button>
+          <button onClick={() => {
+            if (!groupModal.name.trim()) return;
+            if (groupModal.editId) {
+              setGroups(gs => gs.map(g => g.id === groupModal.editId ? { ...g, name: groupModal.name.trim(), emoji: groupModal.emoji, appIds: groupModal.appIds } : g));
+            } else {
+              setGroups(gs => [...gs, { id: "g" + Date.now(), name: groupModal.name.trim(), emoji: groupModal.emoji, appIds: groupModal.appIds }]);
+            }
+            setGroupModal({ open: false, editId: null, name: "", emoji: "📁", appIds: [] });
+          }} style={{ flex: 1, background: theme.primary, color: "#fff", border: "none", borderRadius: 12, padding: 12, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>✅ Speichern</button>
+        </div>
+        {groupModal.editId && (
+          <button onClick={() => { setGroups(gs => gs.filter(g => g.id !== groupModal.editId)); if (activeGroup === groupModal.editId) setActiveGroup("all"); setGroupModal({ open: false, editId: null, name: "", emoji: "📁", appIds: [] }); }}
+            style={{ width: "100%", marginTop: 10, background: "#fee2e2", border: "1px solid #fca5a5", color: "#dc2626", borderRadius: 12, padding: 10, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>🗑️ Gruppe löschen</button>
+        )}
+      </div>
+    </div>
+  );
 
   const s = {
     body:       { position: "relative", background: customBg.enabled ? `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)` : theme.bg, minHeight: "100vh", fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif", color: theme.text, transition: "background .4s,color .3s" },
@@ -645,6 +707,7 @@ export default function App() {
       onClick={e => handleAppClick(e, app)}
       draggable
       onDragStart={e => onDragStart(e, app.id)}
+      onDrop={e => onDrop(e, app.id)}
       onDragOver={e => onDragOver(e, app.id)}
       onDragEnd={onDragEnd}
       onMouseEnter={e => { e.currentTarget.style.background = theme.cardHover; e.currentTarget.style.borderColor = theme.primary; e.currentTarget.style.transform = "translateY(-4px) scale(1.03)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5)"; }}
@@ -684,6 +747,7 @@ export default function App() {
       {animEnabled && <BlobBg isDark={isDark} />}
       <GlobalPinModal />
       <HelpModal />
+      <GroupModal />
 
       {/* QR Modal */}
       {qrModal.open && (
