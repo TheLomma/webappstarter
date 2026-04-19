@@ -273,7 +273,7 @@ export default function App() {
     { id: 1, name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪", fav: false },
     { id: 3, name: "SynaTest", url: "https://synaptictester.vercel.app", emoji: "🧠", fav: false },
     { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️", fav: false },
-    { id: 5, name: "5 Star Lomma", url: "https://magic.pm/5star/lomma/", emoji: "🌟", fav: false },
+    { id: 5, name: "5 Star", url: "https://magic.pm/5star/lomma/", emoji: "🌟", fav: false },
     { id: 6, name: "The Wheel", url: "https://thewheel.fun/login.php", emoji: "🎡", fav: false },
     { id: 7, name: "Prestige", url: "https://prestige-magic.com", emoji: "📋", fav: false },
     { id: 8, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "📊", fav: false },
@@ -293,7 +293,6 @@ export default function App() {
     { id: 1, name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪", fav: false },
     { id: 3, name: "SynaTest", url: "https://synaptictester.vercel.app", emoji: "🧠", fav: false },
     { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️", fav: false },
-    { id: 5, name: "5 Star Lomma", url: "https://magic.pm/5star/lomma/", emoji: "🌟", fav: false },
     { id: 6, name: "The Wheel", url: "https://thewheel.fun/login.php", emoji: "🎡", fav: false },
     { id: 7, name: "Prestige", url: "https://prestige-magic.com", emoji: "📋", fav: false },
     { id: 9, name: "API Test", url: "https://apitest-pi-seven.vercel.app", emoji: "🔌", fav: false },
@@ -305,6 +304,7 @@ export default function App() {
     { id: 16, name: "BoardVault", url: "https://brettspielesapp.vercel.app", emoji: "🎲", fav: false },
     { id: 17, name: "Coffee Magic", url: "https://coffeemagic.vercel.app", emoji: "☕", fav: false },
     { id: 18, name: "Arc", url: "https://arc-liart-one.vercel.app", emoji: "🌀", fav: false },
+    { id: 19, name: "Sky Hopper", url: "https://skyhopgame.com/38782", emoji: "🦅", fav: false },
   ];
 
   const DEFAULT_APPS = profile === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK;
