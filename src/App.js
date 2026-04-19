@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v5.2",
+    version: "v5.3",
     search: "Search apps...",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
@@ -133,7 +133,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v5.2",
+    version: "v5.3",
     search: "Apps suchen...",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
@@ -245,8 +245,8 @@ const STORAGE_LAST_EXPORT = "wal_last_export";
 const STORAGE_PROFILE = "wal_profile";
 
 const PROFILES = {
-  dominik: { name: "Dominik", emoji: "👨‍💼" },
-  joern:   { name: "Jörn",    emoji: "🧑‍💼" },
+  dominik: { name: "Dominik", emoji: "👨🏻" },
+  joern:   { name: "Jörn",    emoji: "👨🏻‍🦳" },
 };
 
 
