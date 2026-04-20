@@ -266,7 +266,7 @@ const STORAGE_PROFILE = "wal_profile";
 const STORAGE_STATS   = "wal_stats";
 const STORAGE_PROFILE_SETTINGS = "wal_profile_settings"; // eslint-disable-line
 const STORAGE_NOTES = "wal_notes";
-const STORAGE_BADGES = "wal_badges";
+const STORAGE_BADGES = "wal_badges"; // eslint-disable-line
 
 const PROFILES = {
   dominik: { name: "Dominik", emoji: "👨🏻" },
