@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v6.0",
+    version: "v6.2",
     search: "Search apps...",
     stats: "Usage Statistics",
     statsDesc: "How often each app was opened",
@@ -143,7 +143,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v6.0",
+    version: "v6.2",
     search: "Apps suchen...",
     stats: "Nutzungsstatistik",
     statsDesc: "Wie oft wurde welche App geöffnet",
@@ -311,6 +311,7 @@ export default function App() {
     { id: 16, name: "BoardVault", url: "https://brettspielesapp.vercel.app", emoji: "🎲", fav: false },
     { id: 17, name: "Coffee Magic", url: "https://coffeemagic.vercel.app", emoji: "☕", fav: false },
     { id: 18, name: "Arc", url: "https://arc-liart-one.vercel.app", emoji: "🌀", fav: false },
+    { id: 20, name: "QR Genie", url: "https://linkgen.ie/datlomma", emoji: "▣", fav: false },
   ];
 
   const DEFAULT_APPS_JOERN = [
@@ -1473,7 +1474,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v6.0</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v6.2</div>
         </div>
       </div>
     </div>
