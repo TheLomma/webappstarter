@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v6.2",
+    version: "v6.3",
     search: "Search apps...",
     stats: "Usage Statistics",
     statsDesc: "How often each app was opened",
@@ -143,7 +143,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v6.2",
+    version: "v6.3",
     search: "Apps suchen...",
     stats: "Nutzungsstatistik",
     statsDesc: "Wie oft wurde welche App geöffnet",
@@ -331,6 +331,7 @@ export default function App() {
     { id: 17, name: "Coffee Magic", url: "https://coffeemagic.vercel.app", emoji: "☕", fav: false },
     { id: 18, name: "Arc", url: "https://arc-liart-one.vercel.app", emoji: "🌀", fav: false },
     { id: 19, name: "Sky Hopper", url: "https://skyhopgame.com/38782", emoji: "🦅", fav: false },
+    { id: 20, name: "QR Genie", url: "https://linkgen.ie/joernk", emoji: "▣", fav: false },
   ];
 
   const DEFAULT_APPS = profile === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK;
@@ -1474,7 +1475,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v6.2</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v6.3</div>
         </div>
       </div>
     </div>
