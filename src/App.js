@@ -413,6 +413,8 @@ export default function App() {
     try { const s = localStorage.getItem("wal_groups"); return s ? JSON.parse(s) : DEFAULT_GROUPS; } catch { return DEFAULT_GROUPS; }
   });
   const [activeGroup, setActiveGroup] = useState("all");
+  const [ctxMenu, setCtxMenu] = useState({ open: false, app: null });
+  const longPressTimer = useRef(null);
   const [groupModal, setGroupModal] = useState({ open: false, editId: null, name: "", emoji: "📁", appIds: [] });
 
   useEffect(() => {
@@ -703,6 +705,16 @@ export default function App() {
     });
   }
   function onDragEnd() { setDragId(null); }
+
+    function startLongPress(app) {
+      longPressTimer.current = setTimeout(() => {
+        if (vibro && navigator.vibrate) navigator.vibrate(40);
+        setCtxMenu({ open: true, app });
+      }, 500);
+    }
+    function cancelLongPress() {
+      if (longPressTimer.current) { clearTimeout(longPressTimer.current); longPressTimer.current = null; }
+    }
 
     const swipeTouchStartX = useRef(null);
     const swipeTouchStartY = useRef(null);
