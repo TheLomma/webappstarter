@@ -264,7 +264,7 @@ const STORAGE_LAST_EXPORT = "wal_last_export";
   const STORAGE_GROUPS = "wal_groups";
 const STORAGE_PROFILE = "wal_profile";
 const STORAGE_STATS   = "wal_stats";
-const STORAGE_PROFILE_SETTINGS = "wal_profile_settings";
+const STORAGE_PROFILE_SETTINGS = "wal_profile_settings"; // eslint-disable-line
 const STORAGE_NOTES = "wal_notes";
 
 const PROFILES = {
