@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v5.6",
+    version: "v5.7",
     search: "Search apps...",
     stats: "Usage Statistics",
     statsDesc: "How often each app was opened",
@@ -32,6 +32,10 @@ const translations = {
     statsResetConfirm: "Reset all usage statistics?",
     statsEmpty: "No data yet — open some apps first!",
     statsOpens: "opens",
+    noteTitle: "Note",
+    notePlaceholder: "Enter note text...",
+    noteSave: "Save",
+    noteAdd: "+ Add Note",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
     importBtn: "Import JSON",
@@ -139,7 +143,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v5.6",
+    version: "v5.7",
     search: "Apps suchen...",
     stats: "Nutzungsstatistik",
     statsDesc: "Wie oft wurde welche App geöffnet",
@@ -147,6 +151,10 @@ const translations = {
     statsResetConfirm: "Alle Nutzungsstatistiken zurücksetzen?",
     statsEmpty: "Noch keine Daten – öffne zuerst ein paar Apps!",
     statsOpens: "×",
+    noteTitle: "Notiz",
+    notePlaceholder: "Notiztext eingeben...",
+    noteSave: "Speichern",
+    noteAdd: "+ Notiz hinzufügen",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
     importBtn: "JSON importieren",
@@ -257,6 +265,7 @@ const STORAGE_LAST_EXPORT = "wal_last_export";
 const STORAGE_PROFILE = "wal_profile";
 const STORAGE_STATS   = "wal_stats";
 const STORAGE_PROFILE_SETTINGS = "wal_profile_settings";
+const STORAGE_NOTES = "wal_notes";
 
 const PROFILES = {
   dominik: { name: "Dominik", emoji: "👨🏻" },
@@ -774,6 +783,12 @@ export default function App() {
 
   const isLandscape = window.innerWidth > window.innerHeight && window.innerHeight < 520;
 
+  const [notes, setNotes] = useState(() => {
+    try { const s = localStorage.getItem(STORAGE_NOTES); return s ? JSON.parse(s) : []; } catch { return []; }
+  });
+  const [noteModal, setNoteModal] = useState({ open: false, id: null, text: "" });
+  useEffect(() => { localStorage.setItem(STORAGE_NOTES, JSON.stringify(notes)); }, [notes]);
+
   const s = {
     body:       { position: "relative", background: customBg.enabled ? `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)` : theme.bg, minHeight: "100vh", fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif", color: theme.text, transition: "background .4s,color .3s" },
     header:     { background: theme.headerBg, backdropFilter: "blur(24px) saturate(180%)", WebkitBackdropFilter: "blur(24px) saturate(180%)", color: theme.headerText, padding: "0 20px", paddingTop: "env(safe-area-inset-top)", height: "calc(60px + env(safe-area-inset-top))", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 1px 0 " + theme.border + ", 0 4px 24px rgba(0,0,0,.08)", borderBottom: "1px solid " + theme.border },
@@ -797,6 +812,21 @@ export default function App() {
     listItem:   { display: "flex", alignItems: "center", gap: 10, padding: "11px 14px", background: theme.inputBg, backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderRadius: 14, marginBottom: 8, border: "1px solid " + theme.border, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" },
     delBtn:     { background: "#fee2e2", border: "none", color: "#dc2626", width: 30, height: 30, borderRadius: 8, cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
   };
+
+  const NoteCard = ({ note }) => (
+    <div
+      style={{ ...s.card, cursor: "default", textAlign: "left", padding: "14px 12px", display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: cardSize === "small" ? 90 : cardSize === "large" ? 160 : 120 }}
+      className="wal-card"
+    >
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "40%", background: "linear-gradient(180deg,rgba(255,255,255,0.12) 0%,transparent 100%)", borderRadius: "22px 22px 0 0", pointerEvents: "none" }} />
+      <div style={{ fontSize: 11, fontWeight: 700, color: theme.primary, marginBottom: 6, letterSpacing: 1, textTransform: "uppercase", opacity: 0.8 }}>📝 {t.noteTitle}</div>
+      <div style={{ fontSize: cardSize === "small" ? 10 : 12, color: theme.text, lineHeight: 1.5, flex: 1, overflow: "hidden", wordBreak: "break-word", display: "-webkit-box", WebkitLineClamp: cardSize === "large" ? 6 : cardSize === "small" ? 2 : 4, WebkitBoxOrient: "vertical" }}>{note.text}</div>
+      <button
+        onClick={() => setNoteModal({ open: true, id: note.id, text: note.text })}
+        style={{ marginTop: 8, background: "none", border: "none", color: theme.subtext, fontSize: 11, cursor: "pointer", textAlign: "left", padding: 0, opacity: 0.6 }}
+      >✏️ Edit</button>
+    </div>
+  );
 
   const AppCard = ({ app }) => (
     <a
@@ -863,6 +893,38 @@ export default function App() {
       <GlobalPinModal />
       <HelpModal />
       <GroupModal />
+
+      {/* Note Modal */}
+      {noteModal.open && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 600, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+          <div onClick={() => setNoteModal({ open: false, id: null, text: "" })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
+          <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid " + theme.border, borderRadius: 28, padding: "24px 20px", maxWidth: 380, width: "calc(100% - 32px)", boxShadow: "0 8px 48px rgba(0,0,0,0.25)" }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: theme.text, marginBottom: 16 }}>📝 {t.noteTitle}</div>
+            <textarea
+              autoFocus
+              value={noteModal.text}
+              onChange={e => setNoteModal(m => ({ ...m, text: e.target.value }))}
+              placeholder={t.notePlaceholder}
+              style={{ width: "100%", minHeight: 120, background: theme.inputBg, border: "1.5px solid " + theme.border, borderRadius: 14, padding: "11px 14px", fontSize: 14, color: theme.text, outline: "none", boxSizing: "border-box", resize: "vertical", fontFamily: "inherit", lineHeight: 1.5 }}
+            />
+            <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
+              <button onClick={() => setNoteModal({ open: false, id: null, text: "" })} style={{ flex: 1, background: theme.inputBg, border: "1px solid " + theme.border, color: theme.text, borderRadius: 12, padding: 11, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Abbrechen</button>
+              {noteModal.id && (
+                <button onClick={() => { setNotes(n => n.filter(x => x.id !== noteModal.id)); setNoteModal({ open: false, id: null, text: "" }); }} style={{ background: "#fee2e2", border: "1px solid #fca5a5", color: "#dc2626", borderRadius: 12, padding: "11px 14px", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>🗑️</button>
+              )}
+              <button onClick={() => {
+                if (!noteModal.text.trim()) return;
+                if (noteModal.id) {
+                  setNotes(n => n.map(x => x.id === noteModal.id ? { ...x, text: noteModal.text.trim() } : x));
+                } else {
+                  setNotes(n => [...n, { id: Date.now(), text: noteModal.text.trim() }]);
+                }
+                setNoteModal({ open: false, id: null, text: "" });
+              }} style={{ flex: 1, background: theme.primary, color: "#fff", border: "none", borderRadius: 12, padding: 11, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>{t.noteSave}</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* QR Modal */}
       {qrModal.open && (
@@ -1022,7 +1084,21 @@ export default function App() {
         )}
 
         {/* All Apps */}
-        <div style={s.secLabel}>{t.myApps}</div>
+        {notes.length > 0 && (
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ ...s.secLabel, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span>📝 Notizen</span>
+              <button onClick={() => setNoteModal({ open: true, id: null, text: "" })} style={{ background: theme.primarySoft, border: "none", color: theme.primary, borderRadius: 8, padding: "3px 10px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>{t.noteAdd}</button>
+            </div>
+            <div style={s.grid}>
+              {notes.map(note => <NoteCard key={note.id} note={note} />)}
+            </div>
+          </div>
+        )}
+        <div style={{ ...s.secLabel, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span>{t.myApps}</span>
+          {notes.length === 0 && <button onClick={() => setNoteModal({ open: true, id: null, text: "" })} style={{ background: theme.primarySoft, border: "none", color: theme.primary, borderRadius: 8, padding: "3px 10px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>{t.noteAdd}</button>}
+        </div>
         <div style={viewMode === "compact" ? { display: "flex", flexDirection: "column", gap: 8 } : s.grid} className="wal-grid">
           {allApps.length === 0 && favApps.length === 0 ? (
             <div style={{ gridColumn: "1/-1", textAlign: "center", padding: "50px 20px", color: theme.subtext }}>
