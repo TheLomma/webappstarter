@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v5.7",
+    version: "v5.8",
     search: "Search apps...",
     stats: "Usage Statistics",
     statsDesc: "How often each app was opened",
@@ -143,7 +143,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v5.7",
+    version: "v5.8",
     search: "Apps suchen...",
     stats: "Nutzungsstatistik",
     statsDesc: "Wie oft wurde welche App geöffnet",
@@ -704,6 +704,32 @@ export default function App() {
   }
   function onDragEnd() { setDragId(null); }
 
+    const swipeTouchStartX = useRef(null);
+    const swipeTouchStartY = useRef(null);
+
+    function handleSwipeTouchStart(e) {
+      swipeTouchStartX.current = e.touches[0].clientX;
+      swipeTouchStartY.current = e.touches[0].clientY;
+    }
+
+    function handleSwipeTouchEnd(e) {
+      if (swipeTouchStartX.current === null) return;
+      const dx = e.changedTouches[0].clientX - swipeTouchStartX.current;
+      const dy = e.changedTouches[0].clientY - swipeTouchStartY.current;
+      swipeTouchStartX.current = null;
+      swipeTouchStartY.current = null;
+      if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+      const allGroupIds = ["all", ...groups.map(g => g.id)];
+      const currentIdx = allGroupIds.indexOf(activeGroup);
+      if (dx < 0 && currentIdx < allGroupIds.length - 1) {
+        setActiveGroup(allGroupIds[currentIdx + 1]);
+        if (vibro && navigator.vibrate) navigator.vibrate(15);
+      } else if (dx > 0 && currentIdx > 0) {
+        setActiveGroup(allGroupIds[currentIdx - 1]);
+        if (vibro && navigator.vibrate) navigator.vibrate(15);
+      }
+    }
+
   async function installApp() {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
@@ -862,7 +888,7 @@ export default function App() {
   );
 
   return (
-    <div style={s.body}>
+    <div style={s.body} onTouchStart={handleSwipeTouchStart} onTouchEnd={handleSwipeTouchEnd}>
 
       <style>{`
         * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
@@ -1060,17 +1086,23 @@ export default function App() {
         </div>
       </header>
 
-      <main style={s.main} className="wal-main">
-        {/* Search */}
-        <div style={{ marginBottom: 20 }}>
-          <input
-            style={{ ...s.input, paddingLeft: 40 }}
-            placeholder={t.search}
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-          />
-          <span style={{ position: "relative", top: -36, left: 14, fontSize: 16, pointerEvents: "none" }}>🔍</span>
+      <div style={{ position: "sticky", top: "calc(60px + env(safe-area-inset-top))", zIndex: 99, background: theme.headerBg, backdropFilter: "blur(24px) saturate(180%)", WebkitBackdropFilter: "blur(24px) saturate(180%)", borderBottom: "1px solid " + theme.border, padding: "8px 16px" }}>
+          <div style={{ position: "relative", maxWidth: 900, margin: "0 auto" }}>
+            <span style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", fontSize: 16, pointerEvents: "none" }}>🔍</span>
+            <input
+              style={{ ...s.input, paddingLeft: 42, paddingRight: search ? 36 : 14, borderRadius: 12 }}
+              placeholder={t.search}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+            {search && (
+              <button onClick={() => setSearch("")} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", fontSize: 16, color: theme.subtext, lineHeight: 1 }}>✕</button>
+            )}
+          </div>
         </div>
+
+        <main style={s.main} className="wal-main">
+        
 
         {/* Favorites */}
         {favApps.length > 0 && (
