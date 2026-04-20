@@ -707,13 +707,13 @@ export default function App() {
   }
   function onDragEnd() { setDragId(null); }
 
-    function startLongPress(app) {
+    function startLongPress(app) { // eslint-disable-line no-unused-vars
       longPressTimer.current = setTimeout(() => {
         if (vibro && navigator.vibrate) navigator.vibrate(40);
         setCtxMenu({ open: true, app });
       }, 500);
     }
-    function cancelLongPress() {
+    function cancelLongPress() { // eslint-disable-line no-unused-vars
       if (longPressTimer.current) { clearTimeout(longPressTimer.current); longPressTimer.current = null; }
     }
 
