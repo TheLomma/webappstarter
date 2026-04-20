@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v5.9",
+    version: "v6.0",
     search: "Search apps...",
     stats: "Usage Statistics",
     statsDesc: "How often each app was opened",
@@ -143,7 +143,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v5.9",
+    version: "v6.0",
     search: "Apps suchen...",
     stats: "Nutzungsstatistik",
     statsDesc: "Wie oft wurde welche App geöffnet",
@@ -1473,7 +1473,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v5.9</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v6.0</div>
         </div>
       </div>
     </div>
