@@ -24,8 +24,14 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v5.4",
+    version: "v5.6",
     search: "Search apps...",
+    stats: "Usage Statistics",
+    statsDesc: "How often each app was opened",
+    statsReset: "Reset Statistics",
+    statsResetConfirm: "Reset all usage statistics?",
+    statsEmpty: "No data yet — open some apps first!",
+    statsOpens: "opens",
     importExport: "Import / Export",
     exportBtn: "Export JSON",
     importBtn: "Import JSON",
@@ -133,8 +139,14 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v5.4",
+    version: "v5.6",
     search: "Apps suchen...",
+    stats: "Nutzungsstatistik",
+    statsDesc: "Wie oft wurde welche App geöffnet",
+    statsReset: "Statistik zurücksetzen",
+    statsResetConfirm: "Alle Nutzungsstatistiken zurücksetzen?",
+    statsEmpty: "Noch keine Daten – öffne zuerst ein paar Apps!",
+    statsOpens: "×",
     importExport: "Import / Export",
     exportBtn: "JSON exportieren",
     importBtn: "JSON importieren",
@@ -243,6 +255,8 @@ const STORAGE_BACKUP_DAYS = "wal_backup_days";
 const STORAGE_LAST_EXPORT = "wal_last_export";
   const STORAGE_GROUPS = "wal_groups";
 const STORAGE_PROFILE = "wal_profile";
+const STORAGE_STATS   = "wal_stats";
+const STORAGE_PROFILE_SETTINGS = "wal_profile_settings";
 
 const PROFILES = {
   dominik: { name: "Dominik", emoji: "👨🏻" },
@@ -377,6 +391,11 @@ export default function App() {
   const DEFAULT_GROUPS = [
     { id: "g1", name: "Alle Apps", emoji: "🌐", appIds: [] },
   ];
+  const [appStats, setAppStats] = useState(() => {
+    try { const s = localStorage.getItem(STORAGE_STATS); return s ? JSON.parse(s) : {}; } catch { return {}; }
+  });
+  const [statsOpen, setStatsOpen] = useState(false);
+
   const [groups, setGroups] = useState(() => {
     try { const s = localStorage.getItem("wal_groups"); return s ? JSON.parse(s) : DEFAULT_GROUPS; } catch { return DEFAULT_GROUPS; }
   });
@@ -753,6 +772,8 @@ export default function App() {
     </div>
   );
 
+  const isLandscape = window.innerWidth > window.innerHeight && window.innerHeight < 520;
+
   const s = {
     body:       { position: "relative", background: customBg.enabled ? `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)` : theme.bg, minHeight: "100vh", fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif", color: theme.text, transition: "background .4s,color .3s" },
     header:     { background: theme.headerBg, backdropFilter: "blur(24px) saturate(180%)", WebkitBackdropFilter: "blur(24px) saturate(180%)", color: theme.headerText, padding: "0 20px", paddingTop: "env(safe-area-inset-top)", height: "calc(60px + env(safe-area-inset-top))", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 1px 0 " + theme.border + ", 0 4px 24px rgba(0,0,0,.08)", borderBottom: "1px solid " + theme.border },
@@ -762,7 +783,9 @@ export default function App() {
     grid:       { display: "grid", gridTemplateColumns: cardSize === "small" ? "repeat(auto-fill,minmax(80px,1fr))" : cardSize === "large" ? "repeat(auto-fill,minmax(150px,1fr))" : "repeat(auto-fill,minmax(110px,1fr))", gap: cardSize === "small" ? 8 : cardSize === "large" ? 16 : 12 },
     card:       { position: "relative", overflow: "hidden", background: theme.surface, backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)", border: "1px solid " + theme.border, borderRadius: 20, padding: "18px 10px", textAlign: "center", cursor: "pointer", textDecoration: "none", color: theme.text, display: "block", boxShadow: "0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.35)", transition: "all .25s cubic-bezier(.34,1.56,.64,1)" },
     overlay:    { position: "fixed", inset: 0, background: "rgba(0,0,0,.5)", zIndex: 200, opacity: drawerOpen ? 1 : 0, pointerEvents: drawerOpen ? "all" : "none", transition: "opacity .3s" },
-    drawer:     { position: "fixed", bottom: 0, left: 0, right: 0, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", borderRadius: "28px 28px 0 0", zIndex: 201, transform: drawerOpen ? "translateY(0)" : "translateY(100%)", transition: "transform .4s cubic-bezier(.34,1.56,.64,1)", maxHeight: "85vh", overflowY: "auto", boxShadow: "0 -4px 40px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.3)", border: "1px solid " + theme.border },
+    drawer:     isLandscape
+      ? { position: "fixed", top: 0, right: 0, bottom: 0, width: "55vw", maxWidth: 380, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", borderRadius: "20px 0 0 20px", zIndex: 201, transform: drawerOpen ? "translateX(0)" : "translateX(110%)", transition: "transform .35s ease", overflowY: "auto", boxShadow: "-4px 0 40px rgba(0,0,0,0.22)", border: "1px solid " + theme.border }
+      : { position: "fixed", bottom: 0, left: 0, right: 0, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", borderRadius: "28px 28px 0 0", zIndex: 201, transform: drawerOpen ? "translateY(0)" : "translateY(100%)", transition: "transform .4s cubic-bezier(.34,1.56,.64,1)", maxHeight: "85vh", overflowY: "auto", boxShadow: "0 -4px 40px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.3)", border: "1px solid " + theme.border },
     drawerHead: { padding: "16px 20px 12px", fontSize: 17, fontWeight: 700, color: theme.text, borderBottom: "1px solid " + theme.border, display: "flex", alignItems: "center", justifyContent: "space-between" },
     closeBtn:   { background: theme.primarySoft, border: "none", color: theme.primary, width: 28, height: 28, borderRadius: "50%", cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center" },
     drawerBody: { padding: "14px 16px 40px" },
@@ -817,7 +840,14 @@ export default function App() {
         body { margin: 0; overscroll-behavior: none; }
         input, button { -webkit-appearance: none; }
         @media (orientation: landscape) and (max-height: 500px) {
-          .wal-header { height: 46px !important; padding: 0 14px !important; }
+          .wal-header { height: 46px !important; padding: 0 12px !important; }
+          .wal-main { padding: 8px 10px !important; }
+          .wal-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important; gap: 6px !important; }
+          .wal-card { padding: 10px 6px !important; border-radius: 14px !important; }
+          .wal-drawer { max-height: 100dvh !important; width: 55vw !important; left: auto !important; right: 0 !important; top: 0 !important; bottom: 0 !important; border-radius: 20px 0 0 20px !important; }
+          .wal-header-version { display: none !important; }
+          .wal-iconbtn { width: 32px !important; height: 32px !important; font-size: 14px !important; }
+        }
           .wal-main { padding: 10px 12px !important; }
           .wal-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important; gap: 8px !important; }
           .wal-drawer { max-height: 100vh !important; width: 60vw !important; left: auto !important; top: 0 !important; bottom: 0 !important; border-radius: 0 !important; }
@@ -956,15 +986,15 @@ export default function App() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <span style={{ fontSize: 24 }}>🚀</span>
           <div>
-            <div style={{ fontSize: 17, fontWeight: 700 }}><span onClick={handleLogoClick} style={{ cursor: "pointer", userSelect: "none" }}>{t.title}{profile ? ` – ${PROFILES[profile]?.name}` : ""}</span></div>
-            <div style={{ fontSize: 10, opacity: 0.6 }}>{t.version}</div>
+            <div style={{ fontSize: 17, fontWeight: 700 }} className="wal-header-title"><span onClick={handleLogoClick} style={{ cursor: "pointer", userSelect: "none" }}>{t.title}{profile ? ` – ${PROFILES[profile]?.name}` : ""}</span></div>
+            <div style={{ fontSize: 10, opacity: 0.6 }} className="wal-header-version">{t.version}</div>
           </div>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
           <button style={s.iconBtn} onClick={() => setLang(l => l === "de" ? "en" : "de")} title={lang === "de" ? "Switch to English" : "Zu Deutsch wechseln"}>{lang === "de" ? "EN" : "DE"}</button>
           <button style={s.iconBtn} onClick={() => setHelpOpen(true)}>❓</button>
           <button style={s.iconBtn} onClick={() => setViewMode(v => v === "compact" ? "grid" : "compact")}>{viewMode === "compact" ? "🔲" : "📊"}</button>
-          <button style={s.iconBtn} onClick={toggleDark}>{isDark ? "☀️" : "🌙"}</button>
+          <button style={s.iconBtn} className="wal-iconbtn" onClick={toggleDark}>{isDark ? "☀️" : "🌙"}</button>
           <button style={s.iconBtn} onClick={() => setDrawerOpen(true)}>⚙️</button>
         </div>
       </header>
@@ -1020,7 +1050,7 @@ export default function App() {
 
       <div style={s.overlay} onClick={() => setDrawerOpen(false)} />
 
-      <div style={s.drawer} className="wal-drawer">
+      <div style={{ ...s.drawer, ...(drawerOpen ? {} : {}) }} className={"wal-drawer" + (drawerOpen ? "" : " wal-drawer-hidden")}>
         <div style={{ width: 40, height: 4, background: theme.border, borderRadius: 2, margin: "12px auto 0" }} />
         <div style={s.drawerHead}>
           <span>⚙️ {t.settings}</span>
