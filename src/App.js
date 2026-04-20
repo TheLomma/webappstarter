@@ -404,10 +404,10 @@ export default function App() {
   const DEFAULT_GROUPS = [
     { id: "g1", name: "Alle Apps", emoji: "🌐", appIds: [] },
   ];
-  const [appStats, setAppStats] = useState(() => {
+  const [appStats, setAppStats] = useState(() => { // eslint-disable-line no-unused-vars
     try { const s = localStorage.getItem(STORAGE_STATS); return s ? JSON.parse(s) : {}; } catch { return {}; }
   });
-  const [statsOpen, setStatsOpen] = useState(false);
+  const [statsOpen, setStatsOpen] = useState(false); // eslint-disable-line no-unused-vars
 
   const [groups, setGroups] = useState(() => {
     try { const s = localStorage.getItem("wal_groups"); return s ? JSON.parse(s) : DEFAULT_GROUPS; } catch { return DEFAULT_GROUPS; }
