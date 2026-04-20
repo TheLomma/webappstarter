@@ -414,7 +414,7 @@ export default function App() {
     try { const s = localStorage.getItem("wal_groups"); return s ? JSON.parse(s) : DEFAULT_GROUPS; } catch { return DEFAULT_GROUPS; }
   });
   const [activeGroup, setActiveGroup] = useState("all");
-  const [ctxMenu, setCtxMenu] = useState({ open: false, app: null });
+  const [ctxMenu, setCtxMenu] = useState({ open: false, app: null }); // eslint-disable-line no-unused-vars
   const longPressTimer = useRef(null);
   const [groupModal, setGroupModal] = useState({ open: false, editId: null, name: "", emoji: "📁", appIds: [] });
 
