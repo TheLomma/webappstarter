@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v5.8",
+    version: "v5.9",
     search: "Search apps...",
     stats: "Usage Statistics",
     statsDesc: "How often each app was opened",
@@ -143,7 +143,7 @@ const translations = {
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v5.8",
+    version: "v5.9",
     search: "Apps suchen...",
     stats: "Nutzungsstatistik",
     statsDesc: "Wie oft wurde welche App geöffnet",
@@ -266,6 +266,7 @@ const STORAGE_PROFILE = "wal_profile";
 const STORAGE_STATS   = "wal_stats";
 const STORAGE_PROFILE_SETTINGS = "wal_profile_settings"; // eslint-disable-line
 const STORAGE_NOTES = "wal_notes";
+const STORAGE_BADGES = "wal_badges";
 
 const PROFILES = {
   dominik: { name: "Dominik", emoji: "👨🏻" },
@@ -1472,7 +1473,7 @@ export default function App() {
             >{t.resetApps}</button>
           </div>
 
-          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v3.0</div>
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v5.9</div>
         </div>
       </div>
     </div>
