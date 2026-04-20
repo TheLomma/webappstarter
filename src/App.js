@@ -374,6 +374,10 @@ export default function App() {
   const [editApp, setEditApp] = useState({ appId: null, name: "", url: "", emoji: "" });
   const [viewMode, setViewMode] = useState(() => localStorage.getItem(STORAGE_VIEW) || "grid");
   const [animEnabled, setAnimEnabled] = useState(() => localStorage.getItem("wal_anim") !== "off"); // eslint-disable-line
+  const [notes, setNotes] = useState(() => {
+    try { const s = localStorage.getItem(STORAGE_NOTES); return s ? JSON.parse(s) : []; } catch { return []; }
+  });
+  const [noteModal, setNoteModal] = useState({ open: false, id: null, text: "" });
     const [helpOpen, setHelpOpen] = useState(false);
   const [globalPin, setGlobalPin] = useState(() => localStorage.getItem(STORAGE_GLOBAL_PIN) || "");
   const [globalUnlocked, setGlobalUnlocked] = useState(false);
@@ -530,6 +534,7 @@ export default function App() {
   useEffect(() => { localStorage.setItem(STORAGE_PIN_TIMEOUT, String(pinTimeout)); }, [pinTimeout]);
   useEffect(() => { localStorage.setItem(STORAGE_BACKUP_DAYS, String(backupDays)); }, [backupDays]);
   useEffect(() => { localStorage.setItem(STORAGE_GROUPS, JSON.stringify(groups)); }, [groups]);
+  useEffect(() => { localStorage.setItem(STORAGE_NOTES, JSON.stringify(notes)); }, [notes]);
   useEffect(() => { if (profile) localStorage.setItem(STORAGE_PROFILE, profile); }, [profile]);
 
   // Backup reminder checker
@@ -782,12 +787,6 @@ export default function App() {
   );
 
   const isLandscape = window.innerWidth > window.innerHeight && window.innerHeight < 520;
-
-  const [notes, setNotes] = useState(() => {
-    try { const s = localStorage.getItem(STORAGE_NOTES); return s ? JSON.parse(s) : []; } catch { return []; }
-  });
-  const [noteModal, setNoteModal] = useState({ open: false, id: null, text: "" });
-  useEffect(() => { localStorage.setItem(STORAGE_NOTES, JSON.stringify(notes)); }, [notes]);
 
   const s = {
     body:       { position: "relative", background: customBg.enabled ? `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)` : theme.bg, minHeight: "100vh", fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif", color: theme.text, transition: "background .4s,color .3s" },
