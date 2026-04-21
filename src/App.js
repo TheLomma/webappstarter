@@ -399,7 +399,7 @@ export default function App() {
   const logoClickRef = useRef(0);
   const logoTimerRef = useRef(null);
   const importRef = useRef();
-  const longPressTimer = useRef(null);
+  // const longPressTimer = useRef(null);
   const swipeTouchStartX = useRef(null);
   const swipeTouchStartY = useRef(null);
 
