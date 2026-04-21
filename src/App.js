@@ -24,7 +24,7 @@ const translations = {
     namePlaceholder: "My App",
     urlPlaceholder: "https://example.com",
     emojiPlaceholder: "🌐",
-    version: "v6.6",
+    version: "v6.5",
     search: "Search apps...",
     stats: "Usage Statistics",
     statsDesc: "How often each app was opened",
@@ -102,25 +102,27 @@ const translations = {
       { icon: "↕️", title: "Reorder", desc: "Hold & drag a card to change its position. Order is saved automatically." },
       { icon: "👥", title: "Groups", desc: "Tap ➕ next to the group tabs to create a group. Assign apps to it and swipe left/right to switch groups." },
       { icon: "🔒", title: "App PIN", desc: "Settings → Manage Apps → tap 🔒 → set a 4-digit PIN. Protected apps ask for PIN before opening." },
-      { icon: "🔐", title: "Global PIN", desc: "Settings → Global PIN → Set Global PIN → enter & confirm a 4-digit PIN." },
+      { icon: "🔴", title: "Notification Badges", desc: "Settings → Notification Badges → tap ✏️ next to an app → enter a number. Badge disappears automatically when you open the app." },
+      { icon: "🔐", title: "Global PIN", desc: "Settings → Global PIN → Set Global PIN → enter & confirm a 4-digit PIN. App will be locked on next start." },
       { icon: "⏱️", title: "Auto-Lock", desc: "Settings → Global PIN → Auto-Lock → choose after how many minutes the app locks automatically." },
-      { icon: "🔲", title: "View Mode", desc: "Tap the 🔲/📊 button in the header to switch between grid and list view." },
+      { icon: "🔲", title: "View Mode", desc: "Tap the 🔲/📊 button in the header to switch between grid and compact list view." },
       { icon: "📐", title: "Card Size", desc: "Settings → Card Size → choose Small, Medium or Large." },
       { icon: "🎨", title: "Themes", desc: "Settings → Theme → pick one of 6 color themes. Use ☀️/🌙 to toggle light/dark." },
       { icon: "🌈", title: "Custom Background", desc: "Settings → Custom Background → enable & pick two gradient colors." },
-      { icon: "✨", title: "Animations", desc: "Settings → Animations → toggle off to disable background animations." },
-      { icon: "📳", title: "Vibration", desc: "Settings → Vibration → toggle on/off (Android only)." },
-      { icon: "🌐", title: "Language", desc: "Settings → Language → choose 🇩🇪 Deutsch or 🇬🇧 English." },
-      { icon: "👤", title: "Profiles", desc: "Tap the launcher title 5 times quickly to switch profiles." },
-      { icon: "💾", title: "Backup Reminder", desc: "Settings → Backup Reminder → choose an interval." },
-      { icon: "📤", title: "Export", desc: "Settings → Import/Export → Export JSON to save your apps." },
+      { icon: "✨", title: "Animations", desc: "Settings → Animations → toggle off to disable background animations for better performance." },
+      { icon: "📳", title: "Vibration", desc: "Settings → Vibration → toggle on/off. Vibrates briefly when opening an app (Android only)." },
+      { icon: "🌐", title: "Language", desc: "Settings → Language → choose 🇩🇪 Deutsch or 🇬🇧 English. Or tap EN/DE in the header." },
+      { icon: "👤", title: "Profiles", desc: "Tap the launcher title 5 times quickly to switch profiles. Each profile has its own app list." },
+      { icon: "💾", title: "Backup Reminder", desc: "Settings → Backup Reminder → choose an interval. A banner will remind you to export your apps." },
+      { icon: "📤", title: "Export", desc: "Settings → Import/Export → Export JSON to save your apps as a file." },
       { icon: "📥", title: "Import", desc: "Settings → Import/Export → Import JSON to restore a saved app list." },
-      { icon: "📷", title: "QR Code", desc: "Settings → QR Code Export → Show QR Code → scan with another device." },
-      { icon: "🔗", title: "Share App", desc: "Tap the 🔗 icon on a card to share a single app via link." },
-      { icon: "📲", title: "Install PWA", desc: "Tap 'Add to Home Screen' in the banner to install as an app." },
-      { icon: "🗄️", title: "Clear Cache", desc: "Settings → Clear Cache → resets all data. Export a backup first!" },
+      { icon: "📷", title: "QR Code", desc: "Settings → QR Code Export → Show QR Code → scan with another device to share your app list." },
+      { icon: "🔗", title: "Share App", desc: "Tap the 🔗 icon on a card to share a single app via link or QR code." },
+      { icon: "📲", title: "Install PWA", desc: "Tap 'Add to Home Screen' in the banner or via your browser menu to install as an app." },
+      { icon: "🗄️", title: "Clear Cache", desc: "Settings → Clear Cache → resets all data to defaults. Export a backup first!" },
     ],
   },
+
   de: {
     title: "Web App Launcher",
     myApps: "MEINE APPS",
@@ -129,22 +131,22 @@ const translations = {
     clearCacheConfirm: "Gesamten Cache & lokalen Speicher leeren?",
     clearCacheDone: "Cache geleert!",
     resetApps: "Standard-Apps wiederherstellen",
-    resetConfirm: "Wirklich auf Standard-Apps zurücksetzen?",
+    resetConfirm: "Wirklich auf Standard-Apps zur\u00fccksetzen?",
     settings: "Einstellungen",
-    addNewApp: "Neue App hinzufügen",
+    addNewApp: "Neue App hinzuf\u00fcgen",
     appName: "App-Name",
     url: "URL",
     emoji: "Emoji-Symbol",
-    addBtn: "+ App hinzufügen",
+    addBtn: "+ App hinzuf\u00fcgen",
     theme: "Design",
     language: "Sprache",
     manageApps: "Apps verwalten",
     emptyTitle: "Noch keine Apps",
-    emptyDesc: "Tippe auf Einstellungen um deine erste App hinzuzufügen!",
+    emptyDesc: "Tippe auf Einstellungen um deine erste App hinzuzuf\u00fcgen!",
     namePlaceholder: "Meine App",
     urlPlaceholder: "https://beispiel.de",
     emojiPlaceholder: "🌐",
-    version: "v6.6",
+    version: "v6.5",
     search: "Apps suchen...",
     stats: "Nutzungsstatistik",
     statsDesc: "Wie oft wurde welche App geöffnet",
@@ -160,15 +162,15 @@ const translations = {
     exportBtn: "JSON exportieren",
     importBtn: "JSON importieren",
     pinProtect: "PIN-Schutz",
-    pinFor: "PIN für App",
+    pinFor: "PIN f\u00fcr App",
     pinSet: "PIN setzen",
     pinRemove: "PIN entfernen",
     pinEnter: "PIN eingeben",
     pinWrong: "Falsche PIN",
     pinPlaceholder: "4-stellige PIN",
     addToHome: "Zum Startbildschirm",
-    addToHomeDesc: "Installiere diese App auf deinem Startbildschirm für schnellen Zugriff.",
-    addToHomeBtn: "Zum Startbildschirm hinzufügen",
+    addToHomeDesc: "Installiere diese App auf deinem Startbildschirm f\u00fcr schnellen Zugriff.",
+    addToHomeBtn: "Zum Startbildschirm hinzuf\u00fcgen",
     addToHomeDismiss: "Nicht jetzt",
     recentlyUsed: "ZULETZT GEÖFFNET",
     cardSize: "Kartengröße",
@@ -217,28 +219,29 @@ const translations = {
       { icon: "➕", title: "App hinzufügen", desc: "Einstellungen (⚙️) öffnen → Name, URL & Emoji eingeben → '+ App hinzufügen' tippen." },
       { icon: "✏️", title: "App bearbeiten", desc: "Einstellungen → Apps verwalten → ✏️ tippen → Felder ändern → Speichern." },
       { icon: "🗑️", title: "App löschen", desc: "Einstellungen → Apps verwalten → 🗑️ neben der App tippen." },
-      { icon: "⭐", title: "Favoriten", desc: "⭐ auf einer Karte tippen, um sie als Favorit zu markieren." },
-      { icon: "🔍", title: "Suche", desc: "Im Suchfeld tippen, um Apps nach Name oder URL zu filtern." },
-      { icon: "↕️", title: "Reihenfolge", desc: "Karte gedrückt halten & ziehen, um die Reihenfolge zu ändern." },
-      { icon: "👥", title: "Gruppen", desc: "➕ neben den Gruppen-Tabs tippen, um eine Gruppe zu erstellen." },
-      { icon: "🔒", title: "App-PIN", desc: "Einstellungen → Apps verwalten → 🔒 tippen → 4-stellige PIN setzen." },
-      { icon: "🔐", title: "Globaler PIN", desc: "Einstellungen → Globaler PIN → Globalen PIN setzen → PIN eingeben & bestätigen." },
-      { icon: "⏱️", title: "Auto-Sperre", desc: "Einstellungen → Globaler PIN → Auto-Sperre → Zeitraum wählen." },
-      { icon: "🔲", title: "Ansicht", desc: "🔲/📊-Button im Header tippen, um zwischen Gitter- und Listenansicht zu wechseln." },
+      { icon: "⭐", title: "Favoriten", desc: "⭐ auf einer Karte tippen, um sie als Favorit zu markieren. Favoriten erscheinen oben." },
+      { icon: "🔍", title: "Suche", desc: "Im Suchfeld tippen, um Apps nach Name oder URL in Echtzeit zu filtern." },
+      { icon: "↕️", title: "Reihenfolge", desc: "Karte gedrückt halten & ziehen, um die Reihenfolge zu ändern. Wird automatisch gespeichert." },
+      { icon: "👥", title: "Gruppen", desc: "➕ neben den Gruppen-Tabs tippen, um eine Gruppe zu erstellen. Apps zuweisen & links/rechts wischen, um zwischen Gruppen zu wechseln." },
+      { icon: "🔒", title: "App-PIN", desc: "Einstellungen → Apps verwalten → 🔒 tippen → 4-stellige PIN setzen. Geschützte Apps fragen beim Öffnen nach der PIN." },
+      { icon: "🔴", title: "Notification-Badges", desc: "Einstellungen → Notification-Badges → ✏️ neben einer App tippen → Zahl eingeben. Badge verschwindet automatisch beim Öffnen der App." },
+      { icon: "🔐", title: "Globaler PIN", desc: "Einstellungen → Globaler PIN → Globalen PIN setzen → 4-stelligen PIN eingeben & bestätigen. App wird beim nächsten Start gesperrt." },
+      { icon: "⏱️", title: "Auto-Sperre", desc: "Einstellungen → Globaler PIN → Auto-Sperre → Zeitraum wählen, nach dem die App automatisch gesperrt wird." },
+      { icon: "🔲", title: "Ansicht", desc: "🔲/📊-Button im Header tippen, um zwischen Gitter- und Kompaktansicht zu wechseln." },
       { icon: "📐", title: "Kartengröße", desc: "Einstellungen → Kartengröße → Klein, Mittel oder Groß wählen." },
-      { icon: "🎨", title: "Design", desc: "Einstellungen → Design → eines von 6 Farbthemes wählen." },
-      { icon: "🌈", title: "Eigener Hintergrund", desc: "Einstellungen → Eigener Hintergrund → aktivieren & zwei Farben wählen." },
-      { icon: "✨", title: "Animationen", desc: "Einstellungen → Animationen → deaktivieren für bessere Performance." },
-      { icon: "📳", title: "Vibration", desc: "Einstellungen → Vibration → ein/aus schalten (nur Android)." },
-      { icon: "🌐", title: "Sprache", desc: "Einstellungen → Sprache → 🇩🇪 Deutsch oder 🇬🇧 English wählen." },
-      { icon: "👤", title: "Profile", desc: "App-Titel 5x schnell tippen, um das Profil zu wechseln." },
-      { icon: "💾", title: "Backup-Erinnerung", desc: "Einstellungen → Backup-Erinnerung → Intervall wählen." },
-      { icon: "📤", title: "Exportieren", desc: "Einstellungen → Import/Export → JSON exportieren." },
-      { icon: "📥", title: "Importieren", desc: "Einstellungen → Import/Export → JSON importieren." },
-      { icon: "📷", title: "QR-Code", desc: "Einstellungen → QR-Code Export → QR-Code anzeigen." },
-      { icon: "🔗", title: "App teilen", desc: "🔗-Icon auf einer Karte tippen, um eine App per Link zu teilen." },
-      { icon: "📲", title: "Als App installieren", desc: "Banner 'Zum Startbildschirm' tippen oder über das Browser-Menü." },
-      { icon: "🗄️", title: "Cache leeren", desc: "Einstellungen → Cache leeren → setzt alle Daten zurück." },
+      { icon: "🎨", title: "Design", desc: "Einstellungen → Design → eines von 6 Farbthemes wählen. ☀️/🌙 schaltet hell/dunkel um." },
+      { icon: "🌈", title: "Eigener Hintergrund", desc: "Einstellungen → Eigener Hintergrund → aktivieren & zwei Verlaufsfarben wählen." },
+      { icon: "✨", title: "Animationen", desc: "Einstellungen → Animationen → deaktivieren, um Hintergrundanimationen für bessere Performance auszuschalten." },
+      { icon: "📳", title: "Vibration", desc: "Einstellungen → Vibration → ein/aus schalten. Kurze Vibration beim Öffnen einer App (nur Android)." },
+      { icon: "🌐", title: "Sprache", desc: "Einstellungen → Sprache → 🇩🇪 Deutsch oder 🇬🇧 English wählen. Oder EN/DE-Button im Header tippen." },
+      { icon: "👤", title: "Profile", desc: "App-Titel 5x schnell tippen, um das Profil zu wechseln. Jedes Profil hat eine eigene App-Liste." },
+      { icon: "💾", title: "Backup-Erinnerung", desc: "Einstellungen → Backup-Erinnerung → Intervall wählen. Ein Banner erinnert dich rechtzeitig ans Exportieren." },
+      { icon: "📤", title: "Exportieren", desc: "Einstellungen → Import/Export → JSON exportieren, um Apps als Datei zu sichern." },
+      { icon: "📥", title: "Importieren", desc: "Einstellungen → Import/Export → JSON importieren, um eine gespeicherte App-Liste zu laden." },
+      { icon: "📷", title: "QR-Code", desc: "Einstellungen → QR-Code Export → QR-Code anzeigen → mit anderem Gerät scannen, um App-Liste zu teilen." },
+      { icon: "🔗", title: "App teilen", desc: "🔗-Icon auf einer Karte tippen, um eine einzelne App per Link zu teilen." },
+      { icon: "📲", title: "Als App installieren", desc: "Banner 'Zum Startbildschirm' tippen oder über das Browser-Menü als PWA installieren." },
+      { icon: "🗄️", title: "Cache leeren", desc: "Einstellungen → Cache leeren → setzt alle Daten auf Standard zurück. Vorher JSON-Export erstellen!" },
     ],
   },
 };
@@ -264,96 +267,100 @@ const STORAGE_GLOBAL_PIN = "wal_global_pin";
 const STORAGE_PIN_TIMEOUT = "wal_pin_timeout";
 const STORAGE_BACKUP_DAYS = "wal_backup_days";
 const STORAGE_LAST_EXPORT = "wal_last_export";
-const STORAGE_GROUPS = "wal_groups";
+  const STORAGE_GROUPS = "wal_groups";
 const STORAGE_PROFILE = "wal_profile";
 const STORAGE_STATS   = "wal_stats";
+const STORAGE_PROFILE_SETTINGS = "wal_profile_settings"; // eslint-disable-line
 const STORAGE_NOTES = "wal_notes";
+const STORAGE_BADGES = "wal_badges"; // eslint-disable-line
 
 const PROFILES = {
   dominik: { name: "Dominik", emoji: "👨🏻" },
   joern:   { name: "Jörn",    emoji: "👨🏻‍🦳" },
 };
 
-const BlobBg = ({ isDark, enabled }) => {
-  if (!enabled) return null;
-  return (
-    <div style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
-      <div style={{ position: "absolute", width: 500, height: 500, borderRadius: "50%", background: isDark ? "radial-gradient(circle,rgba(124,107,248,0.35) 0%,transparent 70%)" : "radial-gradient(circle,rgba(167,139,250,0.45) 0%,transparent 70%)", top: "-120px", left: "-100px", animation: "blob1 8s ease-in-out infinite" }} />
-      <div style={{ position: "absolute", width: 420, height: 420, borderRadius: "50%", background: isDark ? "radial-gradient(circle,rgba(56,189,248,0.25) 0%,transparent 70%)" : "radial-gradient(circle,rgba(14,165,233,0.35) 0%,transparent 70%)", top: "40%", right: "-80px", animation: "blob2 10s ease-in-out infinite" }} />
-      <div style={{ position: "absolute", width: 380, height: 380, borderRadius: "50%", background: isDark ? "radial-gradient(circle,rgba(52,211,153,0.2) 0%,transparent 70%)" : "radial-gradient(circle,rgba(16,185,129,0.3) 0%,transparent 70%)", bottom: "-80px", left: "30%", animation: "blob3 12s ease-in-out infinite" }} />
-      <style>{`
-        @keyframes blob1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,30px) scale(1.08)} 66%{transform:translate(-20px,50px) scale(0.95)} }
-        @keyframes blob2 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-50px,20px) scale(1.05)} 66%{transform:translate(30px,-40px) scale(0.97)} }
-        @keyframes blob3 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-30px) scale(1.06)} 66%{transform:translate(-40px,20px) scale(0.94)} }
-      `}</style>
-    </div>
-  );
-};
+
+
+
+const BlobBg = ({ isDark }) => (
+  <div style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
+    <div style={{ position: "absolute", width: 500, height: 500, borderRadius: "50%", background: isDark ? "radial-gradient(circle,rgba(124,107,248,0.35) 0%,transparent 70%)" : "radial-gradient(circle,rgba(167,139,250,0.45) 0%,transparent 70%)", top: "-120px", left: "-100px", animation: "blob1 8s ease-in-out infinite" }} />
+    <div style={{ position: "absolute", width: 420, height: 420, borderRadius: "50%", background: isDark ? "radial-gradient(circle,rgba(56,189,248,0.25) 0%,transparent 70%)" : "radial-gradient(circle,rgba(14,165,233,0.35) 0%,transparent 70%)", top: "40%", right: "-80px", animation: "blob2 10s ease-in-out infinite" }} />
+    <div style={{ position: "absolute", width: 380, height: 380, borderRadius: "50%", background: isDark ? "radial-gradient(circle,rgba(52,211,153,0.2) 0%,transparent 70%)" : "radial-gradient(circle,rgba(16,185,129,0.3) 0%,transparent 70%)", bottom: "-80px", left: "30%", animation: "blob3 12s ease-in-out infinite" }} />
+    <style>{`
+      @keyframes blob1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,30px) scale(1.08)} 66%{transform:translate(-20px,50px) scale(0.95)} }
+      @keyframes blob2 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-50px,20px) scale(1.05)} 66%{transform:translate(30px,-40px) scale(0.97)} }
+      @keyframes blob3 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-30px) scale(1.06)} 66%{transform:translate(-40px,20px) scale(0.94)} }
+    `}</style>
+  </div>
+);
 
 export default function App() {
   const [profile, setProfile] = useState(() => localStorage.getItem(STORAGE_PROFILE) || null);
   const [profileScreen, setProfileScreen] = useState(() => !localStorage.getItem(STORAGE_PROFILE));
 
   const DEFAULT_APPS_DOMINIK = [
-    { id: 1,  name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪", fav: false },
-    { id: 3,  name: "SynaTest",         url: "https://synaptictester.vercel.app",      emoji: "🧠", fav: false },
-    { id: 4,  name: "Reiseplaner",      url: "https://reiseplaner-psi.vercel.app",     emoji: "✈️", fav: false },
-    { id: 5,  name: "5 Star",           url: "https://magic.pm/5star/lomma/",          emoji: "🌟", fav: false },
-    { id: 6,  name: "The Wheel",        url: "https://thewheel.fun/login.php",         emoji: "🎡", fav: false },
-    { id: 7,  name: "Prestige",         url: "https://prestige-magic.com",             emoji: "📋", fav: false },
-    { id: 8,  name: "RP Dashboard",     url: "https://rpdashboard.vercel.app",         emoji: "📊", fav: false },
-    { id: 9,  name: "API Test",         url: "https://apitest-pi-seven.vercel.app",    emoji: "🔌", fav: false },
-    { id: 10, name: "Restaurant Magic", url: "https://restaurantmagic.vercel.app",     emoji: "🍽️", fav: false },
-    { id: 11, name: "Papierinventur",   url: "https://papierinventur.vercel.app",      emoji: "📄", fav: false },
-    { id: 12, name: "Coup d'État",      url: "https://cardgame-omega-six.vercel.app",  emoji: "🃏", fav: false },
-    { id: 13, name: "Jump Runner",      url: "https://jumprunner.vercel.app",          emoji: "🕹️", fav: false },
-    { id: 14, name: "Hopmanns Olive",   url: "https://olivespeisekarte.vercel.app",    emoji: "🫒", fav: false },
-    { id: 15, name: "SMS Web App",      url: "https://smswebapp.vercel.app",           emoji: "💬", fav: false },
-    { id: 16, name: "BoardVault",       url: "https://brettspielesapp.vercel.app",     emoji: "🎲", fav: false },
-    { id: 17, name: "Coffee Magic",     url: "https://coffeemagic.vercel.app",         emoji: "☕", fav: false },
-    { id: 18, name: "Arc",              url: "https://arc-liart-one.vercel.app",       emoji: "🌀", fav: false },
-    { id: 20, name: "QR Genie",         url: "https://linkgen.ie/datlomma",            emoji: "▣",  fav: false },
-    { id: 21, name: "ParcWizard",       url: "https://parcwizard.vercel.app",          emoji: "🪄", fav: false },
+    { id: 1, name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪", fav: false },
+    { id: 3, name: "SynaTest", url: "https://synaptictester.vercel.app", emoji: "🧠", fav: false },
+    { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️", fav: false },
+    { id: 5, name: "5 Star", url: "https://magic.pm/5star/lomma/", emoji: "🌟", fav: false },
+    { id: 6, name: "The Wheel", url: "https://thewheel.fun/login.php", emoji: "🎡", fav: false },
+    { id: 7, name: "Prestige", url: "https://prestige-magic.com", emoji: "📋", fav: false },
+    { id: 8, name: "RP Dashboard", url: "https://rpdashboard.vercel.app", emoji: "📊", fav: false },
+    { id: 9, name: "API Test", url: "https://apitest-pi-seven.vercel.app", emoji: "🔌", fav: false },
+    { id: 10, name: "Restaurant Magic", url: "https://restaurantmagic.vercel.app", emoji: "🍽️", fav: false },
+    { id: 11, name: "Papierinventur", url: "https://papierinventur.vercel.app", emoji: "📄", fav: false },
+    { id: 12, name: "Coup d'État", url: "https://cardgame-omega-six.vercel.app", emoji: "🃏", fav: false },
+    { id: 13, name: "Jump Runner", url: "https://jumprunner.vercel.app", emoji: "🕹️", fav: false },
+    { id: 14, name: "Hopmanns Olive", url: "https://olivespeisekarte.vercel.app", emoji: "🫒", fav: false },
+    { id: 15, name: "SMS Web App", url: "https://smswebapp.vercel.app", emoji: "💬", fav: false },
+    { id: 16, name: "BoardVault", url: "https://brettspielesapp.vercel.app", emoji: "🎲", fav: false },
+    { id: 17, name: "Coffee Magic", url: "https://coffeemagic.vercel.app", emoji: "☕", fav: false },
+    { id: 18, name: "Arc", url: "https://arc-liart-one.vercel.app", emoji: "🌀", fav: false },
+    { id: 20, name: "QR Genie", url: "https://linkgen.ie/datlomma", emoji: "▣", fav: false },
+    { id: 21, name: "ParcWizard", url: "https://parcwizard.vercel.app", emoji: "🪄", fav: false },
   ];
 
   const DEFAULT_APPS_JOERN = [
-    { id: 1,  name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪", fav: false },
-    { id: 3,  name: "SynaTest",         url: "https://synaptictester.vercel.app",      emoji: "🧠", fav: false },
-    { id: 4,  name: "Reiseplaner",      url: "https://reiseplaner-psi.vercel.app",     emoji: "✈️", fav: false },
-    { id: 5,  name: "5 Star",           url: "https://magic.pm/5star/derkusterer/",    emoji: "🌟", fav: false },
-    { id: 6,  name: "The Wheel",        url: "https://thewheel.fun/login.php",         emoji: "🎡", fav: false },
-    { id: 7,  name: "Prestige",         url: "https://prestige-magic.com",             emoji: "📋", fav: false },
-    { id: 9,  name: "API Test",         url: "https://apitest-pi-seven.vercel.app",    emoji: "🔌", fav: false },
-    { id: 10, name: "Restaurant Magic", url: "https://restaurantmagic.vercel.app",     emoji: "🍽️", fav: false },
-    { id: 12, name: "Coup d'État",      url: "https://cardgame-omega-six.vercel.app",  emoji: "🃏", fav: false },
-    { id: 13, name: "Jump Runner",      url: "https://jumprunner.vercel.app",          emoji: "🕹️", fav: false },
-    { id: 14, name: "Hopmanns Olive",   url: "https://olivespeisekarte.vercel.app",    emoji: "🫒", fav: false },
-    { id: 15, name: "SMS Web App",      url: "https://smswebapp.vercel.app",           emoji: "💬", fav: false },
-    { id: 16, name: "BoardVault",       url: "https://brettspielesapp.vercel.app",     emoji: "🎲", fav: false },
-    { id: 17, name: "Coffee Magic",     url: "https://coffeemagic.vercel.app",         emoji: "☕", fav: false },
-    { id: 18, name: "Arc",              url: "https://arc-liart-one.vercel.app",       emoji: "🌀", fav: false },
-    { id: 19, name: "Sky Hopper",       url: "https://skyhopgame.com/38782",           emoji: "🦅", fav: false },
-    { id: 20, name: "QR Genie",         url: "https://linkgen.ie/joernk",              emoji: "▣",  fav: false },
-    { id: 21, name: "ParcWizard",       url: "https://parcwizard.vercel.app",          emoji: "🪄", fav: false },
+    { id: 1, name: "Magic Showrunner", url: "https://magicshowrunnernew.vercel.app", emoji: "🎪", fav: false },
+    { id: 3, name: "SynaTest", url: "https://synaptictester.vercel.app", emoji: "🧠", fav: false },
+    { id: 4, name: "Reiseplaner", url: "https://reiseplaner-psi.vercel.app", emoji: "✈️", fav: false },
+    { id: 5, name: "5 Star", url: "https://magic.pm/5star/derkusterer/", emoji: "🌟", fav: false },
+    { id: 6, name: "The Wheel", url: "https://thewheel.fun/login.php", emoji: "🎡", fav: false },
+    { id: 7, name: "Prestige", url: "https://prestige-magic.com", emoji: "📋", fav: false },
+    { id: 9, name: "API Test", url: "https://apitest-pi-seven.vercel.app", emoji: "🔌", fav: false },
+    { id: 10, name: "Restaurant Magic", url: "https://restaurantmagic.vercel.app", emoji: "🍽️", fav: false },
+    { id: 12, name: "Coup d'État", url: "https://cardgame-omega-six.vercel.app", emoji: "🃏", fav: false },
+    { id: 13, name: "Jump Runner", url: "https://jumprunner.vercel.app", emoji: "🕹️", fav: false },
+    { id: 14, name: "Hopmanns Olive", url: "https://olivespeisekarte.vercel.app", emoji: "🫒", fav: false },
+    { id: 15, name: "SMS Web App", url: "https://smswebapp.vercel.app", emoji: "💬", fav: false },
+    { id: 16, name: "BoardVault", url: "https://brettspielesapp.vercel.app", emoji: "🎲", fav: false },
+    { id: 17, name: "Coffee Magic", url: "https://coffeemagic.vercel.app", emoji: "☕", fav: false },
+    { id: 18, name: "Arc", url: "https://arc-liart-one.vercel.app", emoji: "🌀", fav: false },
+    { id: 19, name: "Sky Hopper", url: "https://skyhopgame.com/38782", emoji: "🦅", fav: false },
+    { id: 20, name: "QR Genie", url: "https://linkgen.ie/joernk", emoji: "▣", fav: false },
+    { id: 21, name: "ParcWizard", url: "https://parcwizard.vercel.app", emoji: "🪄", fav: false },
   ];
 
-  const DEFAULT_PINS = {
-    "https://rpdashboard.vercel.app": "2026",
-    "https://papierinventur.vercel.app": "2026",
-  };
-
-  const DEFAULT_GROUPS = [{ id: "g1", name: "Alle Apps", emoji: "🌐", appIds: [] }];
+  const DEFAULT_APPS = profile === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK;
 
   const [apps, setApps] = useState(() => {
-    try { const s = localStorage.getItem(STORAGE_APPS); return s ? JSON.parse(s) : (localStorage.getItem(STORAGE_PROFILE) === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK); } catch { return DEFAULT_APPS_DOMINIK; }
+    try { const s = localStorage.getItem(STORAGE_APPS); return s ? JSON.parse(s) : DEFAULT_APPS; } catch { return DEFAULT_APPS; }
   });
+  const DEFAULT_PINS = { "https://rpdashboard.vercel.app": "2026", "https://papierinventur.vercel.app": "2026" };
   const [pins, setPins] = useState(() => {
-    try { const s = localStorage.getItem(STORAGE_PINS); return { ...DEFAULT_PINS, ...(s ? JSON.parse(s) : {}) }; } catch { return DEFAULT_PINS; }
+    try {
+      const s = localStorage.getItem(STORAGE_PINS);
+      const saved = s ? JSON.parse(s) : {};
+      // Merge: DEFAULT_PINS first, then saved on top — so user-set PINs win,
+      // but DEFAULT_PINS keys are always present as fallback
+      return { ...DEFAULT_PINS, ...saved };
+    } catch { return DEFAULT_PINS; }
   });
   const [themeName, setThemeName] = useState(() => {
     const saved = localStorage.getItem(STORAGE_THEME);
     if (saved) return saved;
-    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
   });
   const [lang, setLang] = useState(() => localStorage.getItem(STORAGE_LANG) || "de");
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -365,7 +372,9 @@ export default function App() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [showBanner, setShowBanner] = useState(false);
   const [dragId, setDragId] = useState(null);
+  const [pinEdit, setPinEdit] = useState({ appId: null, value: "" });
   const [cardSize, setCardSize] = useState(() => localStorage.getItem(STORAGE_SIZE) || "medium");
+
   const [vibro, setVibro] = useState(() => localStorage.getItem(STORAGE_VIBRO) !== "off");
   const [customBg, setCustomBg] = useState(() => {
     try { const s = localStorage.getItem(STORAGE_CUSTBG); return s ? JSON.parse(s) : { enabled: false, color1: "#1a1a2e", color2: "#16213e" }; } catch { return { enabled: false, color1: "#1a1a2e", color2: "#16213e" }; }
@@ -375,113 +384,20 @@ export default function App() {
   const [qrModal, setQrModal] = useState({ open: false, url: "" });
   const [editApp, setEditApp] = useState({ appId: null, name: "", url: "", emoji: "" });
   const [viewMode, setViewMode] = useState(() => localStorage.getItem(STORAGE_VIEW) || "grid");
-  const [animEnabled, setAnimEnabled] = useState(() => localStorage.getItem("wal_anim") !== "off");
-  const [notes, setNotes] = useState(() => { try { const s = localStorage.getItem(STORAGE_NOTES); return s ? JSON.parse(s) : []; } catch { return []; } });
+  const [animEnabled, setAnimEnabled] = useState(() => localStorage.getItem("wal_anim") !== "off"); // eslint-disable-line
+  const [notes, setNotes] = useState(() => {
+    try { const s = localStorage.getItem(STORAGE_NOTES); return s ? JSON.parse(s) : []; } catch { return []; }
+  });
   const [noteModal, setNoteModal] = useState({ open: false, id: null, text: "" });
-  const [helpOpen, setHelpOpen] = useState(false);
+    const [helpOpen, setHelpOpen] = useState(false);
   const [globalPin, setGlobalPin] = useState(() => localStorage.getItem(STORAGE_GLOBAL_PIN) || "");
   const [globalUnlocked, setGlobalUnlocked] = useState(false);
   const [globalPinModal, setGlobalPinModal] = useState({ open: false, input: "", error: false, mode: "unlock" });
   const [globalPinSetup, setGlobalPinSetup] = useState({ step: 0, first: "", input: "" });
   const [pinTimeout, setPinTimeout] = useState(() => parseInt(localStorage.getItem(STORAGE_PIN_TIMEOUT) || "0"));
-  const [backupDays, setBackupDays] = useState(() => parseInt(localStorage.getItem(STORAGE_BACKUP_DAYS) || "0"));
-  const [showBackupBanner, setShowBackupBanner] = useState(false);
-  const [appStats, setAppStats] = useState(() => { try { const s = localStorage.getItem(STORAGE_STATS); return s ? JSON.parse(s) : {}; } catch { return {}; } });
-  const [groups, setGroups] = useState(() => { try { const s = localStorage.getItem(STORAGE_GROUPS); return s ? JSON.parse(s) : DEFAULT_GROUPS; } catch { return DEFAULT_GROUPS; } });
-  const [activeGroup, setActiveGroup] = useState("all");
-  const [groupModal, setGroupModal] = useState({ open: false, editId: null, name: "", emoji: "📁", appIds: [] });
-  const [pinEditModal, setPinEditModal] = useState({ open: false, appId: null, appUrl: "", value: "", mode: "set" });
-  const [settingsTab, setSettingsTab] = useState("general");
-  const [notifBadges, setNotifBadges] = useState(() => { try { const s = localStorage.getItem("wal_badges"); return s ? JSON.parse(s) : {}; } catch { return {}; } });
-  const [badgeEditModal, setBadgeEditModal] = useState({ open: false, appId: null, appUrl: "", value: "" });
-
   const lastUnlockedRef = useRef(null);
   const logoClickRef = useRef(0);
   const logoTimerRef = useRef(null);
-  const importRef = useRef();
-  // const longPressTimer = useRef(null);
-  const swipeTouchStartX = useRef(null);
-  const swipeTouchStartY = useRef(null);
-
-  const t = translations[lang] || translations.en;
-  const theme = THEMES[themeName] || THEMES.dark;
-  const isDark = ["dark", "blueDark", "greenDark"].includes(themeName);
-  const DEFAULT_APPS = profile === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK;
-
-  // persist effects
-  useEffect(() => { localStorage.setItem(STORAGE_APPS, JSON.stringify(apps)); }, [apps]);
-  useEffect(() => { localStorage.setItem(STORAGE_PINS, JSON.stringify(pins)); }, [pins]);
-  useEffect(() => { localStorage.setItem(STORAGE_THEME, themeName); }, [themeName]);
-  useEffect(() => { localStorage.setItem(STORAGE_LANG, lang); }, [lang]);
-  useEffect(() => { localStorage.setItem(STORAGE_SIZE, cardSize); }, [cardSize]);
-  useEffect(() => { localStorage.setItem(STORAGE_VIBRO, vibro ? "on" : "off"); }, [vibro]);
-  useEffect(() => { localStorage.setItem(STORAGE_CUSTBG, JSON.stringify(customBg)); }, [customBg]);
-  useEffect(() => { localStorage.setItem(STORAGE_VIEW, viewMode); }, [viewMode]);
-  useEffect(() => { localStorage.setItem(STORAGE_GLOBAL_PIN, globalPin); }, [globalPin]);
-  useEffect(() => { localStorage.setItem(STORAGE_PIN_TIMEOUT, String(pinTimeout)); }, [pinTimeout]);
-  useEffect(() => { localStorage.setItem(STORAGE_BACKUP_DAYS, String(backupDays)); }, [backupDays]);
-  useEffect(() => { localStorage.setItem(STORAGE_GROUPS, JSON.stringify(groups)); }, [groups]);
-  useEffect(() => { localStorage.setItem(STORAGE_NOTES, JSON.stringify(notes)); }, [notes]);
-  useEffect(() => { localStorage.setItem(STORAGE_STATS, JSON.stringify(appStats)); }, [appStats]);
-  useEffect(() => { localStorage.setItem("wal_badges", JSON.stringify(notifBadges)); }, [notifBadges]);
-  useEffect(() => { localStorage.setItem("wal_anim", animEnabled ? "on" : "off"); }, [animEnabled]);
-  useEffect(() => { if (profile) localStorage.setItem(STORAGE_PROFILE, profile); }, [profile]);
-
-  useEffect(() => {
-    const goOffline = () => setIsOffline(true);
-    const goOnline = () => setIsOffline(false);
-    window.addEventListener("offline", goOffline);
-    window.addEventListener("online", goOnline);
-    return () => { window.removeEventListener("offline", goOffline); window.removeEventListener("online", goOnline); };
-  }, []);
-
-  useEffect(() => {
-    if (backupDays === 0) { setShowBackupBanner(false); return; }
-    const last = parseInt(localStorage.getItem(STORAGE_LAST_EXPORT) || "0");
-    if (!last) { setShowBackupBanner(true); return; }
-    const daysSince = (Date.now() - last) / 86400000;
-    if (daysSince >= backupDays) setShowBackupBanner(true);
-  }, [backupDays]);
-
-  useEffect(() => {
-    if (!globalPin || pinTimeout === 0) return;
-    const interval = setInterval(() => {
-      if (lastUnlockedRef.current && globalUnlocked) {
-        const elapsed = (Date.now() - lastUnlockedRef.current) / 60000;
-        if (elapsed >= pinTimeout) {
-          setGlobalUnlocked(false);
-          setGlobalPinModal({ open: true, input: "", error: false, mode: "unlock" });
-          lastUnlockedRef.current = null;
-        }
-      }
-    }, 15000);
-    return () => clearInterval(interval);
-  }, [globalPin, pinTimeout, globalUnlocked]);
-
-  useEffect(() => {
-    const pin = localStorage.getItem(STORAGE_GLOBAL_PIN) || "";
-    if (pin) setGlobalPinModal({ open: true, input: "", error: false, mode: "unlock" });
-  }, []); // eslint-disable-line
-
-  useEffect(() => {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      const raw = params.get("import");
-      if (raw) {
-        const decoded = JSON.parse(atob(raw));
-        if (Array.isArray(decoded) && decoded.length > 0) {
-          setUrlImportModal({ open: true, apps: decoded });
-          window.history.replaceState({}, "", window.location.pathname);
-        }
-      }
-    } catch {}
-  }, []);
-
-  useEffect(() => {
-    const handler = e => { e.preventDefault(); setDeferredPrompt(e); setShowBanner(true); };
-    window.addEventListener("beforeinstallprompt", handler);
-    return () => window.removeEventListener("beforeinstallprompt", handler);
-  }, []);
 
   function handleLogoClick() {
     logoClickRef.current += 1;
@@ -493,64 +409,66 @@ export default function App() {
       logoTimerRef.current = setTimeout(() => { logoClickRef.current = 0; }, 1500);
     }
   }
+  const [backupDays, setBackupDays] = useState(() => parseInt(localStorage.getItem(STORAGE_BACKUP_DAYS) || "0"));
+  const [showBackupBanner, setShowBackupBanner] = useState(false);
+  const importRef = useRef();
+  const DEFAULT_GROUPS = [
+    { id: "g1", name: "Alle Apps", emoji: "🌐", appIds: [] },
+  ];
+  const [appStats, setAppStats] = useState(() => { // eslint-disable-line no-unused-vars
+    try { const s = localStorage.getItem(STORAGE_STATS); return s ? JSON.parse(s) : {}; } catch { return {}; }
+  });
+  const [statsOpen, setStatsOpen] = useState(false); // eslint-disable-line no-unused-vars
 
-  function toggleDark() {
-    const pairs = { light: "dark", dark: "light", blue: "blueDark", blueDark: "blue", green: "greenDark", greenDark: "green" };
-    setThemeName(pairs[themeName] || "dark");
-  }
+  const [groups, setGroups] = useState(() => {
+    try { const s = localStorage.getItem("wal_groups"); return s ? JSON.parse(s) : DEFAULT_GROUPS; } catch { return DEFAULT_GROUPS; }
+  });
+  const [activeGroup, setActiveGroup] = useState("all");
+  const [ctxMenu, setCtxMenu] = useState({ open: false, app: null }); // eslint-disable-line no-unused-vars
+  const longPressTimer = useRef(null);
+  const [groupModal, setGroupModal] = useState({ open: false, editId: null, name: "", emoji: "📁", appIds: [] });
 
-  function vibrate(pattern) {
-    if (vibro && navigator.vibrate) navigator.vibrate(pattern || 30);
-  }
+  useEffect(() => {
+    const goOffline = () => setIsOffline(true);
+    const goOnline = () => setIsOffline(false);
+    window.addEventListener("offline", goOffline);
+    window.addEventListener("online", goOnline);
+    return () => { window.removeEventListener("offline", goOffline); window.removeEventListener("online", goOnline); };
+  }, []);
 
-  function addApp() {
-    if (!form.name.trim() || !form.url.trim()) { setError("Name and URL required."); return; }
-    let url = form.url.trim();
-    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
-    try { new URL(url); } catch { setError("Invalid URL."); return; }
-    setApps(prev => [...prev, { id: Date.now(), name: form.name.trim(), url, emoji: form.emoji.trim() || "🌐", fav: false }]);
-    setForm({ name: "", url: "", emoji: "" });
-    setError("");
-  }
-
-  function saveEditApp() {
-    if (!editApp.name.trim() || !editApp.url.trim()) return;
-    let url = editApp.url.trim();
-    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
-    setApps(prev => prev.map(a => a.id === editApp.appId ? { ...a, name: editApp.name.trim(), url, emoji: editApp.emoji.trim() || "🌐" } : a));
-    setEditApp({ appId: null, name: "", url: "", emoji: "" });
-  }
-
-  function deleteApp(id) { setApps(prev => prev.filter(a => a.id !== id)); }
-  function toggleFav(id) { setApps(prev => prev.map(a => a.id === id ? { ...a, fav: !a.fav } : a)); }
-
-  function handleAppClick(e, app) {
-    vibrate(30);
-    // clear badge
-    if (notifBadges[app.id]) {
-      setNotifBadges(prev => { const n = { ...prev }; delete n[app.id]; return n; });
-    }
-    // track stats
-    setAppStats(prev => ({ ...prev, [app.id]: (prev[app.id] || 0) + 1 }));
-    if (pins[app.url]) {
-      e.preventDefault();
-      setPwModal({ open: true, url: app.url, pin: "" });
-      setPinError(false);
-    }
-  }
-
-  function submitPin(digit) {
-    const next = pwModal.pin + digit;
-    if (next.length < 4) { setPwModal(m => ({ ...m, pin: next })); return; }
-    if (next === pins[pwModal.url]) {
-      const url = pwModal.url;
-      setPwModal({ open: false, url: "", pin: "" });
-      window.open(url, "_blank");
-    } else {
-      setPinError(true);
-      setTimeout(() => { setPwModal(m => ({ ...m, pin: "" })); setPinError(false); }, 700);
-    }
-  }
+  const GlobalPinModal = () => !globalPinModal.open ? null : (
+    <div style={{ position: "fixed", inset: 0, zIndex: 8000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
+      <div style={{ background: theme.surface, border: "1px solid " + theme.border, borderRadius: 28, padding: "32px 24px", maxWidth: 340, width: "100%", textAlign: "center", boxShadow: "0 8px 48px rgba(0,0,0,0.4)" }}>
+        <div style={{ fontSize: 52, marginBottom: 12 }}>{globalPinModal.mode === "setup" ? "🔐" : "🔒"}</div>
+        <div style={{ fontSize: 20, fontWeight: 800, color: theme.text, marginBottom: 6 }}>
+          {globalPinModal.mode === "setup"
+            ? (globalPinSetup.step === 0 ? t.globalPinNew : t.globalPinConfirm)
+            : t.globalPinEnter}
+        </div>
+        <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 24 }}>Web App Launcher</div>
+        <div style={{ display: "flex", justifyContent: "center", gap: 14, marginBottom: 28 }}>
+          {[0,1,2,3].map(i => {
+            const pinLen = globalPinModal.mode === "setup" ? globalPinSetup.input.length : globalPinModal.input.length;
+            return <div key={i} style={{ width: 16, height: 16, borderRadius: "50%", background: i < pinLen ? (globalPinModal.error ? "#dc2626" : theme.primary) : theme.border, transition: "background .15s" }} />;
+          })}
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, marginBottom: 8 }}>
+          {[1,2,3,4,5,6,7,8,9].map(n => (
+            <button key={n} onClick={() => globalPinModal.mode === "setup" ? handleGlobalPinSetup(String(n)) : submitGlobalPin(String(n))}
+              style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 22, fontWeight: 600, color: theme.text, cursor: "pointer" }}>{n}</button>
+          ))}
+          <div />
+          <button onClick={() => globalPinModal.mode === "setup" ? handleGlobalPinSetup("0") : submitGlobalPin("0")}
+            style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 22, fontWeight: 600, color: theme.text, cursor: "pointer" }}>0</button>
+          <button onClick={() => globalPinModal.mode === "setup"
+            ? setGlobalPinSetup(s => ({ ...s, input: s.input.slice(0,-1) }))
+            : setGlobalPinModal(m => ({ ...m, input: m.input.slice(0,-1) }))}
+            style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 18, color: theme.text, cursor: "pointer" }}>⌫</button>
+        </div>
+        {globalPinModal.error && <div style={{ color: "#dc2626", fontSize: 13, marginTop: 8 }}>{globalPinModal.mode === "setup" ? t.globalPinMismatch : t.globalPinWrong}</div>}
+      </div>
+    </div>
+  );
 
   function submitGlobalPin(digit) {
     const next = globalPinModal.input + digit;
@@ -587,11 +505,162 @@ export default function App() {
     }
   }
 
+  const HelpModal = () => !helpOpen ? null : (
+    <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }} onClick={() => setHelpOpen(false)}>
+      <div style={{ background: theme.bg, border: "1px solid " + theme.border, borderRadius: 20, padding: 24, maxWidth: 480, width: "100%", maxHeight: "80vh", overflowY: "auto", backdropFilter: "blur(20px)" }} onClick={e => e.stopPropagation()}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: theme.text }}>❓ {t.helpTitle}</h2>
+          <button onClick={() => setHelpOpen(false)} style={{ background: theme.surface, border: "1px solid " + theme.border, borderRadius: 10, padding: "6px 14px", cursor: "pointer", color: theme.text, fontWeight: 700 }}>{t.helpClose}</button>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {t.helpItems.map((item, i) => (
+            <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", background: theme.surface, border: "1px solid " + theme.border, borderRadius: 14, padding: "12px 14px" }}>
+              <span style={{ fontSize: 22, flexShrink: 0, marginTop: 1 }}>{item.icon}</span>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 14, color: theme.text, marginBottom: 3 }}>{item.title}</div>
+                <div style={{ fontSize: 13, color: theme.subtext, lineHeight: 1.5 }}>{item.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+
+
+
+
+  const t = translations[lang] || translations.en;
+  const theme = THEMES[themeName] || THEMES.dark;
+  const isDark = ["dark", "blueDark", "greenDark"].includes(themeName);
+
+  useEffect(() => { localStorage.setItem(STORAGE_APPS, JSON.stringify(apps)); }, [apps]);
+  useEffect(() => { localStorage.setItem(STORAGE_PINS, JSON.stringify(pins)); }, [pins]);
+  useEffect(() => { localStorage.setItem(STORAGE_THEME, themeName); }, [themeName]);
+  useEffect(() => { localStorage.setItem(STORAGE_LANG, lang); }, [lang]);
+  useEffect(() => { localStorage.setItem(STORAGE_SIZE, cardSize); }, [cardSize]);
+  useEffect(() => { localStorage.setItem(STORAGE_VIBRO, vibro ? "on" : "off"); }, [vibro]);
+  useEffect(() => { localStorage.setItem(STORAGE_CUSTBG, JSON.stringify(customBg)); }, [customBg]);
+  useEffect(() => { localStorage.setItem(STORAGE_VIEW, viewMode); }, [viewMode]);
+  useEffect(() => { localStorage.setItem(STORAGE_GLOBAL_PIN, globalPin); }, [globalPin]);
+  useEffect(() => { localStorage.setItem(STORAGE_PIN_TIMEOUT, String(pinTimeout)); }, [pinTimeout]);
+  useEffect(() => { localStorage.setItem(STORAGE_BACKUP_DAYS, String(backupDays)); }, [backupDays]);
+  useEffect(() => { localStorage.setItem(STORAGE_GROUPS, JSON.stringify(groups)); }, [groups]);
+  useEffect(() => { localStorage.setItem(STORAGE_NOTES, JSON.stringify(notes)); }, [notes]);
+  useEffect(() => { if (profile) localStorage.setItem(STORAGE_PROFILE, profile); }, [profile]);
+
+  // Backup reminder checker
+  useEffect(() => {
+    if (backupDays === 0) { setShowBackupBanner(false); return; }
+    const last = parseInt(localStorage.getItem(STORAGE_LAST_EXPORT) || "0");
+    if (!last) { setShowBackupBanner(true); return; }
+    const daysSince = (Date.now() - last) / 1000 / 60 / 60 / 24;
+    if (daysSince >= backupDays) setShowBackupBanner(true);
+  }, [backupDays]);
+
+  // PIN Timeout checker
+  useEffect(() => {
+    if (!globalPin || pinTimeout === 0) return;
+    const interval = setInterval(() => {
+      if (lastUnlockedRef.current && globalUnlocked) {
+        const elapsed = (Date.now() - lastUnlockedRef.current) / 1000 / 60;
+        if (elapsed >= pinTimeout) {
+          setGlobalUnlocked(false);
+          setGlobalPinModal({ open: true, input: "", error: false, mode: "unlock" });
+          lastUnlockedRef.current = null;
+        }
+      }
+    }, 15000);
+    return () => clearInterval(interval);
+  }, [globalPin, pinTimeout, globalUnlocked]);
+
+  // Show global PIN lock on load – reads directly from localStorage to avoid exhaustive-deps
+  useEffect(() => {
+    const pin = localStorage.getItem(STORAGE_GLOBAL_PIN) || "";
+    if (pin) setGlobalPinModal({ open: true, input: "", error: false, mode: "unlock" });
+  }, []); // eslint-disable-line
+
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const raw = params.get("import");
+      if (raw) {
+        const decoded = JSON.parse(atob(raw));
+        if (Array.isArray(decoded) && decoded.length > 0) {
+          setUrlImportModal({ open: true, apps: decoded });
+          window.history.replaceState({}, "", window.location.pathname);
+        }
+      }
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    const handler = e => { e.preventDefault(); setDeferredPrompt(e); setShowBanner(true); };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  function toggleDark() {
+    const pairs = { light: "dark", dark: "light", blue: "blueDark", blueDark: "blue", green: "greenDark", greenDark: "green" };
+    setThemeName(pairs[themeName] || "dark");
+  }
+
+  function addApp() {
+    if (!form.name.trim() || !form.url.trim()) { setError("Name and URL required."); return; }
+    let url = form.url.trim();
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+    try { new URL(url); } catch { setError("Invalid URL."); return; }
+    setApps(prev => [...prev, { id: Date.now(), name: form.name.trim(), url, emoji: form.emoji.trim() || "🌐", fav: false }]);
+    setForm({ name: "", url: "", emoji: "" });
+    setError("");
+  }
+
+  function resetApps() { setApps(DEFAULT_APPS); }
+
+  function saveEditApp() {
+    if (!editApp.name.trim() || !editApp.url.trim()) return;
+    let url = editApp.url.trim();
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+    setApps(prev => prev.map(a => a.id === editApp.appId ? { ...a, name: editApp.name.trim(), url, emoji: editApp.emoji.trim() || "🌐" } : a));
+    setEditApp({ appId: null, name: "", url: "", emoji: "" });
+  }
+  function deleteApp(id) { setApps(prev => prev.filter(a => a.id !== id)); }
+  function toggleFav(id) { setApps(prev => prev.map(a => a.id === id ? { ...a, fav: !a.fav } : a)); }
+
+  function vibrate() {
+    if (vibro && navigator.vibrate) navigator.vibrate(30);
+  }
+
+  function handleAppClick(e, app) {
+    vibrate();
+    if (pins[app.url]) {
+      e.preventDefault();
+      setPwModal({ open: true, url: app.url, pin: "" });
+      setPinError(false);
+    }
+  }
+
+  function submitPin(digit) {
+    const next = pwModal.pin + digit;
+    if (next.length < 4) { setPwModal(m => ({ ...m, pin: next })); return; }
+    if (next === pins[pwModal.url]) {
+      const url = pwModal.url;
+      setPwModal({ open: false, url: "", pin: "" });
+      window.open(url, "_blank");
+    } else {
+      setPinError(true);
+      setTimeout(() => { setPwModal(m => ({ ...m, pin: "" })); setPinError(false); }, 700);
+    }
+  }
+
+  function deletePin(digit) { setPwModal(m => ({ ...m, pin: m.pin.slice(0, -1) })); }
+
   function shareApp(app) {
     const payload = btoa(JSON.stringify([app]));
     const shareUrl = window.location.origin + window.location.pathname + "?import=" + payload;
     if (navigator.share) {
-      navigator.share({ title: app.name, url: shareUrl });
+      navigator.share({ title: app.name, text: "Öffne " + app.name + " im Web App Launcher", url: shareUrl });
     } else {
       navigator.clipboard.writeText(shareUrl).then(() => alert("🔗 Link kopiert!"));
     }
@@ -609,7 +678,8 @@ export default function App() {
   function exportApps() {
     localStorage.setItem(STORAGE_LAST_EXPORT, String(Date.now()));
     setShowBackupBanner(false);
-    const blob = new Blob([JSON.stringify(apps, null, 2)], { type: "application/json" });
+    const data = JSON.stringify(apps, null, 2);
+    const blob = new Blob([data], { type: "application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "web-app-launcher.json";
@@ -620,12 +690,19 @@ export default function App() {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = ev => { try { const data = JSON.parse(ev.target.result); if (Array.isArray(data)) setApps(data); } catch {} };
+    reader.onload = ev => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        if (Array.isArray(data)) setApps(data);
+      } catch {}
+    };
     reader.readAsText(file);
     e.target.value = "";
   }
 
-  function onDragStart(e, id) { setDragId(id); e.dataTransfer.effectAllowed = "move"; }
+  // Drag & Drop
+  function onDragStart(e, id) { setDragId(id); e.dataTransfer.effectAllowed = "move"; if (vibro && navigator.vibrate) navigator.vibrate(20); }
+  function onDrop(e, id) { if (vibro && navigator.vibrate) navigator.vibrate([15, 30, 15]); }
   function onDragOver(e, id) {
     e.preventDefault();
     if (id === dragId) return;
@@ -640,22 +717,41 @@ export default function App() {
   }
   function onDragEnd() { setDragId(null); }
 
-  function handleSwipeTouchStart(e) {
-    swipeTouchStartX.current = e.touches[0].clientX;
-    swipeTouchStartY.current = e.touches[0].clientY;
-  }
-  function handleSwipeTouchEnd(e) {
-    if (swipeTouchStartX.current === null) return;
-    const dx = e.changedTouches[0].clientX - swipeTouchStartX.current;
-    const dy = e.changedTouches[0].clientY - swipeTouchStartY.current;
-    swipeTouchStartX.current = null;
-    swipeTouchStartY.current = null;
-    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-    const allGroupIds = ["all", ...groups.map(g => g.id)];
-    const currentIdx = allGroupIds.indexOf(activeGroup);
-    if (dx < 0 && currentIdx < allGroupIds.length - 1) { setActiveGroup(allGroupIds[currentIdx + 1]); vibrate(15); }
-    else if (dx > 0 && currentIdx > 0) { setActiveGroup(allGroupIds[currentIdx - 1]); vibrate(15); }
-  }
+    function startLongPress(app) { // eslint-disable-line no-unused-vars
+      longPressTimer.current = setTimeout(() => {
+        if (vibro && navigator.vibrate) navigator.vibrate(40);
+        setCtxMenu({ open: true, app });
+      }, 500);
+    }
+    function cancelLongPress() { // eslint-disable-line no-unused-vars
+      if (longPressTimer.current) { clearTimeout(longPressTimer.current); longPressTimer.current = null; }
+    }
+
+    const swipeTouchStartX = useRef(null);
+    const swipeTouchStartY = useRef(null);
+
+    function handleSwipeTouchStart(e) {
+      swipeTouchStartX.current = e.touches[0].clientX;
+      swipeTouchStartY.current = e.touches[0].clientY;
+    }
+
+    function handleSwipeTouchEnd(e) {
+      if (swipeTouchStartX.current === null) return;
+      const dx = e.changedTouches[0].clientX - swipeTouchStartX.current;
+      const dy = e.changedTouches[0].clientY - swipeTouchStartY.current;
+      swipeTouchStartX.current = null;
+      swipeTouchStartY.current = null;
+      if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+      const allGroupIds = ["all", ...groups.map(g => g.id)];
+      const currentIdx = allGroupIds.indexOf(activeGroup);
+      if (dx < 0 && currentIdx < allGroupIds.length - 1) {
+        setActiveGroup(allGroupIds[currentIdx + 1]);
+        if (vibro && navigator.vibrate) navigator.vibrate(15);
+      } else if (dx > 0 && currentIdx > 0) {
+        setActiveGroup(allGroupIds[currentIdx - 1]);
+        if (vibro && navigator.vibrate) navigator.vibrate(15);
+      }
+    }
 
   async function installApp() {
     if (!deferredPrompt) return;
@@ -667,54 +763,10 @@ export default function App() {
 
   const activeGroupObj = groups.find(g => g.id === activeGroup);
   const groupFiltered = activeGroup === "all" ? apps : apps.filter(a => activeGroupObj?.appIds?.includes(a.id));
-  const filtered = groupFiltered.filter(a =>
-    a.name.toLowerCase().includes(search.toLowerCase()) ||
-    a.url.toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = groupFiltered.filter(a => a.name.toLowerCase().includes(search.toLowerCase()) || a.url.toLowerCase().includes(search.toLowerCase()));
   const favApps = filtered.filter(a => a.fav);
   const allApps = filtered.filter(a => !a.fav);
 
-  // shared styles
-  const s = {
-    input: {
-      width: "100%", boxSizing: "border-box", padding: "10px 14px",
-      background: theme.inputBg, border: "1px solid " + theme.border,
-      borderRadius: 12, color: theme.text, fontSize: 14, outline: "none",
-      fontFamily: "inherit",
-    },
-    btn: {
-      background: theme.primary, color: "#fff", border: "none",
-      borderRadius: 12, padding: "11px 0", fontSize: 14, fontWeight: 700,
-      cursor: "pointer", width: "100%",
-    },
-    iconBtn: {
-      background: theme.surface, border: "1px solid " + theme.border,
-      borderRadius: 10, width: 32, height: 32, display: "flex",
-      alignItems: "center", justifyContent: "center", cursor: "pointer",
-      fontSize: 14, color: theme.text, flexShrink: 0,
-    },
-    sectionLabel: {
-      fontSize: 11, fontWeight: 800, letterSpacing: 1.2,
-      color: theme.subtext, textTransform: "uppercase", marginBottom: 10,
-    },
-    row: {
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      padding: "13px 0", borderBottom: "1px solid " + theme.border,
-    },
-    rowLabel: { fontSize: 14, fontWeight: 600, color: theme.text },
-    rowSub: { fontSize: 12, color: theme.subtext, marginTop: 2 },
-    pill: (active) => ({
-      padding: "5px 14px", borderRadius: 20, fontSize: 13, fontWeight: 700,
-      cursor: "pointer", border: "1.5px solid " + (active ? theme.primary : theme.border),
-      background: active ? theme.primarySoft : "transparent", color: active ? theme.primary : theme.subtext,
-      transition: "all .15s",
-    }),
-  };
-
-  const cardSizeMap = { small: { minW: 80, pad: "12px 6px", iconSize: 28, fontSize: 11 }, medium: { minW: 100, pad: "16px 8px", iconSize: 36, fontSize: 12 }, large: { minW: 120, pad: "20px 10px", iconSize: 44, fontSize: 13 } };
-  const cs = cardSizeMap[cardSize] || cardSizeMap.medium;
-
-  // ---- Profile screen ----
   if (profileScreen) return (
     <div style={{ position: "fixed", inset: 0, background: "linear-gradient(135deg,#0f0f17 0%,#1a1a2e 50%,#16213e 100%)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", zIndex: 9999, padding: 32 }}>
       <div style={{ fontSize: 48, marginBottom: 16 }}>🚀</div>
@@ -722,14 +774,10 @@ export default function App() {
       <div style={{ fontSize: 15, color: "rgba(226,232,240,0.5)", marginBottom: 48 }}>Wähle dein Profil</div>
       <div style={{ display: "flex", gap: 20, flexWrap: "wrap", justifyContent: "center" }}>
         {Object.entries(PROFILES).map(([key, p]) => (
-          <button key={key} onClick={() => {
-            localStorage.removeItem(STORAGE_APPS);
-            setProfile(key);
-            setApps(key === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK);
-            setProfileScreen(false);
-          }} style={{ background: "rgba(255,255,255,0.07)", border: "2px solid rgba(255,255,255,0.15)", borderRadius: 28, padding: "32px 40px", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, minWidth: 140, transition: "all .2s" }}
-            onMouseEnter={e => { e.currentTarget.style.background = "rgba(167,139,250,0.18)"; e.currentTarget.style.borderColor = "#a78bfa"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.07)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; }}>
+          <button key={key} onClick={() => { localStorage.removeItem(STORAGE_APPS); setProfile(key); setApps(key === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK); setProfileScreen(false); }}
+            style={{ background: "rgba(255,255,255,0.07)", border: "2px solid rgba(255,255,255,0.15)", borderRadius: 28, padding: "32px 40px", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, transition: "all .2s", minWidth: 140 }}
+            onMouseEnter={e => { e.currentTarget.style.background = "rgba(167,139,250,0.18)"; e.currentTarget.style.borderColor = "#a78bfa"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.07)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.transform = "none"; }}>
             <span style={{ fontSize: 52 }}>{p.emoji}</span>
             <span style={{ fontSize: 20, fontWeight: 800, color: "#e2e8f0" }}>{p.name}</span>
           </button>
@@ -738,635 +786,706 @@ export default function App() {
     </div>
   );
 
-  // ---- PIN keypad helper ----
-  const PinKeypad = ({ onDigit, onDelete, pinLen, hasError, label, sublabel }) => (
-    <div style={{ textAlign: "center" }}>
-      {label && <div style={{ fontSize: 20, fontWeight: 800, color: theme.text, marginBottom: 6 }}>{label}</div>}
-      {sublabel && <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 24 }}>{sublabel}</div>}
-      <div style={{ display: "flex", justifyContent: "center", gap: 14, marginBottom: 28 }}>
-        {[0,1,2,3].map(i => (
-          <div key={i} style={{ width: 16, height: 16, borderRadius: "50%", background: i < pinLen ? (hasError ? "#dc2626" : theme.primary) : theme.border, transition: "background .15s" }} />
-        ))}
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, marginBottom: 8 }}>
-        {[1,2,3,4,5,6,7,8,9].map(n => (
-          <button key={n} onClick={() => onDigit(String(n))} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 22, fontWeight: 600, color: theme.text, cursor: "pointer" }}>{n}</button>
-        ))}
-        <div />
-        <button onClick={() => onDigit("0")} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 22, fontWeight: 600, color: theme.text, cursor: "pointer" }}>0</button>
-        <button onClick={onDelete} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 18, color: theme.text, cursor: "pointer" }}>⌫</button>
-      </div>
-      {hasError && <div style={{ color: "#dc2626", fontSize: 13, marginTop: 8 }}>✗</div>}
-    </div>
-  );
-
-  // ---- App card ----
-  const AppCard = ({ app }) => {
-    const badge = notifBadges[app.id];
-    const faviconUrl = `https://www.google.com/s2/favicons?sz=64&domain=${new URL(app.url).hostname}`;
-    const [imgOk, setImgOk] = useState(true);
-
-    return (
-      <div
-        draggable
-        onDragStart={e => onDragStart(e, app.id)}
-        onDragOver={e => onDragOver(e, app.id)}
-        onDragEnd={onDragEnd}
-        style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: cs.pad, background: theme.surface, border: "1px solid " + theme.border, borderRadius: 20, cursor: "pointer", transition: "all .2s", minWidth: cs.minW, userSelect: "none", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", boxShadow: "0 2px 16px rgba(0,0,0,0.08)", opacity: dragId === app.id ? 0.5 : 1 }}
-        onMouseEnter={e => { e.currentTarget.style.background = theme.cardHover; e.currentTarget.style.transform = "translateY(-3px)"; }}
-        onMouseLeave={e => { e.currentTarget.style.background = theme.surface; e.currentTarget.style.transform = "none"; }}
-      >
-        {/* badge */}
-        {badge > 0 && (
-          <div style={{ position: "absolute", top: 6, right: 6, background: "#ef4444", color: "#fff", borderRadius: 10, minWidth: 18, height: 18, fontSize: 10, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 4px", zIndex: 2 }}>{badge > 99 ? "99+" : badge}</div>
-        )}
-        {/* fav star */}
-        <button onClick={e => { e.preventDefault(); e.stopPropagation(); toggleFav(app.id); }} style={{ position: "absolute", top: 5, left: 5, background: "none", border: "none", fontSize: 13, cursor: "pointer", opacity: app.fav ? 1 : 0.3, padding: 2 }}>⭐</button>
-        {/* share */}
-        <button onClick={e => { e.preventDefault(); e.stopPropagation(); shareApp(app); }} style={{ position: "absolute", top: 5, right: badge > 0 ? 26 : 5, background: "none", border: "none", fontSize: 11, cursor: "pointer", opacity: 0.4, padding: 2, color: theme.text }}>🔗</button>
-        {/* icon */}
-        <a href={app.url} target="_blank" rel="noopener noreferrer" onClick={e => handleAppClick(e, app)} style={{ textDecoration: "none", display: "flex", flexDirection: "column", alignItems: "center", gap: 8, width: "100%" }}>
-          <div style={{ width: cs.iconSize, height: cs.iconSize, borderRadius: 12, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", background: theme.primarySoft, flexShrink: 0 }}>
-            {imgOk ? (
-              <img src={faviconUrl} alt="" width={cs.iconSize} height={cs.iconSize} style={{ objectFit: "contain" }} onError={() => setImgOk(false)} />
-            ) : (
-              <span style={{ fontSize: cs.iconSize * 0.65 }}>{app.emoji}</span>
-            )}
-          </div>
-          <div style={{ fontSize: cs.fontSize, fontWeight: 700, color: theme.text, textAlign: "center", lineHeight: 1.3, wordBreak: "break-word", width: "100%" }}>{app.name}</div>
-          {pins[app.url] && <div style={{ fontSize: 10, color: theme.subtext }}>🔒</div>}
-        </a>
-      </div>
-    );
-  };
-
-  // ---- List row ----
-  const AppListRow = ({ app }) => {
-    const badge = notifBadges[app.id];
-    const faviconUrl = `https://www.google.com/s2/favicons?sz=32&domain=${new URL(app.url).hostname}`;
-    const [imgOk, setImgOk] = useState(true);
-    return (
-      <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 14px", background: theme.surface, border: "1px solid " + theme.border, borderRadius: 14, backdropFilter: "blur(20px)", marginBottom: 6, position: "relative" }}
-        draggable onDragStart={e => onDragStart(e, app.id)} onDragOver={e => onDragOver(e, app.id)} onDragEnd={onDragEnd}>
-        <div style={{ width: 32, height: 32, borderRadius: 8, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", background: theme.primarySoft, flexShrink: 0 }}>
-          {imgOk ? <img src={faviconUrl} alt="" width={32} height={32} style={{ objectFit: "contain" }} onError={() => setImgOk(false)} /> : <span style={{ fontSize: 20 }}>{app.emoji}</span>}
-        </div>
-        <a href={app.url} target="_blank" rel="noopener noreferrer" onClick={e => handleAppClick(e, app)} style={{ textDecoration: "none", flex: 1, minWidth: 0 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: theme.text, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.name}</div>
-          <div style={{ fontSize: 11, color: theme.subtext, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.url}</div>
-        </a>
-        {badge > 0 && <div style={{ background: "#ef4444", color: "#fff", borderRadius: 10, minWidth: 18, height: 18, fontSize: 10, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 4px" }}>{badge}</div>}
-        <button onClick={() => toggleFav(app.id)} style={{ background: "none", border: "none", fontSize: 16, cursor: "pointer", opacity: app.fav ? 1 : 0.3 }}>⭐</button>
-        {pins[app.url] && <span style={{ fontSize: 13 }}>🔒</span>}
-      </div>
-    );
-  };
-
-  // ---- Group modal ----
   const GroupModal = () => !groupModal.open ? null : (
     <div style={{ position: "fixed", inset: 0, zIndex: 500, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
-      <div onClick={() => setGroupModal({ open: false, editId: null, name: "", emoji: "📁", appIds: [] })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)" }} />
-      <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px)", border: "1px solid " + theme.border, borderRadius: "28px 28px 0 0", padding: "24px 20px 40px", width: "100%", maxWidth: 500, maxHeight: "85vh", overflowY: "auto", boxShadow: "0 -4px 40px rgba(0,0,0,0.2)" }}>
+      <div onClick={() => setGroupModal({ open: false, editId: null, name: "", emoji: "📁", appIds: [] })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
+      <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px)", WebkitBackdropFilter: "blur(40px)", border: "1px solid " + theme.border, borderRadius: "28px 28px 0 0", padding: "24px 20px 40px", width: "100%", maxWidth: 500, maxHeight: "85vh", overflowY: "auto", boxShadow: "0 -4px 40px rgba(0,0,0,0.2)" }}>
         <div style={{ fontSize: 17, fontWeight: 800, color: theme.text, marginBottom: 16 }}>{groupModal.editId ? "✏️ Gruppe bearbeiten" : "➕ Neue Gruppe"}</div>
-        <div style={{ display: "flex", gap: 10, marginBottom: 16 }}>
-          <input style={{ ...s.input, width: 60, textAlign: "center", fontSize: 22 }} maxLength={2} value={groupModal.emoji} onChange={e => setGroupModal(m => ({ ...m, emoji: e.target.value }))} />
-          <input style={{ ...s.input, flex: 1 }} placeholder="Gruppenname" value={groupModal.name} onChange={e => setGroupModal(m => ({ ...m, name: e.target.value }))} />
+        <div style={{ marginBottom: 12 }}>
+          <label style={{ fontSize: 12, color: theme.subtext, display: "block", marginBottom: 6, fontWeight: 700 }}>Emoji</label>
+          <input style={{ ...s.input, fontSize: 22, textAlign: "center", width: 60 }} maxLength={2} value={groupModal.emoji} onChange={e => setGroupModal(m => ({ ...m, emoji: e.target.value }))} />
         </div>
-        <div style={{ fontSize: 12, color: theme.subtext, fontWeight: 700, marginBottom: 8 }}>Apps auswählen</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 6, maxHeight: 240, overflowY: "auto", marginBottom: 16 }}>
-          {apps.map(app => {
-            const checked = groupModal.appIds.includes(app.id);
-            return (
-              <div key={app.id} onClick={() => setGroupModal(m => ({ ...m, appIds: checked ? m.appIds.filter(i => i !== app.id) : [...m.appIds, app.id] }))}
-                style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", background: checked ? theme.primarySoft : theme.inputBg, border: "1.5px solid " + (checked ? theme.primary : theme.border), borderRadius: 12, cursor: "pointer" }}>
-                <span style={{ fontSize: 20 }}>{app.emoji}</span>
-                <span style={{ fontSize: 14, fontWeight: 600, color: theme.text, flex: 1 }}>{app.name}</span>
-                <span>{checked ? "✅" : "⬜"}</span>
-              </div>
-            );
-          })}
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ fontSize: 12, color: theme.subtext, display: "block", marginBottom: 6, fontWeight: 700 }}>Name</label>
+          <input style={s.input} placeholder="Gruppenname" value={groupModal.name} onChange={e => setGroupModal(m => ({ ...m, name: e.target.value }))} />
+        </div>
+        <div style={{ marginBottom: 20 }}>
+          <label style={{ fontSize: 12, color: theme.subtext, display: "block", marginBottom: 10, fontWeight: 700 }}>Apps auswählen</label>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6, maxHeight: 260, overflowY: "auto" }}>
+            {apps.map(app => {
+              const checked = groupModal.appIds.includes(app.id);
+              return (
+                <div key={app.id} onClick={() => setGroupModal(m => ({ ...m, appIds: checked ? m.appIds.filter(id => id !== app.id) : [...m.appIds, app.id] }))}
+                  style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", background: checked ? theme.primarySoft : theme.inputBg, border: "1.5px solid " + (checked ? theme.primary : theme.border), borderRadius: 12, cursor: "pointer", transition: "all .15s" }}>
+                  <span style={{ fontSize: 20 }}>{app.emoji}</span>
+                  <span style={{ fontSize: 14, fontWeight: 600, color: theme.text, flex: 1 }}>{app.name}</span>
+                  <span style={{ fontSize: 18 }}>{checked ? "✅" : "⬜"}</span>
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div style={{ display: "flex", gap: 8 }}>
-          <button onClick={() => setGroupModal({ open: false, editId: null, name: "", emoji: "📁", appIds: [] })} style={{ ...s.btn, background: theme.inputBg, color: theme.text, flex: 1 }}>Abbrechen</button>
-          <button style={{ ...s.btn, flex: 2 }} onClick={() => {
+          <button onClick={() => setGroupModal({ open: false, editId: null, name: "", emoji: "📁", appIds: [] })} style={{ flex: 1, background: theme.inputBg, border: "1px solid " + theme.border, color: theme.text, borderRadius: 12, padding: 12, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Abbrechen</button>
+          <button onClick={() => {
             if (!groupModal.name.trim()) return;
             if (groupModal.editId) {
-              setGroups(prev => prev.map(g => g.id === groupModal.editId ? { ...g, name: groupModal.name, emoji: groupModal.emoji, appIds: groupModal.appIds } : g));
+              setGroups(gs => gs.map(g => g.id === groupModal.editId ? { ...g, name: groupModal.name.trim(), emoji: groupModal.emoji, appIds: groupModal.appIds } : g));
             } else {
-              const newId = "g" + Date.now();
-              setGroups(prev => [...prev, { id: newId, name: groupModal.name, emoji: groupModal.emoji, appIds: groupModal.appIds }]);
-              setActiveGroup(newId);
+              setGroups(gs => [...gs, { id: "g" + Date.now(), name: groupModal.name.trim(), emoji: groupModal.emoji, appIds: groupModal.appIds }]);
             }
             setGroupModal({ open: false, editId: null, name: "", emoji: "📁", appIds: [] });
-          }}>Speichern</button>
+          }} style={{ flex: 1, background: theme.primary, color: "#fff", border: "none", borderRadius: 12, padding: 12, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>✅ Speichern</button>
         </div>
+        {groupModal.editId && (
+          <button onClick={() => { setGroups(gs => gs.filter(g => g.id !== groupModal.editId)); if (activeGroup === groupModal.editId) setActiveGroup("all"); setGroupModal({ open: false, editId: null, name: "", emoji: "📁", appIds: [] }); }}
+            style={{ width: "100%", marginTop: 10, background: "#fee2e2", border: "1px solid #fca5a5", color: "#dc2626", borderRadius: 12, padding: 10, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>🗑️ Gruppe löschen</button>
+        )}
       </div>
     </div>
   );
 
-  // ---- Settings drawer ----
-  const Drawer = () => !drawerOpen ? null : (
-    <div style={{ position: "fixed", inset: 0, zIndex: 400, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
-      <div onClick={() => setDrawerOpen(false)} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(10px)" }} />
-      <div style={{ position: "relative", zIndex: 1, background: isDark ? "rgba(20,20,35,0.97)" : "rgba(245,245,255,0.97)", backdropFilter: "blur(40px)", border: "1px solid " + theme.border, borderRadius: "28px 28px 0 0", width: "100%", maxWidth: 540, maxHeight: "90vh", overflowY: "auto", boxShadow: "0 -8px 48px rgba(0,0,0,0.3)", paddingBottom: 40 }}>
-        {/* handle */}
-        <div style={{ display: "flex", justifyContent: "center", paddingTop: 12, paddingBottom: 4 }}>
-          <div style={{ width: 40, height: 4, borderRadius: 2, background: theme.border }} />
-        </div>
-        {/* header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 20px 8px" }}>
-          <div style={{ fontSize: 18, fontWeight: 900, color: theme.text }}>⚙️ {t.settings}</div>
-          <button onClick={() => setDrawerOpen(false)} style={{ background: theme.surface, border: "1px solid " + theme.border, borderRadius: 10, padding: "6px 14px", cursor: "pointer", color: theme.text, fontWeight: 700, fontSize: 13 }}>✕</button>
-        </div>
-        {/* tabs */}
-        <div style={{ display: "flex", gap: 6, padding: "0 20px 16px", overflowX: "auto" }}>
-          {[["general","🛠️ Allgemein"],["apps","📱 Apps"],["security","🔐 Sicherheit"],["data","💾 Daten"],["notif","🔔 Badges"]].map(([tab, label]) => (
-            <button key={tab} onClick={() => setSettingsTab(tab)} style={{ ...s.pill(settingsTab === tab), whiteSpace: "nowrap", fontSize: 12 }}>{label}</button>
-          ))}
-        </div>
+  const isLandscape = window.innerWidth > window.innerHeight && window.innerHeight < 520;
 
-        <div style={{ padding: "0 20px" }}>
-          {/* GENERAL TAB */}
-          {settingsTab === "general" && <>
-            {/* Theme */}
-            <div style={s.sectionLabel}>{t.theme}</div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20 }}>
-              {Object.entries(THEMES).map(([key, th]) => (
-                <button key={key} onClick={() => setThemeName(key)} style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 12px", borderRadius: 12, border: "1.5px solid " + (themeName === key ? theme.primary : theme.border), background: themeName === key ? theme.primarySoft : theme.inputBg, cursor: "pointer", fontSize: 12, fontWeight: 600, color: theme.text }}>
-                  <div style={{ width: 14, height: 14, borderRadius: "50%", background: th.dot }} />{th.label}
-                </button>
-              ))}
-            </div>
-            {/* Card size */}
-            <div style={s.sectionLabel}>{t.cardSize}</div>
-            <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
-              {[["small", t.small], ["medium", t.medium], ["large", t.large]].map(([k, label]) => (
-                <button key={k} onClick={() => setCardSize(k)} style={s.pill(cardSize === k)}>{label}</button>
-              ))}
-            </div>
-            {/* View mode */}
-            <div style={{ ...s.row, borderBottom: "none" }}>
-              <div><div style={s.rowLabel}>🔲 Ansicht</div></div>
-              <div style={{ display: "flex", gap: 6 }}>
-                {[["grid","🔲"],["list","📊"]].map(([v, icon]) => (
-                  <button key={v} onClick={() => setViewMode(v)} style={{ ...s.iconBtn, background: viewMode === v ? theme.primarySoft : theme.inputBg, border: "1.5px solid " + (viewMode === v ? theme.primary : theme.border), color: theme.primary, fontSize: 16 }}>{icon}</button>
-                ))}
-              </div>
-            </div>
-            <div style={s.row}>
-              <div><div style={s.rowLabel}>{t.language}</div></div>
-              <div style={{ display: "flex", gap: 6 }}>
-                {[["de","🇩🇪"],["en","🇬🇧"]].map(([l, flag]) => (
-                  <button key={l} onClick={() => setLang(l)} style={{ ...s.iconBtn, background: lang === l ? theme.primarySoft : theme.inputBg, border: "1.5px solid " + (lang === l ? theme.primary : theme.border), fontSize: 16 }}>{flag}</button>
-                ))}
-              </div>
-            </div>
-            <div style={s.row}>
-              <div><div style={s.rowLabel}>{t.vibration}</div></div>
-              <button onClick={() => setVibro(v => !v)} style={{ ...s.iconBtn, background: vibro ? theme.primarySoft : theme.inputBg, border: "1.5px solid " + (vibro ? theme.primary : theme.border), color: vibro ? theme.primary : theme.subtext, width: "auto", padding: "0 12px", fontSize: 12, fontWeight: 700 }}>{vibro ? t.vibrationOn : t.vibrationOff}</button>
-            </div>
-            <div style={s.row}>
-              <div><div style={s.rowLabel}>{t.animations}</div></div>
-              <button onClick={() => setAnimEnabled(v => !v)} style={{ ...s.iconBtn, background: animEnabled ? theme.primarySoft : theme.inputBg, border: "1.5px solid " + (animEnabled ? theme.primary : theme.border), color: animEnabled ? theme.primary : theme.subtext, width: "auto", padding: "0 12px", fontSize: 12, fontWeight: 700 }}>{animEnabled ? t.animationsOn : t.animationsOff}</button>
-            </div>
-            {/* Custom BG */}
-            <div style={{ ...s.row, flexDirection: "column", alignItems: "flex-start", gap: 10 }}>
-              <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                <div style={s.rowLabel}>{t.customBg}</div>
-                <button onClick={() => setCustomBg(b => ({ ...b, enabled: !b.enabled }))} style={{ ...s.iconBtn, background: customBg.enabled ? theme.primarySoft : theme.inputBg, border: "1.5px solid " + (customBg.enabled ? theme.primary : theme.border), color: customBg.enabled ? theme.primary : theme.subtext, width: "auto", padding: "0 12px", fontSize: 12, fontWeight: 700 }}>{customBg.enabled ? "An" : "Aus"}</button>
-              </div>
-              {customBg.enabled && (
-                <div style={{ display: "flex", gap: 12 }}>
-                  <label style={{ fontSize: 12, color: theme.subtext }}>{t.customBgColor1} <input type="color" value={customBg.color1} onChange={e => setCustomBg(b => ({ ...b, color1: e.target.value }))} style={{ marginLeft: 6, cursor: "pointer" }} /></label>
-                  <label style={{ fontSize: 12, color: theme.subtext }}>{t.customBgColor2} <input type="color" value={customBg.color2} onChange={e => setCustomBg(b => ({ ...b, color2: e.target.value }))} style={{ marginLeft: 6, cursor: "pointer" }} /></label>
-                </div>
-              )}
-            </div>
-            {/* Backup reminder */}
-            <div style={{ ...s.row, borderBottom: "none" }}>
-              <div><div style={s.rowLabel}>{t.backupReminder}</div><div style={s.rowSub}>{t.backupReminderDesc}</div></div>
-              <select value={backupDays} onChange={e => setBackupDays(Number(e.target.value))} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 10, color: theme.text, padding: "6px 10px", fontSize: 12, cursor: "pointer" }}>
-                {[0,7,14,30].map((d,i) => <option key={d} value={d}>{t.backupReminderOptions[i]}</option>)}
-              </select>
-            </div>
-            <div style={{ marginTop: 8 }}>
-              <button onClick={() => setHelpOpen(true)} style={{ ...s.btn, background: theme.surface, color: theme.text, border: "1px solid " + theme.border }}>❓ {t.helpTitle}</button>
-            </div>
-          </>}
+  const s = {
+    body:       { position: "relative", background: customBg.enabled ? `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)` : theme.bg, minHeight: "100vh", fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif", color: theme.text, transition: "background .4s,color .3s" },
+    header:     { background: theme.headerBg, backdropFilter: "blur(24px) saturate(180%)", WebkitBackdropFilter: "blur(24px) saturate(180%)", color: theme.headerText, padding: "0 20px", paddingTop: "env(safe-area-inset-top)", height: "calc(60px + env(safe-area-inset-top))", display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 1px 0 " + theme.border + ", 0 4px 24px rgba(0,0,0,.08)", borderBottom: "1px solid " + theme.border },
+    iconBtn:    { background: "rgba(255,255,255,0.18)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.3)", color: theme.headerText, width: 38, height: 38, borderRadius: "50%", cursor: "pointer", fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" },
+    main:       { position: "relative", zIndex: 1, padding: "16px 14px", maxWidth: 900, margin: "0 auto" },
+    secLabel:   { fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "1.5px", color: theme.subtext, marginBottom: 14 },
+    grid:       { display: "grid", gridTemplateColumns: cardSize === "small" ? "repeat(auto-fill,minmax(80px,1fr))" : cardSize === "large" ? "repeat(auto-fill,minmax(150px,1fr))" : "repeat(auto-fill,minmax(110px,1fr))", gap: cardSize === "small" ? 8 : cardSize === "large" ? 16 : 12 },
+    card:       { position: "relative", overflow: "hidden", background: theme.surface, backdropFilter: "blur(20px) saturate(180%)", WebkitBackdropFilter: "blur(20px) saturate(180%)", border: "1px solid " + theme.border, borderRadius: 20, padding: "18px 10px", textAlign: "center", cursor: "pointer", textDecoration: "none", color: theme.text, display: "block", boxShadow: "0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.35)", transition: "all .25s cubic-bezier(.34,1.56,.64,1)" },
+    overlay:    { position: "fixed", inset: 0, background: "rgba(0,0,0,.5)", zIndex: 200, opacity: drawerOpen ? 1 : 0, pointerEvents: drawerOpen ? "all" : "none", transition: "opacity .3s" },
+    drawer:     isLandscape
+      ? { position: "fixed", top: 0, right: 0, bottom: 0, width: "55vw", maxWidth: 380, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", borderRadius: "20px 0 0 20px", zIndex: 201, transform: drawerOpen ? "translateX(0)" : "translateX(110%)", transition: "transform .35s ease", overflowY: "auto", boxShadow: "-4px 0 40px rgba(0,0,0,0.22)", border: "1px solid " + theme.border }
+      : { position: "fixed", bottom: 0, left: 0, right: 0, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", borderRadius: "28px 28px 0 0", zIndex: 201, transform: drawerOpen ? "translateY(0)" : "translateY(100%)", transition: "transform .4s cubic-bezier(.34,1.56,.64,1)", maxHeight: "85vh", overflowY: "auto", boxShadow: "0 -4px 40px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.3)", border: "1px solid " + theme.border },
+    drawerHead: { padding: "16px 20px 12px", fontSize: 17, fontWeight: 700, color: theme.text, borderBottom: "1px solid " + theme.border, display: "flex", alignItems: "center", justifyContent: "space-between" },
+    closeBtn:   { background: theme.primarySoft, border: "none", color: theme.primary, width: 28, height: 28, borderRadius: "50%", cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center" },
+    drawerBody: { padding: "14px 16px 40px" },
+    secTitle:   { fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, color: theme.subtext, marginBottom: 12 },
+    input:      { width: "100%", background: theme.inputBg, backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", border: "1.5px solid " + theme.border, borderRadius: 14, padding: "11px 14px", fontSize: 14, color: theme.text, outline: "none", boxSizing: "border-box", boxShadow: "inset 0 1px 3px rgba(0,0,0,0.06)" },
+    addBtn:     { width: "100%", background: theme.primary, color: "#fff", border: "none", borderRadius: 16, padding: 13, fontSize: 15, fontWeight: 700, cursor: "pointer", marginTop: 6, boxShadow: "0 4px 16px rgba(0,0,0,0.18)", letterSpacing: 0.3 },
+    themeGrid:  { display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 6 },
+    langRow:    { display: "flex", gap: 8 },
+    listItem:   { display: "flex", alignItems: "center", gap: 10, padding: "11px 14px", background: theme.inputBg, backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderRadius: 14, marginBottom: 8, border: "1px solid " + theme.border, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" },
+    delBtn:     { background: "#fee2e2", border: "none", color: "#dc2626", width: 30, height: 30, borderRadius: 8, cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 },
+  };
 
-          {/* APPS TAB */}
-          {settingsTab === "apps" && <>
-            <div style={s.sectionLabel}>{t.addNewApp}</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 }}>
-              <input style={s.input} placeholder={t.namePlaceholder} value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
-              <input style={s.input} placeholder={t.urlPlaceholder} value={form.url} onChange={e => setForm(f => ({ ...f, url: e.target.value }))} />
-              <input style={s.input} placeholder={t.emojiPlaceholder} value={form.emoji} onChange={e => setForm(f => ({ ...f, emoji: e.target.value }))} maxLength={2} />
-              {error && <div style={{ color: "#ef4444", fontSize: 12 }}>{error}</div>}
-              <button style={s.btn} onClick={addApp}>{t.addBtn}</button>
-            </div>
-            <div style={s.sectionLabel}>{t.manageApps}</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6, maxHeight: 340, overflowY: "auto" }}>
-              {apps.map(app => (
-                <div key={app.id}>
-                  {editApp.appId === app.id ? (
-                    <div style={{ background: theme.primarySoft, border: "1px solid " + theme.primary, borderRadius: 14, padding: 12, display: "flex", flexDirection: "column", gap: 8 }}>
-                      <input style={s.input} value={editApp.name} onChange={e => setEditApp(ea => ({ ...ea, name: e.target.value }))} />
-                      <input style={s.input} value={editApp.url} onChange={e => setEditApp(ea => ({ ...ea, url: e.target.value }))} />
-                      <input style={s.input} value={editApp.emoji} onChange={e => setEditApp(ea => ({ ...ea, emoji: e.target.value }))} maxLength={2} />
-                      <div style={{ display: "flex", gap: 6 }}>
-                        <button onClick={saveEditApp} style={{ ...s.btn, flex: 2 }}>💾 Speichern</button>
-                        <button onClick={() => setEditApp({ appId: null, name: "", url: "", emoji: "" })} style={{ ...s.btn, flex: 1, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border }}>✕</button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 10px", background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 12 }}>
-                      <span style={{ fontSize: 18 }}>{app.emoji}</span>
-                      <span style={{ flex: 1, fontSize: 13, fontWeight: 600, color: theme.text, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{app.name}</span>
-                      <button onClick={() => setPinEditModal({ open: true, appId: app.id, appUrl: app.url, value: "", mode: pins[app.url] ? "remove" : "set" })} style={{ ...s.iconBtn, fontSize: 13 }}>{pins[app.url] ? "🔒" : "🔓"}</button>
-                      <button onClick={() => setEditApp({ appId: app.id, name: app.name, url: app.url, emoji: app.emoji })} style={{ ...s.iconBtn, fontSize: 13 }}>✏️</button>
-                      <button onClick={() => deleteApp(app.id)} style={{ ...s.iconBtn, fontSize: 13 }}>🗑️</button>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 16 }}>
-              <button onClick={() => { if (window.confirm(t.resetConfirm)) { setApps(DEFAULT_APPS); } }} style={{ ...s.btn, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border }}>{t.resetApps}</button>
-            </div>
-          </>}
-
-          {/* SECURITY TAB */}
-          {settingsTab === "security" && <>
-            <div style={s.sectionLabel}>{t.globalPin}</div>
-            <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 16, padding: 16, marginBottom: 16 }}>
-              <div style={s.rowLabel}>{t.globalPinDesc}</div>
-              {globalPin && <div style={{ fontSize: 12, color: theme.primary, marginTop: 4 }}>✅ {t.globalPinActive}</div>}
-              <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
-                <button onClick={() => { setGlobalPinSetup({ step: 0, first: "", input: "" }); setGlobalPinModal({ open: true, input: "", error: false, mode: "setup" }); }} style={{ ...s.btn, flex: 2 }}>{globalPin ? "🔐 PIN ändern" : t.globalPinSet}</button>
-                {globalPin && <button onClick={() => { if (window.confirm("PIN wirklich entfernen?")) { setGlobalPin(""); setGlobalUnlocked(false); } }} style={{ ...s.btn, flex: 1, background: "#dc2626" }}>{t.globalPinRemove}</button>}
-              </div>
-            </div>
-            <div style={{ ...s.row, borderBottom: "none" }}>
-              <div><div style={s.rowLabel}>{t.pinTimeout}</div><div style={s.rowSub}>{t.pinTimeoutDesc}</div></div>
-              <select value={pinTimeout} onChange={e => setPinTimeout(Number(e.target.value))} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 10, color: theme.text, padding: "6px 10px", fontSize: 12 }}>
-                {[0,1,5,15,30].map((m,i) => <option key={m} value={m}>{t.pinTimeoutOptions[i]}</option>)}
-              </select>
-            </div>
-          </>}
-
-          {/* DATA TAB */}
-          {settingsTab === "data" && <>
-            <div style={s.sectionLabel}>{t.importExport}</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
-              <button style={s.btn} onClick={exportApps}>📤 {t.exportBtn}</button>
-              <button style={{ ...s.btn, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border }} onClick={() => importRef.current?.click()}>📥 {t.importBtn}</button>
-              <input ref={importRef} type="file" accept=".json" style={{ display: "none" }} onChange={importApps} />
-              <button style={{ ...s.btn, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border }} onClick={generateQr}>📷 {t.qrBtn}</button>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <button onClick={() => {
-                if (window.confirm(t.clearCacheConfirm)) {
-                  localStorage.clear();
-                  localStorage.setItem(STORAGE_GLOBAL_PIN, "");
-                  window.location.reload();
-                }
-              }} style={{ ...s.btn, background: "#dc2626" }}>🗑️ {t.clearCache}</button>
-            </div>
-            {/* Stats */}
-            <div style={{ marginTop: 20 }}>
-              <div style={s.sectionLabel}>{t.stats}</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 6, maxHeight: 200, overflowY: "auto" }}>
-                {Object.keys(appStats).length === 0 ? (
-                  <div style={{ color: theme.subtext, fontSize: 13, padding: 8 }}>{t.statsEmpty}</div>
-                ) : apps.filter(a => appStats[a.id]).sort((a,b) => (appStats[b.id]||0)-(appStats[a.id]||0)).map(app => (
-                  <div key={app.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 10px", background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 10 }}>
-                    <span>{app.emoji}</span>
-                    <span style={{ flex: 1, fontSize: 13, color: theme.text }}>{app.name}</span>
-                    <span style={{ fontSize: 13, fontWeight: 700, color: theme.primary }}>{appStats[app.id]} {t.statsOpens}</span>
-                  </div>
-                ))}
-              </div>
-              {Object.keys(appStats).length > 0 && (
-                <button onClick={() => { if (window.confirm(t.statsResetConfirm)) { setAppStats({}); localStorage.removeItem(STORAGE_STATS); } }} style={{ ...s.btn, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border, marginTop: 8 }}>{t.statsReset}</button>
-              )}
-            </div>
-          </>}
-
-          {/* BADGES TAB */}
-          {settingsTab === "notif" && <>
-            <div style={s.sectionLabel}>🔔 Notification Badges</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              {apps.map(app => (
-                <div key={app.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 12 }}>
-                  <span style={{ fontSize: 20 }}>{app.emoji}</span>
-                  <span style={{ flex: 1, fontSize: 13, fontWeight: 600, color: theme.text }}>{app.name}</span>
-                  {notifBadges[app.id] > 0 && <span style={{ background: "#ef4444", color: "#fff", borderRadius: 10, minWidth: 20, height: 20, fontSize: 11, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 5px" }}>{notifBadges[app.id]}</span>}
-                  <button onClick={() => setBadgeEditModal({ open: true, appId: app.id, appUrl: app.url, value: notifBadges[app.id] ? String(notifBadges[app.id]) : "" })} style={{ ...s.iconBtn, fontSize: 13 }}>✏️</button>
-                  {notifBadges[app.id] && <button onClick={() => setNotifBadges(prev => { const n = { ...prev }; delete n[app.id]; return n; })} style={{ ...s.iconBtn, fontSize: 13 }}>✕</button>}
-                </div>
-              ))}
-            </div>
-          </>}
-        </div>
-      </div>
+  const NoteCard = ({ note }) => (
+    <div
+      style={{ ...s.card, cursor: "default", textAlign: "left", padding: "14px 12px", display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: cardSize === "small" ? 90 : cardSize === "large" ? 160 : 120 }}
+      className="wal-card"
+    >
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "40%", background: "linear-gradient(180deg,rgba(255,255,255,0.12) 0%,transparent 100%)", borderRadius: "22px 22px 0 0", pointerEvents: "none" }} />
+      <div style={{ fontSize: 11, fontWeight: 700, color: theme.primary, marginBottom: 6, letterSpacing: 1, textTransform: "uppercase", opacity: 0.8 }}>📝 {t.noteTitle}</div>
+      <div style={{ fontSize: cardSize === "small" ? 10 : 12, color: theme.text, lineHeight: 1.5, flex: 1, overflow: "hidden", wordBreak: "break-word", display: "-webkit-box", WebkitLineClamp: cardSize === "large" ? 6 : cardSize === "small" ? 2 : 4, WebkitBoxOrient: "vertical" }}>{note.text}</div>
+      <button
+        onClick={() => setNoteModal({ open: true, id: note.id, text: note.text })}
+        style={{ marginTop: 8, background: "none", border: "none", color: theme.subtext, fontSize: 11, cursor: "pointer", textAlign: "left", padding: 0, opacity: 0.6 }}
+      >✏️ Edit</button>
     </div>
   );
 
-  const bgStyle = customBg.enabled
-    ? { background: `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)` }
-    : { background: theme.bg };
+  const AppCard = ({ app }) => (
+    <a
+      key={app.id}
+      href={app.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ ...s.card, opacity: dragId === app.id ? 0.4 : 1 }}
+      onClick={e => handleAppClick(e, app)}
+      draggable
+      onDragStart={e => onDragStart(e, app.id)}
+      onDrop={e => onDrop(e, app.id)}
+      onDragOver={e => onDragOver(e, app.id)}
+      onDragEnd={onDragEnd}
+      onMouseEnter={e => { e.currentTarget.style.background = theme.cardHover; e.currentTarget.style.borderColor = theme.primary; e.currentTarget.style.transform = "translateY(-4px) scale(1.03)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5)"; }}
+      onMouseLeave={e => { e.currentTarget.style.background = theme.surface; e.currentTarget.style.borderColor = theme.border; e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.35)"; }}
+    >
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "45%", background: "linear-gradient(180deg,rgba(255,255,255,0.18) 0%,transparent 100%)", borderRadius: "22px 22px 0 0", pointerEvents: "none" }} />
+      {pins[app.url] && <div style={{ position: "absolute", top: 8, right: 8, fontSize: 11 }}>🔒</div>}
+      <button
+        onClick={e => { e.preventDefault(); e.stopPropagation(); shareApp(app); }}
+        title="App teilen"
+        style={{ position: "absolute", bottom: 7, right: 7, background: "none", border: "none", cursor: "pointer", fontSize: 13, opacity: 0.35, transition: "opacity .2s" }}
+        onMouseEnter={e => e.currentTarget.style.opacity = "1"}
+        onMouseLeave={e => e.currentTarget.style.opacity = "0.35"}
+      >🔗</button>
+      <button
+        onClick={e => { e.preventDefault(); e.stopPropagation(); toggleFav(app.id); }}
+        style={{ position: "absolute", top: 7, left: 8, background: "none", border: "none", cursor: "pointer", fontSize: 14, opacity: app.fav ? 1 : 0.3, transition: "opacity .2s" }}
+      >⭐</button>
+      <span style={{ fontSize: cardSize === "small" ? 26 : cardSize === "large" ? 52 : 38, display: "block", marginBottom: cardSize === "small" ? 6 : 10, marginTop: cardSize === "small" ? 4 : 8 }}>{app.emoji}</span>
+      <span style={{ fontSize: cardSize === "small" ? 10 : cardSize === "large" ? 15 : 13, fontWeight: 600, lineHeight: 1.3 }}>{app.name}</span>
+    </a>
+  );
 
   return (
-    <div style={{ minHeight: "100vh", ...bgStyle, fontFamily: "'Inter','SF Pro Display',-apple-system,sans-serif", position: "relative", overflowX: "hidden" }}>
-      <BlobBg isDark={isDark} enabled={animEnabled && !customBg.enabled} />
-      <style>{`* { box-sizing: border-box; } ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: ${theme.border}; border-radius: 2px; } input, select, button { font-family: inherit; }`}</style>
+    <div style={s.body} onTouchStart={handleSwipeTouchStart} onTouchEnd={handleSwipeTouchEnd}>
 
-      {/* Offline banner */}
-      {isOffline && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 9000, background: "#dc2626", color: "#fff", padding: "10px 20px", textAlign: "center", fontSize: 13, fontWeight: 700 }}>
-          📡 {t.offlineTitle} — {t.offlineDesc}
-        </div>
-      )}
-
-      {/* Backup banner */}
-      {showBackupBanner && (
-        <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 8500, background: theme.primary, color: "#fff", padding: "14px 20px", display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
-          <div style={{ flex: 1 }}><div style={{ fontWeight: 800, fontSize: 14 }}>💾 {t.backupBannerTitle}</div><div style={{ fontSize: 12, opacity: 0.85 }}>{t.backupBannerDesc}</div></div>
-          <div style={{ display: "flex", gap: 8 }}>
-            <button onClick={exportApps} style={{ background: "#fff", color: theme.primary, border: "none", borderRadius: 10, padding: "8px 14px", fontSize: 13, fontWeight: 800, cursor: "pointer" }}>{t.backupBannerBtn}</button>
-            <button onClick={() => setShowBackupBanner(false)} style={{ background: "rgba(255,255,255,0.2)", color: "#fff", border: "1px solid rgba(255,255,255,0.4)", borderRadius: 10, padding: "8px 14px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>{t.backupBannerDismiss}</button>
-          </div>
-        </div>
-      )}
-
-      {/* PWA install banner */}
-      {showBanner && (
-        <div style={{ position: "fixed", bottom: showBackupBanner ? 80 : 0, left: 0, right: 0, zIndex: 8400, background: isDark ? "rgba(30,30,50,0.97)" : "rgba(255,255,255,0.97)", backdropFilter: "blur(20px)", borderTop: "1px solid " + theme.border, padding: "16px 20px", display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{ flex: 1 }}><div style={{ fontWeight: 800, fontSize: 14, color: theme.text }}>📲 {t.addToHome}</div><div style={{ fontSize: 12, color: theme.subtext }}>{t.addToHomeDesc}</div></div>
-          <button onClick={installApp} style={{ background: theme.primary, color: "#fff", border: "none", borderRadius: 10, padding: "8px 14px", fontSize: 13, fontWeight: 800, cursor: "pointer" }}>{t.addToHomeBtn}</button>
-          <button onClick={() => setShowBanner(false)} style={{ background: "none", border: "none", color: theme.subtext, cursor: "pointer", fontSize: 13 }}>{t.addToHomeDismiss}</button>
-        </div>
-      )}
-
-      {/* HEADER */}
-      <div style={{ position: "sticky", top: 0, zIndex: 200, background: theme.headerBg, backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", borderBottom: "1px solid " + theme.border, padding: "12px 16px" }}>
-        <div style={{ maxWidth: 700, margin: "0 auto", display: "flex", alignItems: "center", gap: 10 }}>
-          <span onClick={handleLogoClick} style={{ fontSize: 22, cursor: "pointer", userSelect: "none" }}>🚀</span>
-          <span onClick={handleLogoClick} style={{ fontSize: 16, fontWeight: 900, color: theme.headerText, letterSpacing: -0.5, cursor: "pointer", userSelect: "none", flex: 1 }}>
-            {t.title} <span style={{ fontSize: 10, fontWeight: 500, opacity: 0.5 }}>{t.version}</span>
-          </span>
-          <button onClick={() => setViewMode(v => v === "grid" ? "list" : "grid")} style={{ ...s.iconBtn, fontSize: 15 }}>{viewMode === "grid" ? "📊" : "🔲"}</button>
-          <button onClick={() => setLang(l => l === "de" ? "en" : "de")} style={{ ...s.iconBtn, fontSize: 12, fontWeight: 800 }}>{lang === "de" ? "EN" : "DE"}</button>
-          <button onClick={toggleDark} style={{ ...s.iconBtn, fontSize: 15 }}>{isDark ? "☀️" : "🌙"}</button>
-          <button onClick={() => { setDrawerOpen(true); setSettingsTab("general"); }} style={{ ...s.iconBtn, fontSize: 15 }}>⚙️</button>
-        </div>
-      </div>
-
-      {/* MAIN */}
-      <div style={{ maxWidth: 700, margin: "0 auto", padding: "16px 14px 120px", position: "relative", zIndex: 1 }}>
-        {/* Search */}
-        <div style={{ marginBottom: 14 }}>
-          <input style={{ ...s.input, paddingLeft: 38, borderRadius: 16 }} placeholder={t.search} value={search} onChange={e => setSearch(e.target.value)} />
-        </div>
-
-        {/* Group tabs */}
-        <div style={{ display: "flex", gap: 6, marginBottom: 16, overflowX: "auto", paddingBottom: 4 }} onTouchStart={handleSwipeTouchStart} onTouchEnd={handleSwipeTouchEnd}>
-          <button onClick={() => setActiveGroup("all")} style={s.pill(activeGroup === "all")}>🌐 Alle</button>
-          {groups.map(g => (
-            <button key={g.id} onClick={() => setActiveGroup(g.id)} style={s.pill(activeGroup === g.id)}
-              onDoubleClick={() => setGroupModal({ open: true, editId: g.id, name: g.name, emoji: g.emoji, appIds: g.appIds || [] })}>
-              {g.emoji} {g.name}
-            </button>
-          ))}
-          <button onClick={() => setGroupModal({ open: false, editId: null, name: "", emoji: "📁", appIds: [] }, setGroupModal({ open: true, editId: null, name: "", emoji: "📁", appIds: [] }))} style={{ ...s.pill(false), flexShrink: 0 }}>➕</button>
-        </div>
-
-        {/* Favorites */}
-        {favApps.length > 0 && (
-          <div style={{ marginBottom: 20 }}>
-            <div style={s.sectionLabel}>⭐ {t.favorites}</div>
-            {viewMode === "grid" ? (
-              <div style={{ display: "grid", gridTemplateColumns: `repeat(auto-fill, minmax(${cs.minW}px, 1fr))`, gap: 10 }}>
-                {favApps.map(app => <AppCard key={app.id} app={app} />)}
-              </div>
-            ) : (
-              <div>{favApps.map(app => <AppListRow key={app.id} app={app} />)}</div>
-            )}
-          </div>
-        )}
-
-        {/* All apps */}
-        {allApps.length > 0 && (
-          <div>
-            <div style={s.sectionLabel}>📱 {t.myApps}</div>
-            {viewMode === "grid" ? (
-              <div style={{ display: "grid", gridTemplateColumns: `repeat(auto-fill, minmax(${cs.minW}px, 1fr))`, gap: 10 }}>
-                {allApps.map(app => <AppCard key={app.id} app={app} />)}
-              </div>
-            ) : (
-              <div>{allApps.map(app => <AppListRow key={app.id} app={app} />)}</div>
-            )}
-          </div>
-        )}
-
-        {filtered.length === 0 && (
-          <div style={{ textAlign: "center", padding: "60px 20px", color: theme.subtext }}>
-            <div style={{ fontSize: 48, marginBottom: 12 }}>📭</div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: theme.text, marginBottom: 8 }}>{t.emptyTitle}</div>
-            <div style={{ fontSize: 14 }}>{t.emptyDesc}</div>
-          </div>
-        )}
-
-        {/* Notes */}
-        <div style={{ marginTop: 24 }}>
-          <div style={s.sectionLabel}>📝 Notizen</div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {notes.map(note => (
-              <div key={note.id} style={{ background: theme.surface, border: "1px solid " + theme.border, borderRadius: 14, padding: "12px 14px", display: "flex", alignItems: "flex-start", gap: 10, backdropFilter: "blur(20px)" }}>
-                <div style={{ flex: 1, fontSize: 13, color: theme.text, whiteSpace: "pre-wrap", lineHeight: 1.5 }}>{note.text}</div>
-                <div style={{ display: "flex", gap: 4, flexShrink: 0 }}>
-                  <button onClick={() => setNoteModal({ open: true, id: note.id, text: note.text })} style={{ ...s.iconBtn, fontSize: 12 }}>✏️</button>
-                  <button onClick={() => setNotes(prev => prev.filter(n => n.id !== note.id))} style={{ ...s.iconBtn, fontSize: 12 }}>🗑️</button>
-                </div>
-              </div>
-            ))}
-            <button onClick={() => setNoteModal({ open: true, id: null, text: "" })} style={{ ...s.btn, background: theme.surface, color: theme.text, border: "1px solid " + theme.border }}>{t.noteAdd}</button>
-          </div>
-        </div>
-      </div>
-
-      {/* Modals */}
-      <Drawer />
+      <style>{`
+        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+        body { margin: 0; overscroll-behavior: none; }
+        input, button { -webkit-appearance: none; }
+        @media (orientation: landscape) and (max-height: 500px) {
+          .wal-header { height: 46px !important; padding: 0 12px !important; }
+          .wal-main { padding: 8px 10px !important; }
+          .wal-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important; gap: 6px !important; }
+          .wal-card { padding: 10px 6px !important; border-radius: 14px !important; }
+          .wal-drawer { max-height: 100dvh !important; width: 55vw !important; left: auto !important; right: 0 !important; top: 0 !important; bottom: 0 !important; border-radius: 20px 0 0 20px !important; }
+          .wal-header-version { display: none !important; }
+          .wal-iconbtn { width: 32px !important; height: 32px !important; font-size: 14px !important; }
+        }
+          .wal-main { padding: 10px 12px !important; }
+          .wal-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)) !important; gap: 8px !important; }
+          .wal-drawer { max-height: 100vh !important; width: 60vw !important; left: auto !important; top: 0 !important; bottom: 0 !important; border-radius: 0 !important; }
+        }
+        @media (max-width: 400px) {
+          .wal-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; }
+          .wal-card { padding: 14px 8px !important; border-radius: 16px !important; }
+          .wal-card span:first-of-type { font-size: 30px !important; }
+          .wal-card span:last-of-type { font-size: 11px !important; }
+        }
+      `}</style>
+      {animEnabled && <BlobBg isDark={isDark} />}
+      <GlobalPinModal />
+      <HelpModal />
       <GroupModal />
 
-      {/* Help modal */}
-      {helpOpen && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }} onClick={() => setHelpOpen(false)}>
-          <div style={{ background: isDark ? "rgba(20,20,35,0.98)" : "rgba(250,250,255,0.98)", backdropFilter: "blur(20px)", border: "1px solid " + theme.border, borderRadius: 20, padding: 24, maxWidth: 480, width: "100%", maxHeight: "80vh", overflowY: "auto" }} onClick={e => e.stopPropagation()}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-              <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: theme.text }}>❓ {t.helpTitle}</h2>
-              <button onClick={() => setHelpOpen(false)} style={{ background: theme.surface, border: "1px solid " + theme.border, borderRadius: 10, padding: "6px 14px", cursor: "pointer", color: theme.text, fontWeight: 700 }}>{t.helpClose}</button>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {t.helpItems.map((item, i) => (
-                <div key={i} style={{ display: "flex", gap: 12, background: theme.surface, border: "1px solid " + theme.border, borderRadius: 12, padding: "10px 12px" }}>
-                  <span style={{ fontSize: 20, flexShrink: 0 }}>{item.icon}</span>
-                  <div>
-                    <div style={{ fontWeight: 700, fontSize: 13, color: theme.text }}>{item.title}</div>
-                    <div style={{ fontSize: 12, color: theme.subtext, lineHeight: 1.5, marginTop: 2 }}>{item.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Global PIN modal */}
-      {globalPinModal.open && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 8000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, background: "rgba(0,0,0,0.8)", backdropFilter: "blur(16px)" }}>
-          <div style={{ background: isDark ? "rgba(20,20,35,0.97)" : "rgba(250,250,255,0.97)", border: "1px solid " + theme.border, borderRadius: 28, padding: "32px 24px", maxWidth: 340, width: "100%", boxShadow: "0 8px 48px rgba(0,0,0,0.4)" }}>
-            <div style={{ fontSize: 52, textAlign: "center", marginBottom: 12 }}>{globalPinModal.mode === "setup" ? "🔐" : "🔒"}</div>
-            <PinKeypad
-              label={globalPinModal.mode === "setup" ? (globalPinSetup.step === 0 ? t.globalPinNew : t.globalPinConfirm) : t.globalPinEnter}
-              sublabel="Web App Launcher"
-              pinLen={globalPinModal.mode === "setup" ? globalPinSetup.input.length : globalPinModal.input.length}
-              hasError={globalPinModal.error}
-              onDigit={d => globalPinModal.mode === "setup" ? handleGlobalPinSetup(d) : submitGlobalPin(d)}
-              onDelete={() => globalPinModal.mode === "setup"
-                ? setGlobalPinSetup(s => ({ ...s, input: s.input.slice(0,-1) }))
-                : setGlobalPinModal(m => ({ ...m, input: m.input.slice(0,-1) }))}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* App PIN modal */}
-      {pwModal.open && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 7000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, background: "rgba(0,0,0,0.75)", backdropFilter: "blur(12px)" }}>
-          <div style={{ background: isDark ? "rgba(20,20,35,0.97)" : "rgba(250,250,255,0.97)", border: "1px solid " + theme.border, borderRadius: 28, padding: "32px 24px", maxWidth: 320, width: "100%", boxShadow: "0 8px 48px rgba(0,0,0,0.4)" }}>
-            <div style={{ fontSize: 44, textAlign: "center", marginBottom: 10 }}>🔒</div>
-            <PinKeypad
-              label={t.pinEnter}
-              sublabel={apps.find(a => a.url === pwModal.url)?.name || ""}
-              pinLen={pwModal.pin.length}
-              hasError={pinError}
-              onDigit={submitPin}
-              onDelete={() => setPwModal(m => ({ ...m, pin: m.pin.slice(0,-1) }))}
-            />
-            <button onClick={() => setPwModal({ open: false, url: "", pin: "" })} style={{ ...s.btn, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border, marginTop: 10 }}>✕ Abbrechen</button>
-          </div>
-        </div>
-      )}
-
-      {/* PIN set/remove modal */}
-      {pinEditModal.open && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 6000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(10px)" }}>
-          <div style={{ background: isDark ? "rgba(20,20,35,0.97)" : "rgba(250,250,255,0.97)", border: "1px solid " + theme.border, borderRadius: 24, padding: 28, maxWidth: 320, width: "100%" }}>
-            <div style={{ fontSize: 20, fontWeight: 800, color: theme.text, marginBottom: 16 }}>{pinEditModal.mode === "set" ? t.pinSet : t.pinRemove}</div>
-            {pinEditModal.mode === "set" ? (
-              <>
-                <PinKeypad
-                  label={t.pinPlaceholder}
-                  pinLen={pinEditModal.value.length}
-                  hasError={false}
-                  onDigit={d => {
-                    const next = pinEditModal.value + d;
-                    if (next.length <= 4) setPinEditModal(m => ({ ...m, value: next }));
-                    if (next.length === 4) {
-                      setPins(prev => ({ ...prev, [pinEditModal.appUrl]: next }));
-                      setPinEditModal({ open: false, appId: null, appUrl: "", value: "", mode: "set" });
-                    }
-                  }}
-                  onDelete={() => setPinEditModal(m => ({ ...m, value: m.value.slice(0,-1) }))}
-                />
-              </>
-            ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                <div style={{ fontSize: 14, color: theme.subtext }}>PIN für diese App wirklich entfernen?</div>
-                <button onClick={() => {
-                  setPins(prev => { const n = { ...prev }; delete n[pinEditModal.appUrl]; return n; });
-                  setPinEditModal({ open: false, appId: null, appUrl: "", value: "", mode: "set" });
-                }} style={{ ...s.btn, background: "#dc2626" }}>🗑️ {t.pinRemove}</button>
-              </div>
-            )}
-            <button onClick={() => setPinEditModal({ open: false, appId: null, appUrl: "", value: "", mode: "set" })} style={{ ...s.btn, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border, marginTop: 10 }}>✕ Abbrechen</button>
-          </div>
-        </div>
-      )}
-
-      {/* Badge edit modal */}
-      {badgeEditModal.open && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 6000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(10px)" }}>
-          <div style={{ background: isDark ? "rgba(20,20,35,0.97)" : "rgba(250,250,255,0.97)", border: "1px solid " + theme.border, borderRadius: 24, padding: 28, maxWidth: 300, width: "100%" }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: theme.text, marginBottom: 16 }}>🔔 Badge setzen</div>
-            <input type="number" min={0} max={999} style={s.input} placeholder="Zahl eingeben..." value={badgeEditModal.value} onChange={e => setBadgeEditModal(m => ({ ...m, value: e.target.value }))} />
-            <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
-              <button onClick={() => {
-                const num = parseInt(badgeEditModal.value);
-                if (!isNaN(num) && num > 0) setNotifBadges(prev => ({ ...prev, [badgeEditModal.appId]: num }));
-                else { setNotifBadges(prev => { const n = { ...prev }; delete n[badgeEditModal.appId]; return n; }); }
-                setBadgeEditModal({ open: false, appId: null, appUrl: "", value: "" });
-              }} style={{ ...s.btn, flex: 2 }}>💾 Speichern</button>
-              <button onClick={() => setBadgeEditModal({ open: false, appId: null, appUrl: "", value: "" })} style={{ ...s.btn, flex: 1, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border }}>✕</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Note modal */}
+      {/* Note Modal */}
       {noteModal.open && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 5000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, background: "rgba(0,0,0,0.5)", backdropFilter: "blur(10px)" }}>
-          <div style={{ background: isDark ? "rgba(20,20,35,0.97)" : "rgba(250,250,255,0.97)", border: "1px solid " + theme.border, borderRadius: 24, padding: 24, maxWidth: 400, width: "100%" }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: theme.text, marginBottom: 12 }}>📝 {t.noteTitle}</div>
-            <textarea style={{ ...s.input, minHeight: 100, resize: "vertical" }} placeholder={t.notePlaceholder} value={noteModal.text} onChange={e => setNoteModal(m => ({ ...m, text: e.target.value }))} />
-            <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
+        <div style={{ position: "fixed", inset: 0, zIndex: 600, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+          <div onClick={() => setNoteModal({ open: false, id: null, text: "" })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
+          <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid " + theme.border, borderRadius: 28, padding: "24px 20px", maxWidth: 380, width: "calc(100% - 32px)", boxShadow: "0 8px 48px rgba(0,0,0,0.25)" }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: theme.text, marginBottom: 16 }}>📝 {t.noteTitle}</div>
+            <textarea
+              autoFocus
+              value={noteModal.text}
+              onChange={e => setNoteModal(m => ({ ...m, text: e.target.value }))}
+              placeholder={t.notePlaceholder}
+              style={{ width: "100%", minHeight: 120, background: theme.inputBg, border: "1.5px solid " + theme.border, borderRadius: 14, padding: "11px 14px", fontSize: 14, color: theme.text, outline: "none", boxSizing: "border-box", resize: "vertical", fontFamily: "inherit", lineHeight: 1.5 }}
+            />
+            <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
+              <button onClick={() => setNoteModal({ open: false, id: null, text: "" })} style={{ flex: 1, background: theme.inputBg, border: "1px solid " + theme.border, color: theme.text, borderRadius: 12, padding: 11, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Abbrechen</button>
+              {noteModal.id && (
+                <button onClick={() => { setNotes(n => n.filter(x => x.id !== noteModal.id)); setNoteModal({ open: false, id: null, text: "" }); }} style={{ background: "#fee2e2", border: "1px solid #fca5a5", color: "#dc2626", borderRadius: 12, padding: "11px 14px", fontSize: 14, fontWeight: 700, cursor: "pointer" }}>🗑️</button>
+              )}
               <button onClick={() => {
                 if (!noteModal.text.trim()) return;
                 if (noteModal.id) {
-                  setNotes(prev => prev.map(n => n.id === noteModal.id ? { ...n, text: noteModal.text } : n));
+                  setNotes(n => n.map(x => x.id === noteModal.id ? { ...x, text: noteModal.text.trim() } : x));
                 } else {
-                  setNotes(prev => [...prev, { id: Date.now(), text: noteModal.text }]);
+                  setNotes(n => [...n, { id: Date.now(), text: noteModal.text.trim() }]);
                 }
                 setNoteModal({ open: false, id: null, text: "" });
-              }} style={{ ...s.btn, flex: 2 }}>💾 {t.noteSave}</button>
-              <button onClick={() => setNoteModal({ open: false, id: null, text: "" })} style={{ ...s.btn, flex: 1, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border }}>✕</button>
+              }} style={{ flex: 1, background: theme.primary, color: "#fff", border: "none", borderRadius: 12, padding: 11, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>{t.noteSave}</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* QR modal */}
+      {/* QR Modal */}
       {qrModal.open && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 5000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(10px)" }} onClick={() => setQrModal({ open: false, url: "" })}>
-          <div style={{ background: isDark ? "rgba(20,20,35,0.97)" : "#fff", border: "1px solid " + theme.border, borderRadius: 24, padding: 32, textAlign: "center" }} onClick={e => e.stopPropagation()}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: theme.text, marginBottom: 20 }}>📷 {t.qrExport}</div>
-            <img src={qrModal.url} alt="QR Code" style={{ borderRadius: 12 }} />
-            <div><button onClick={() => setQrModal({ open: false, url: "" })} style={{ ...s.btn, marginTop: 20, width: "auto", padding: "10px 28px" }}>{t.qrClose}</button></div>
+        <div style={{ position: "fixed", inset: 0, zIndex: 700, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+          <div onClick={() => setQrModal({ open: false, url: "" })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
+          <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid " + theme.border, borderRadius: 28, padding: "28px 24px", maxWidth: 340, width: "calc(100% - 32px)", boxShadow: "0 8px 48px rgba(0,0,0,0.3)", textAlign: "center" }}>
+            <div style={{ fontSize: 36, marginBottom: 8 }}>📷</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: theme.text, marginBottom: 4 }}>{t.qrExport}</div>
+            <div style={{ fontSize: 12, color: theme.subtext, marginBottom: 20 }}>Scanne den Code um die Apps zu importieren</div>
+            <div style={{ background: "#fff", borderRadius: 16, padding: 12, display: "inline-block", marginBottom: 20 }}>
+              <img src={qrModal.url} alt="QR Code" width={220} height={220} style={{ display: "block", borderRadius: 8 }} />
+            </div>
+            <div style={{ fontSize: 11, color: theme.subtext, marginBottom: 20 }}>{apps.length} App{apps.length !== 1 ? "s" : ""} enthalten</div>
+            <button onClick={() => setQrModal({ open: false, url: "" })} style={{ width: "100%", background: theme.primary, color: "#fff", border: "none", borderRadius: 14, padding: 12, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>{t.qrClose}</button>
           </div>
         </div>
       )}
 
-      {/* URL import modal */}
+      {/* URL Import Modal */}
       {urlImportModal.open && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 5000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(10px)" }}>
-          <div style={{ background: isDark ? "rgba(20,20,35,0.97)" : "rgba(250,250,255,0.97)", border: "1px solid " + theme.border, borderRadius: 24, padding: 28, maxWidth: 380, width: "100%" }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: theme.text, marginBottom: 12 }}>📥 Import</div>
-            <div style={{ fontSize: 14, color: theme.subtext, marginBottom: 16 }}>{urlImportModal.apps.length} App(s) importieren?</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6, maxHeight: 200, overflowY: "auto", marginBottom: 16 }}>
-              {urlImportModal.apps.map((a, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 10px", background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 10 }}>
-                  <span>{a.emoji}</span><span style={{ fontSize: 13, color: theme.text }}>{a.name}</span>
+        <div style={{ position: "fixed", inset: 0, zIndex: 600, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+          <div onClick={() => setUrlImportModal({ open: false, apps: [] })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
+          <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid " + theme.border, borderRadius: 28, padding: "24px 20px", maxWidth: 360, width: "calc(100% - 32px)", boxShadow: "0 8px 48px rgba(0,0,0,0.25)" }}>
+            <div style={{ fontSize: 36, textAlign: "center", marginBottom: 12 }}>🔗</div>
+            <div style={{ fontSize: 17, fontWeight: 700, color: theme.text, textAlign: "center", marginBottom: 6 }}>URL Import</div>
+            <div style={{ fontSize: 13, color: theme.subtext, textAlign: "center", marginBottom: 16 }}>{urlImportModal.apps.length} App{urlImportModal.apps.length !== 1 ? "s" : ""} gefunden. Importieren?</div>
+            <div style={{ maxHeight: 200, overflowY: "auto", marginBottom: 16 }}>
+              {urlImportModal.apps.map((app, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 10px", background: theme.inputBg, borderRadius: 10, marginBottom: 6, border: "1px solid " + theme.border }}>
+                  <span style={{ fontSize: 20 }}>{app.emoji || "🌐"}</span>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: theme.text }}>{app.name}</div>
+                    <div style={{ fontSize: 11, color: theme.subtext }}>{app.url}</div>
+                  </div>
                 </div>
               ))}
             </div>
             <div style={{ display: "flex", gap: 8 }}>
-              <button onClick={() => { setApps(prev => { const ids = new Set(prev.map(a => a.id)); return [...prev, ...urlImportModal.apps.filter(a => !ids.has(a.id))]; }); setUrlImportModal({ open: false, apps: [] }); }} style={{ ...s.btn, flex: 2 }}>✅ Importieren</button>
-              <button onClick={() => setUrlImportModal({ open: false, apps: [] })} style={{ ...s.btn, flex: 1, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border }}>✕</button>
+              <button onClick={() => setUrlImportModal({ open: false, apps: [] })} style={{ flex: 1, background: theme.inputBg, border: "1px solid " + theme.border, color: theme.text, borderRadius: 12, padding: 11, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Abbrechen</button>
+              <button onClick={() => { setApps(prev => { const newApps = urlImportModal.apps.map((a, i) => ({ ...a, id: Date.now() + i, fav: false })); return [...prev, ...newApps]; }); setUrlImportModal({ open: false, apps: [] }); }} style={{ flex: 1, background: theme.primary, color: "#fff", border: "none", borderRadius: 12, padding: 11, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>✅ Importieren</button>
             </div>
           </div>
         </div>
       )}
+
+      {/* Offline Screen */}
+      {isOffline && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 9000, background: customBg.enabled ? `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)` : theme.bg, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 32, textAlign: "center" }}>
+          <BlobBg isDark={isDark} />
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <div style={{ fontSize: 80, marginBottom: 24 }}>📡</div>
+            <div style={{ fontSize: 24, fontWeight: 800, color: theme.text, marginBottom: 12 }}>{t.offlineTitle}</div>
+            <div style={{ fontSize: 15, color: theme.subtext, marginBottom: 32, maxWidth: 280 }}>{t.offlineDesc}</div>
+            <button
+              onClick={() => window.location.reload()}
+              style={{ background: theme.primary, color: "#fff", border: "none", borderRadius: 16, padding: "14px 32px", fontSize: 15, fontWeight: 700, cursor: "pointer", boxShadow: "0 4px 16px rgba(0,0,0,0.2)" }}
+            >🔄 Erneut versuchen</button>
+          </div>
+        </div>
+      )}
+
+      {/* Backup Banner */}
+      {showBackupBanner && (
+        <div style={{ position: "fixed", bottom: showBanner ? 120 : 24, left: 16, right: 16, zIndex: 401, background: theme.surface, backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", border: "1px solid " + theme.primary, borderRadius: 20, padding: "14px 16px", boxShadow: "0 8px 32px rgba(0,0,0,0.2)", display: "flex", alignItems: "center", gap: 14 }}>
+          <span style={{ fontSize: 32 }}>💾</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: theme.text }}>{t.backupBannerTitle}</div>
+            <div style={{ fontSize: 12, color: theme.subtext }}>{t.backupBannerDesc}</div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <button onClick={() => { exportApps(); }} style={{ background: theme.primary, color: "#fff", border: "none", borderRadius: 10, padding: "6px 12px", fontSize: 12, fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap" }}>{t.backupBannerBtn}</button>
+            <button onClick={() => setShowBackupBanner(false)} style={{ background: "none", border: "none", color: theme.subtext, fontSize: 12, cursor: "pointer" }}>{t.backupBannerDismiss}</button>
+          </div>
+        </div>
+      )}
+
+      {/* Add to Home Banner */}
+      {showBanner && (
+        <div style={{ position: "fixed", bottom: 24, left: 16, right: 16, zIndex: 400, background: theme.surface, backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", border: "1px solid " + theme.border, borderRadius: 20, padding: "14px 16px", boxShadow: "0 8px 32px rgba(0,0,0,0.2)", display: "flex", alignItems: "center", gap: 14 }}>
+          <span style={{ fontSize: 32 }}>📱</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: theme.text }}>{t.addToHome}</div>
+            <div style={{ fontSize: 12, color: theme.subtext }}>{t.addToHomeDesc}</div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <button onClick={installApp} style={{ background: theme.primary, color: "#fff", border: "none", borderRadius: 10, padding: "6px 12px", fontSize: 12, fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap" }}>{t.addToHomeBtn}</button>
+            <button onClick={() => setShowBanner(false)} style={{ background: "none", border: "none", color: theme.subtext, fontSize: 12, cursor: "pointer" }}>{t.addToHomeDismiss}</button>
+          </div>
+        </div>
+      )}
+
+      {/* PIN Modal */}
+      {pwModal.open && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 500, display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+          <div onClick={() => setPwModal({ open: false, url: "", pin: "" })} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }} />
+          <div style={{ position: "relative", zIndex: 1, background: theme.surface, backdropFilter: "blur(40px) saturate(200%)", WebkitBackdropFilter: "blur(40px) saturate(200%)", border: "1px solid " + theme.border, borderRadius: 28, padding: "28px 20px", maxWidth: 340, width: "calc(100% - 32px)", boxShadow: "0 8px 48px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.3)", textAlign: "center" }}>
+            <div style={{ fontSize: 44, marginBottom: 12 }}>🔒</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: theme.text, marginBottom: 20 }}>{t.pinEnter}</div>
+            {/* PIN dots */}
+            <div style={{ display: "flex", justifyContent: "center", gap: 14, marginBottom: 28 }}>
+              {[0,1,2,3].map(i => (
+                <div key={i} style={{ width: 16, height: 16, borderRadius: "50%", background: i < pwModal.pin.length ? (pinError ? "#dc2626" : theme.primary) : theme.border, transition: "background .15s", boxShadow: i < pwModal.pin.length ? "0 0 8px " + theme.primary : "none" }} />
+              ))}
+            </div>
+            {/* Numpad */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10, marginBottom: 8 }}>
+              {[1,2,3,4,5,6,7,8,9].map(n => (
+                <button key={n} onClick={() => submitPin(String(n))} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 22, fontWeight: 600, color: theme.text, cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }}>{n}</button>
+              ))}
+              <div />
+              <button onClick={() => submitPin("0")} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 0", fontSize: 22, fontWeight: 600, color: theme.text, cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }}>0</button>
+              <button onClick={deletePin} style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "16px 0", fontSize: 18, color: theme.text, cursor: "pointer", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>⌫</button>
+            </div>
+            {pinError && <div style={{ color: "#dc2626", fontSize: 13, marginTop: 4 }}>{t.pinWrong}</div>}
+            <button onClick={() => setPwModal({ open: false, url: "", pin: "" })} style={{ marginTop: 16, background: "none", border: "none", color: theme.subtext, fontSize: 13, cursor: "pointer" }}>Abbrechen</button>
+          </div>
+        </div>
+      )}
+
+      <header style={s.header} className="wal-header">
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span style={{ fontSize: 24 }}>🚀</span>
+          <div>
+            <div style={{ fontSize: 17, fontWeight: 700 }} className="wal-header-title"><span onClick={handleLogoClick} style={{ cursor: "pointer", userSelect: "none" }}>{t.title}{profile ? ` – ${PROFILES[profile]?.name}` : ""}</span></div>
+            <div style={{ fontSize: 10, opacity: 0.6 }} className="wal-header-version">{t.version}</div>
+          </div>
+        </div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button style={s.iconBtn} onClick={() => setLang(l => l === "de" ? "en" : "de")} title={lang === "de" ? "Switch to English" : "Zu Deutsch wechseln"}>{lang === "de" ? "EN" : "DE"}</button>
+          <button style={s.iconBtn} onClick={() => setHelpOpen(true)}>❓</button>
+          <button style={s.iconBtn} onClick={() => setViewMode(v => v === "compact" ? "grid" : "compact")}>{viewMode === "compact" ? "🔲" : "📊"}</button>
+          <button style={s.iconBtn} className="wal-iconbtn" onClick={toggleDark}>{isDark ? "☀️" : "🌙"}</button>
+          <button style={s.iconBtn} onClick={() => setDrawerOpen(true)}>⚙️</button>
+        </div>
+      </header>
+
+      <div style={{ position: "sticky", top: "calc(60px + env(safe-area-inset-top))", zIndex: 99, background: theme.headerBg, backdropFilter: "blur(24px) saturate(180%)", WebkitBackdropFilter: "blur(24px) saturate(180%)", borderBottom: "1px solid " + theme.border, padding: "8px 16px" }}>
+          <div style={{ position: "relative", maxWidth: 900, margin: "0 auto" }}>
+            <span style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", fontSize: 16, pointerEvents: "none" }}>🔍</span>
+            <input
+              style={{ ...s.input, paddingLeft: 42, paddingRight: search ? 36 : 14, borderRadius: 12 }}
+              placeholder={t.search}
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+            {search && (
+              <button onClick={() => setSearch("")} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", fontSize: 16, color: theme.subtext, lineHeight: 1 }}>✕</button>
+            )}
+          </div>
+        </div>
+
+        <main style={s.main} className="wal-main">
+        
+
+        {/* Favorites */}
+        {favApps.length > 0 && (
+          <div style={{ marginBottom: 28 }}>
+            <div style={s.secLabel}>⭐ {t.favorites}</div>
+            <div style={s.grid}>
+              {favApps.map(app => <AppCard key={app.id} app={app} />)}
+            </div>
+          </div>
+        )}
+
+        {/* All Apps */}
+        {notes.length > 0 && (
+          <div style={{ marginBottom: 28 }}>
+            <div style={{ ...s.secLabel, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span>📝 Notizen</span>
+              <button onClick={() => setNoteModal({ open: true, id: null, text: "" })} style={{ background: theme.primarySoft, border: "none", color: theme.primary, borderRadius: 8, padding: "3px 10px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>{t.noteAdd}</button>
+            </div>
+            <div style={s.grid}>
+              {notes.map(note => <NoteCard key={note.id} note={note} />)}
+            </div>
+          </div>
+        )}
+        <div style={{ ...s.secLabel, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span>{t.myApps}</span>
+          {notes.length === 0 && <button onClick={() => setNoteModal({ open: true, id: null, text: "" })} style={{ background: theme.primarySoft, border: "none", color: theme.primary, borderRadius: 8, padding: "3px 10px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>{t.noteAdd}</button>}
+        </div>
+        <div style={viewMode === "compact" ? { display: "flex", flexDirection: "column", gap: 8 } : s.grid} className="wal-grid">
+          {allApps.length === 0 && favApps.length === 0 ? (
+            <div style={{ gridColumn: "1/-1", textAlign: "center", padding: "50px 20px", color: theme.subtext }}>
+              <div style={{ fontSize: 48, marginBottom: 12 }}>📦</div>
+              <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 6 }}>{t.emptyTitle}</div>
+              <div style={{ fontSize: 13 }}>{t.emptyDesc}</div>
+            </div>
+          ) : viewMode === "compact"
+            ? allApps.map(app => (
+                <a key={app.id} href={app.url} target="_blank" rel="noopener noreferrer"
+                  onClick={e => handleAppClick(e, app)}
+                  style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 14px", background: theme.surface, border: "1px solid " + theme.border, borderRadius: 14, textDecoration: "none", color: theme.text, backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", transition: "all .2s" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = theme.cardHover; e.currentTarget.style.borderColor = theme.primary; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = theme.surface; e.currentTarget.style.borderColor = theme.border; }}
+                >
+                  <span style={{ fontSize: 22, flexShrink: 0 }}>{app.emoji}</span>
+                  <span style={{ fontSize: 14, fontWeight: 600, flex: 1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.name}</span>
+                  {pins[app.url] && <span style={{ fontSize: 12, flexShrink: 0 }}>🔒</span>}
+                  {app.fav && <span style={{ fontSize: 12, flexShrink: 0 }}>⭐</span>}
+                </a>
+              ))
+            : allApps.map(app => <AppCard key={app.id} app={app} />)}
+        </div>
+      </main>
+
+      <div style={s.overlay} onClick={() => setDrawerOpen(false)} />
+
+      <div style={{ ...s.drawer, ...(drawerOpen ? {} : {}) }} className={"wal-drawer" + (drawerOpen ? "" : " wal-drawer-hidden")}>
+        <div style={{ width: 40, height: 4, background: theme.border, borderRadius: 2, margin: "12px auto 0" }} />
+        <div style={s.drawerHead}>
+          <span>⚙️ {t.settings}</span>
+          <button style={s.closeBtn} onClick={() => setDrawerOpen(false)}>✕</button>
+        </div>
+        <div style={s.drawerBody}>
+
+          {/* Add App */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.addNewApp}</div>
+            {error && <div style={{ color: "#dc2626", fontSize: 12, marginBottom: 8 }}>{error}</div>}
+            {[["name", t.appName, t.namePlaceholder, "text"], ["url", t.url, t.urlPlaceholder, "url"], ["emoji", t.emoji, t.emojiPlaceholder, "text"]].map(([key, label, ph, type]) => (
+              <div key={key} style={{ marginBottom: 8 }}>
+                <label style={{ fontSize: 12, fontWeight: 600, color: theme.subtext, display: "block", marginBottom: 4 }}>{label}</label>
+                <input style={s.input} type={type} placeholder={ph} value={form[key]} onChange={e => setForm({ ...form, [key]: e.target.value })} maxLength={key === "emoji" ? 2 : undefined} />
+              </div>
+            ))}
+            <button style={s.addBtn} onClick={addApp}>{t.addBtn}</button>
+          </div>
+
+          {/* Custom Background */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.customBg}</div>
+            <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: 14 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: customBg.enabled ? 14 : 0 }}>
+                <div style={{ fontSize: 14, fontWeight: 600, color: theme.text }}>🎨 {t.customBg}</div>
+                <button
+                  onClick={() => setCustomBg(b => ({ ...b, enabled: !b.enabled }))}
+                  style={{ width: 52, height: 28, borderRadius: 14, border: "none", cursor: "pointer", background: customBg.enabled ? theme.primary : theme.border, position: "relative", transition: "background .25s" }}
+                >
+                  <div style={{ position: "absolute", top: 3, left: customBg.enabled ? 26 : 3, width: 22, height: 22, borderRadius: "50%", background: "#fff", transition: "left .25s", boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }} />
+                </button>
+              </div>
+              {customBg.enabled && (
+                <div>
+                  <div style={{ display: "flex", gap: 12, marginBottom: 12 }}>
+                    <div style={{ flex: 1 }}>
+                      <label style={{ fontSize: 11, fontWeight: 600, color: theme.subtext, display: "block", marginBottom: 6 }}>{t.customBgColor1}</label>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <input type="color" value={customBg.color1} onChange={e => setCustomBg(b => ({ ...b, color1: e.target.value }))} style={{ width: 40, height: 36, border: "none", borderRadius: 8, cursor: "pointer", padding: 2, background: "none" }} />
+                        <span style={{ fontSize: 12, color: theme.subtext }}>{customBg.color1}</span>
+                      </div>
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <label style={{ fontSize: 11, fontWeight: 600, color: theme.subtext, display: "block", marginBottom: 6 }}>{t.customBgColor2}</label>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <input type="color" value={customBg.color2} onChange={e => setCustomBg(b => ({ ...b, color2: e.target.value }))} style={{ width: 40, height: 36, border: "none", borderRadius: 8, cursor: "pointer", padding: 2, background: "none" }} />
+                        <span style={{ fontSize: 12, color: theme.subtext }}>{customBg.color2}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ height: 40, borderRadius: 10, background: `linear-gradient(135deg, ${customBg.color1} 0%, ${customBg.color2} 100%)`, marginBottom: 10, border: "1px solid " + theme.border }} />
+                  <button onClick={() => setCustomBg({ enabled: false, color1: "#1a1a2e", color2: "#16213e" })} style={{ width: "100%", background: "transparent", border: "1px solid " + theme.border, color: theme.subtext, borderRadius: 10, padding: 8, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>↩️ Reset</button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Backup Reminder */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>💾 {t.backupReminder}</div>
+            <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px" }}>
+              <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 12 }}>{t.backupReminderDesc}</div>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                {[0, 7, 14, 30].map((days, i) => (
+                  <button key={days} onClick={() => setBackupDays(days)}
+                    style={{ padding: "6px 12px", borderRadius: 10, border: "1px solid " + (backupDays === days ? theme.primary : theme.border), background: backupDays === days ? theme.primary : theme.inputBg, color: backupDays === days ? "#fff" : theme.text, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                    {t.backupReminderOptions[i]}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Global PIN */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>🔐 {t.globalPin}</div>
+            <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px" }}>
+              <div style={{ fontSize: 13, color: theme.subtext, marginBottom: 12 }}>{t.globalPinDesc}</div>
+              {globalPin ? (
+                <div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+                    <span style={{ fontSize: 13, color: theme.primary, fontWeight: 700 }}>✅ {t.globalPinActive}</span>
+                  </div>
+                  <div style={{ marginBottom: 10 }}>
+                    <div style={{ fontSize: 12, color: theme.subtext, marginBottom: 6 }}>{t.pinTimeout}</div>
+                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                      {[0, 1, 5, 15, 30].map((mins, i) => (
+                        <button key={mins} onClick={() => setPinTimeout(mins)}
+                          style={{ padding: "5px 10px", borderRadius: 10, border: "1px solid " + (pinTimeout === mins ? theme.primary : theme.border), background: pinTimeout === mins ? theme.primary : theme.inputBg, color: pinTimeout === mins ? "#fff" : theme.text, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                          {t.pinTimeoutOptions[i]}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <button onClick={() => { setGlobalPin(""); setGlobalUnlocked(false); setPinTimeout(0); }} style={{ width: "100%", background: "#fee2e2", border: "1px solid #fca5a5", color: "#dc2626", borderRadius: 12, padding: "10px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>🗑️ {t.globalPinRemove}</button>
+                </div>
+              ) : (
+                <button onClick={() => setGlobalPinModal({ open: true, input: "", error: false, mode: "setup" })} style={{ width: "100%", background: theme.primary, color: "#fff", border: "none", borderRadius: 12, padding: "10px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>🔐 {t.globalPinSet}</button>
+              )}
+            </div>
+          </div>
+
+          {/* Vibration */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.vibration}</div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "12px 16px" }}>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 600, color: theme.text }}>📳 {t.vibration}</div>
+                <div style={{ fontSize: 11, color: theme.subtext }}>Android / Mobile</div>
+              </div>
+              <button
+                onClick={() => setVibro(v => !v)}
+                style={{ width: 52, height: 28, borderRadius: 14, border: "none", cursor: "pointer", background: vibro ? theme.primary : theme.border, position: "relative", transition: "background .25s" }}
+              >
+                <div style={{ position: "absolute", top: 3, left: vibro ? 26 : 3, width: 22, height: 22, borderRadius: "50%", background: "#fff", transition: "left .25s", boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }} />
+              </button>
+            </div>
+          </div>
+
+          {/* Card Size */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.cardSize}</div>
+            <div style={{ display: "flex", gap: 8 }}>
+              {[["small", t.small, "🔹"], ["medium", t.medium, "🔷"], ["large", t.large, "🔶"]].map(([size, label, icon]) => (
+                <button key={size} onClick={() => setCardSize(size)} style={{ flex: 1, border: "2px solid " + (cardSize === size ? theme.primary : theme.border), borderRadius: 12, padding: "10px 6px", cursor: "pointer", fontSize: 12, fontWeight: 700, background: cardSize === size ? theme.primarySoft : theme.surface, color: cardSize === size ? theme.primary : theme.text, transition: "all .2s", textAlign: "center" }}>
+                  <div style={{ fontSize: size === "small" ? 16 : size === "large" ? 28 : 22, marginBottom: 4 }}>{icon}</div>
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Profil */}
+            <div style={{ marginBottom: 24 }}>
+              <div style={s.secTitle}>👤 Profil</div>
+              <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "14px 16px" }}>
+                <div style={{ fontSize: 14, fontWeight: 600, color: theme.text, marginBottom: 12 }}>Aktives Profil: {PROFILES[profile]?.emoji} {PROFILES[profile]?.name}</div>
+                <div style={{ display: "flex", gap: 8 }}>
+                  {Object.entries(PROFILES).map(([key, p]) => (
+                    <button key={key} onClick={() => { if (key !== profile) { localStorage.removeItem(STORAGE_APPS); setProfile(key); setApps(key === "joern" ? DEFAULT_APPS_JOERN : DEFAULT_APPS_DOMINIK); } }}
+                      style={{ flex: 1, padding: "10px 8px", borderRadius: 12, border: "2px solid " + (profile === key ? theme.primary : theme.border), background: profile === key ? theme.primarySoft : theme.surface, color: profile === key ? theme.primary : theme.text, fontWeight: 700, fontSize: 13, cursor: "pointer" }}>
+                      {p.emoji} {p.name}
+                    </button>
+                  ))}
+                </div>
+                <button onClick={() => setProfileScreen(true)}
+                  style={{ width: "100%", marginTop: 10, background: "transparent", border: "1px solid " + theme.border, color: theme.subtext, borderRadius: 12, padding: 9, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>
+                  🔄 Profil-Auswahl anzeigen
+                </button>
+              </div>
+            </div>
+
+            {/* Dark / Light Mode Toggle */}
+            <div style={{ marginBottom: 24 }}>
+              <div style={s.secTitle}>☀️ Dark / Light Mode</div>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 14, padding: "12px 16px" }}>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: theme.text }}>{isDark ? "🌙 Dark Mode" : "☀️ Light Mode"}</div>
+                  <div style={{ fontSize: 11, color: theme.subtext }}>Beim ersten Start: Systemeinstellung</div>
+                </div>
+                <button onClick={toggleDark} style={{ width: 52, height: 28, borderRadius: 14, border: "none", cursor: "pointer", background: isDark ? theme.primary : "rgba(200,200,200,0.4)", position: "relative", transition: "background .25s" }}>
+                  <div style={{ position: "absolute", top: 3, left: isDark ? 26 : 3, width: 22, height: 22, borderRadius: "50%", background: "#fff", transition: "left .25s", boxShadow: "0 1px 4px rgba(0,0,0,0.2)" }} />
+                </button>
+              </div>
+            </div>
+
+            {/* Theme */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.theme}</div>
+            <div style={s.themeGrid}>
+              {Object.entries(THEMES).map(([key, th]) => (
+                <button key={key} onClick={() => setThemeName(key)} style={{ border: "2px solid " + (themeName === key ? theme.primary : theme.border), borderRadius: 12, padding: "10px 6px", cursor: "pointer", fontSize: 11, fontWeight: 700, textAlign: "center", background: themeName === key ? theme.primarySoft : theme.surface, color: themeName === key ? theme.primary : theme.text, transition: "all .2s" }}>
+                  <div style={{ width: 20, height: 20, borderRadius: "50%", background: th.dot, margin: "0 auto 6px" }} />
+                  {th.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Language */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.language}</div>
+            <div style={s.langRow}>
+              {["en", "de"].map(l => (
+                <button key={l} onClick={() => setLang(l)} style={{ flex: 1, border: "2px solid " + (lang === l ? theme.primary : theme.border), borderRadius: 10, padding: 8, cursor: "pointer", fontSize: 13, fontWeight: 700, background: lang === l ? theme.primarySoft : theme.surface, color: lang === l ? theme.primary : theme.text, transition: "all .2s" }}>
+                  {l === "en" ? "🇬🇧 English" : "🇩🇪 Deutsch"}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Manage Apps + PIN */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.manageApps}</div>
+            {apps.length === 0 && <div style={{ color: theme.subtext, fontSize: 13 }}>{t.emptyTitle}</div>}
+            {apps.map(app => (
+              <div key={app.id}>
+                <div style={s.listItem}>
+                  <span style={{ fontSize: 22 }}>{app.emoji}</span>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.name}</div>
+                    <div style={{ fontSize: 11, color: theme.subtext, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{app.url}</div>
+                  </div>
+                  <button
+                    onClick={() => setPinEdit(pinEdit.appId === app.id ? { appId: null, value: "" } : { appId: app.id, value: pins[app.url] || "" })}
+                    style={{ background: pins[app.url] ? theme.primarySoft : theme.inputBg, border: "1px solid " + theme.border, color: pins[app.url] ? theme.primary : theme.subtext, width: 30, height: 30, borderRadius: 8, cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginRight: 4 }}
+                  >🔒</button>
+                  <button
+                    onClick={() => setEditApp(editApp.appId === app.id ? { appId: null, name: "", url: "", emoji: "" } : { appId: app.id, name: app.name, url: app.url, emoji: app.emoji })}
+                    style={{ background: editApp.appId === app.id ? theme.primarySoft : theme.inputBg, border: "1px solid " + theme.border, color: editApp.appId === app.id ? theme.primary : theme.subtext, width: 30, height: 30, borderRadius: 8, cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginRight: 4 }}
+                  >✏️</button>
+                  <button style={s.delBtn} onClick={() => deleteApp(app.id)}>🗑️</button>
+                </div>
+                {editApp.appId === app.id && (
+                  <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 12, padding: 12, marginBottom: 8, marginTop: -4 }}>
+                    <div style={{ fontSize: 12, color: theme.subtext, marginBottom: 8, fontWeight: 700 }}>✏️ App bearbeiten</div>
+                    {[["name", "Name", "text"], ["url", "URL", "url"], ["emoji", "Emoji", "text"]].map(([key, label, type]) => (
+                      <div key={key} style={{ marginBottom: 8 }}>
+                        <label style={{ fontSize: 11, color: theme.subtext, display: "block", marginBottom: 4 }}>{label}</label>
+                        <input
+                          style={{ ...s.input, fontSize: 13 }}
+                          type={type}
+                          value={editApp[key]}
+                          maxLength={key === "emoji" ? 2 : undefined}
+                          onChange={e => setEditApp(p => ({ ...p, [key]: e.target.value }))}
+                        />
+                      </div>
+                    ))}
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <button onClick={() => setEditApp({ appId: null, name: "", url: "", emoji: "" })} style={{ flex: 1, background: theme.inputBg, border: "1px solid " + theme.border, color: theme.subtext, borderRadius: 10, padding: 8, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>Abbrechen</button>
+                      <button onClick={saveEditApp} style={{ flex: 1, background: theme.primary, color: "#fff", border: "none", borderRadius: 10, padding: 8, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>✅ Speichern</button>
+                    </div>
+                  </div>
+                )}
+
+                {pinEdit.appId === app.id && (
+                  <div style={{ background: theme.inputBg, border: "1px solid " + theme.border, borderRadius: 12, padding: 12, marginBottom: 8, marginTop: -4 }}>
+                    <div style={{ fontSize: 12, color: theme.subtext, marginBottom: 6 }}>{t.pinFor}: {app.name}</div>
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <input
+                        style={{ ...s.input, flex: 1, letterSpacing: 4, fontSize: 16 }}
+                        type="password"
+                        maxLength={4}
+                        placeholder={t.pinPlaceholder}
+                        value={pinEdit.value}
+                        onChange={e => setPinEdit(p => ({ ...p, value: e.target.value.replace(/\D/g, "").slice(0, 4) }))}
+                      />
+                      <button
+                        onClick={() => { if (pinEdit.value.length === 4) { setPins(p => ({ ...p, [app.url]: pinEdit.value })); setPinEdit({ appId: null, value: "" }); } }}
+                        style={{ background: theme.primary, color: "#fff", border: "none", borderRadius: 10, padding: "0 14px", cursor: "pointer", fontWeight: 700, fontSize: 13 }}
+                      >{t.pinSet}</button>
+                      {pins[app.url] && <button
+                        onClick={() => { setPins(p => { const n = { ...p }; delete n[app.url]; return n; }); setPinEdit({ appId: null, value: "" }); }}
+                        style={{ background: "#fee2e2", color: "#dc2626", border: "none", borderRadius: 10, padding: "0 10px", cursor: "pointer", fontSize: 12, fontWeight: 700 }}
+                      >{t.pinRemove}</button>}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Import / Export */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>{t.importExport}</div>
+            <div style={{ display: "flex", gap: 8 }}>
+              <button onClick={exportApps} style={{ flex: 1, background: theme.primarySoft, color: theme.primary, border: "1px solid " + theme.border, borderRadius: 12, padding: 10, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>📤 {t.exportBtn}</button>
+              <button onClick={generateQr} style={{ flex: 1, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border, borderRadius: 12, padding: 10, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>📷 {t.qrBtn}</button>
+              <button onClick={() => importRef.current.click()} style={{ flex: 1, background: theme.inputBg, color: theme.text, border: "1px solid " + theme.border, borderRadius: 12, padding: 10, fontSize: 13, fontWeight: 700, cursor: "pointer" }}>📥 {t.importBtn}</button>
+              <input ref={importRef} type="file" accept=".json" style={{ display: "none" }} onChange={importApps} />
+            </div>
+          </div>
+
+          {/* Clear Cache */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>Cache</div>
+            <button
+              onClick={() => {
+                if (window.confirm(t.clearCacheConfirm)) {
+                  localStorage.clear();
+                  sessionStorage.clear();
+                  setApps(DEFAULT_APPS);
+                  setThemeName("dark");
+                  setLang("de");
+                  setPins({ "https://rpdashboard.vercel.app": "2026" });
+                  alert(t.clearCacheDone);
+                }
+              }}
+              style={{ width: "100%", background: "transparent", border: "2px solid #f59e0b", color: "#f59e0b", borderRadius: 12, padding: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}
+            >🗑️ {t.clearCache}</button>
+          </div>
+
+          {/* Reset */}
+          <div style={{ marginBottom: 24 }}>
+            <div style={s.secTitle}>Reset</div>
+            <button
+              onClick={() => { if (window.confirm(t.resetConfirm)) resetApps(); }}
+              style={{ width: "100%", background: "transparent", border: "2px solid #dc2626", color: "#dc2626", borderRadius: 12, padding: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}
+            >{t.resetApps}</button>
+          </div>
+
+          <div style={{ textAlign: "center", fontSize: 11, color: theme.subtext, marginTop: 24 }}>Web App Launcher · v6.5</div>
+        </div>
+      </div>
     </div>
   );
 }
